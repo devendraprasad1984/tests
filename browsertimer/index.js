@@ -1,7 +1,7 @@
 const timer = document.getElementById('timer');
 const timerCounterEndBy = 'timerCounterEndBy'
 const timerCur = 'timerCurVal'
-let counterInitVal = 10
+let counterInitVal = 60
 let tref = undefined
 
 const setLocal = (key, val) => {
@@ -18,7 +18,8 @@ const getLocal = (key) => {
 
 const gettime = () => {
     let now = new Date()
-    let val = now.getUTCHours() + now.getUTCMinutes() + now.getUTCSeconds()
+    // let val = now.getUTCHours() + now.getUTCMinutes() + now.getUTCSeconds()
+    let val = Math.round(new Date().getTime() / 1000)
     return val
 }
 
@@ -53,6 +54,8 @@ const init = () => {
     if (curCacheTimer === undefined || curCacheTimer === null) {
         let now = gettime()
         setLocal(timerCounterEndBy, (now + counterInitVal))
+        // setLocal('end', now1+counterInitVal)
+        // setLocal('start', now1)
         setLocal(timerCur, now)
         timer.innerHTML = 'Starting in a sec'
     }
