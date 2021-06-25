@@ -901,31 +901,6 @@ const checkArrayElementUsingBinarySearchAndInsertAtRelevantPosIfNotFound = () =>
 // checkArrayElementUsingBinarySearchAndInsertAtRelevantPosIfNotFound()
 
 const swapCaseAndNumbers=()=>{
-    /*
-
-'''
-Have the function swap(param) take the param parameter and swap the case of each character.
-Then, if a letter is between two numbers (without separation), switch the places of the
-two numbers. For example: if param is "6Hello4 -8World, 7 yes3"
-the output should be 4hELLO6 -8wORLD, 7 YES3.
-
-Rule:
-1) swap the case of each character
-2) if a letter is between two numbers (without separation), switch the places of the two numbers
-
-# Examples
-Input: "6Hello4 -8World, 7 yes3"
-Output: 4hELLO6 -8wORLD, 7 YES3
-
-Input: "Hello -5LOL6du5d4e"
-Output: hELLO -6lol5DU4D5E
-
-Input: "2S 6 du5d4e"
-Output: 2s 6 DU4D5E
-'''
-
-*/
-
     function switchCase(char){
         let charCode=char.charCodeAt(0)
         if(charCode>=65 && charCode<=90)
