@@ -58,6 +58,10 @@ const findPairSum = () => {
     }
     console.log('pair of numbers that equals givan sum', sum, '=', collectionResults)
 }
+
+findPairSum()
+
+
 const makeUnique = (ar) => {
     let obj = {}
     for (let i of ar)
@@ -895,3 +899,81 @@ const checkArrayElementUsingBinarySearchAndInsertAtRelevantPosIfNotFound = () =>
     console.log(arr, found)
 }
 // checkArrayElementUsingBinarySearchAndInsertAtRelevantPosIfNotFound()
+
+const swapCaseAndNumbers=()=>{
+    /*
+
+'''
+Have the function swap(param) take the param parameter and swap the case of each character.
+Then, if a letter is between two numbers (without separation), switch the places of the
+two numbers. For example: if param is "6Hello4 -8World, 7 yes3"
+the output should be 4hELLO6 -8wORLD, 7 YES3.
+
+Rule:
+1) swap the case of each character
+2) if a letter is between two numbers (without separation), switch the places of the two numbers
+
+# Examples
+Input: "6Hello4 -8World, 7 yes3"
+Output: 4hELLO6 -8wORLD, 7 YES3
+
+Input: "Hello -5LOL6du5d4e"
+Output: hELLO -6lol5DU4D5E
+
+Input: "2S 6 du5d4e"
+Output: 2s 6 DU4D5E
+'''
+
+*/
+
+    function switchCase(char){
+        let charCode=char.charCodeAt(0)
+        if(charCode>=65 && charCode<=90)
+            return char.toLowerCase()
+        else if(charCode>=97 && charCode<=122)
+            return char.toUpperCase()
+        else
+            return char
+    }
+
+    function swap(param) {
+        let newParam='';
+        let numFirstFound=false
+        let firstNumIndex=-1
+        for(let index in param){
+            let chr=param[index]
+            let isnum=(isNaN(chr)===false && chr!==' ')
+
+            // if(isnum){
+            //   console.log(isnum, chr, index)
+            // }
+
+            if(chr===' '){
+                numFirstFound=false
+                firstNumIndex=-1
+                newParam+=chr
+            }else if(isnum===true && index!==firstNumIndex && numFirstFound===true){
+                //console.log('found 2nd number',chr, 'at', index)
+                let tmp=newParam.split('')
+                tmp[firstNumIndex]=param[index]
+                newParam=tmp.join('') + param[firstNumIndex]
+                //newParam+=param[firstNumIndex]
+                //console.log('updated',param[index], param[firstNumIndex], newParam)
+                numFirstFound=false
+                firstNumIndex=-1
+            }else if(isnum===true && firstNumIndex===-1 && numFirstFound===false){
+                //console.log('found 1st number',chr,'at',index)
+                firstNumIndex=index
+                numFirstFound=true
+                newParam+=chr
+            }else{
+                newParam+=switchCase(chr)
+            }
+        }
+        return newParam;
+    }
+
+    console.log(swap("6Hello4 -8World, 7 yes3"));
+    console.log(swap("Hello -5LOL6du5d4e"));
+    console.log(swap("2S 6 du5d4e"));
+}
