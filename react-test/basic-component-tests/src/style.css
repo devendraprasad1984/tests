@@ -3,6 +3,10 @@ ul, #myUL {
     list-style-type: none;
 }
 
+.center{
+    text-align: center;
+}
+
 #myUL {
     margin: 0;
     padding: 0;

@@ -59,9 +59,6 @@ const findPairSum = () => {
     console.log('pair of numbers that equals givan sum', sum, '=', collectionResults)
 }
 
-findPairSum()
-
-
 const makeUnique = (ar) => {
     let obj = {}
     for (let i of ar)
@@ -902,6 +899,8 @@ const checkArrayElementUsingBinarySearchAndInsertAtRelevantPosIfNotFound = () =>
 
 const swapCaseAndNumbers=()=>{
     function switchCase(char){
+        if(typeof char!=="string") return ''
+
         let charCode=char.charCodeAt(0)
         if(charCode>=65 && charCode<=90)
             return char.toLowerCase()
@@ -931,7 +930,7 @@ const swapCaseAndNumbers=()=>{
                 //console.log('found 2nd number',chr, 'at', index)
                 let tmp=newParam.split('')
                 tmp[firstNumIndex]=param[index]
-                newParam=tmp.join('') + param[firstNumIndex]
+                newParam=tmp.join('').toString() + param[firstNumIndex]
                 //newParam+=param[firstNumIndex]
                 //console.log('updated',param[index], param[firstNumIndex], newParam)
                 numFirstFound=false
@@ -948,7 +947,9 @@ const swapCaseAndNumbers=()=>{
         return newParam;
     }
 
-    console.log(swap("6Hello4 -8World, 7 yes3"));
+    let str1=swap("6Hello4 -8World, 7 yes3")
+    console.log(str1);
     console.log(swap("Hello -5LOL6du5d4e"));
-    console.log(swap("2S 6 du5d4e"));
+    // console.log(swap("2S 6 du5d4e"));
 }
+swapCaseAndNumbers()
