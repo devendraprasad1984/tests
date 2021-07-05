@@ -1,6 +1,7 @@
 import './App.css';
 import './style.css';
-import Combine from "./black_hawk/combine";
+// import Combine from "./black_hawk/combine";
+import Chart1 from "./charts/chart1";
 // import SelectBox from "./component/selectBox";
 // import InputTag from "./component/inputTag";
 // import TreeExample1 from "./component/treeExample1";
@@ -26,9 +27,13 @@ function App() {
         {/*<InputTag defaultTags={['devendra']} getValues={handleTagsCallBack}/>*/}
         {/*<TreeExample1/>*/}
         {/*<TreeExample2/>*/}
-        <h1>Black Hawk Test</h1>
-        <span>put * to see all</span>
-        <Combine/>
+
+        {/*<h1>Black Hawk Test</h1>*/}
+        {/*<span>put * to see all</span>*/}
+        {/*<Combine/>*/}
+
+        <Chart1 name='chart1'/>
+
     </div>
 }
 

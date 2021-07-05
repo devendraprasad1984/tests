@@ -3,6 +3,13 @@ ul, #myUL {
     list-style-type: none;
 }
 
+svg{
+    /*background-color: #bbd8e2;*/
+    overflow: visible;
+    /*min-height: 300px;*/
+    /*width: 98%;*/
+}
+
 .center{
     text-align: center;
 }
