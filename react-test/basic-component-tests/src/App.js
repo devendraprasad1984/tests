@@ -1,7 +1,8 @@
 import './App.css';
 import './style.css';
+import Chart2 from "./charts/chart2";
 // import Combine from "./black_hawk/combine";
-import Chart1 from "./charts/chart1";
+// import Chart1 from "./charts/chart1";
 // import SelectBox from "./component/selectBox";
 // import InputTag from "./component/inputTag";
 // import TreeExample1 from "./component/treeExample1";
@@ -32,7 +33,7 @@ function App() {
         {/*<span>put * to see all</span>*/}
         {/*<Combine/>*/}
 
-        <Chart1 name='chart1'/>
+        <Chart2 name='chart2' color={['tomato','gray']}/>
 
     </div>
 }
