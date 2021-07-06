@@ -25,30 +25,33 @@ const Chart2 = props => {
         focus.selectAll('.line').remove()
         focus.selectAll('.domain').remove()
         focus.selectAll('.tick').remove()
-        focus.selectAll('circle').remove()
+        focus.selectAll('.points').remove()
     }
 
     const drawlines = (focus, fnObj) => {
-        let dataset=fnObj.multilines
+        let dataset = fnObj.multilines
+        let lineNames = dataset.map(x => x.name)
+        // const myColor = d3.scaleOrdinal().domain([lineNames]).range(d3.schemeSet2);
+        // console.log(dataset,lineNames, myColor)
         for (let i = 0; i < dataset.length; i++) {
             focus.append("path")
                 .datum(dataset[i].data)
-                .attr("fill", "none")
-                .attr('class', 'line')
+                .attr("fill", 'none')
+                .attr('class', 'line xline' + i)
                 .attr("stroke", color[i])
-                .attr("stroke-width", 1.2)
+                .attr("stroke-width", 1.5)
                 .attr("d", fnObj.lineFn);
         }
     }
     const drawcircle = (focus, fnObj) => {
-        let dataset=fnObj.multilines
-        for (let i=0; i<dataset.length; i++) {
-            let {candrag, data}=dataset[i]
-            focus.selectAll('.dots'+i).data(data)
+        let dataset = fnObj.multilines
+        for (let i = 0; i < dataset.length; i++) {
+            let {candrag, data} = dataset[i]
+            focus.selectAll('.dots' + i).data(data)
                 .enter()
                 .append('circle')
                 .attr('r', 6.0)
-                .attr('class', 'dots'+i)
+                .attr('class', 'points dots' + i)
                 .attr('cx', d => fnObj.xScaleFn(d[0]))
                 .attr('cy', d => fnObj.yScaleFn(d[1]))
                 .style('cursor', 'pointer')
@@ -58,7 +61,8 @@ const Chart2 = props => {
                 .on("mousedown", mousemove)
                 .on("mouseleave", mouseleave)
                 .on("mouseout", mouseleave)
-                .call(candrag ? fnObj.dragFn: ()=>{})
+                .call(candrag ? fnObj.dragFn : () => {
+                })
         }
     }
 
@@ -68,11 +72,17 @@ const Chart2 = props => {
     }
 
     const dragged = (d, focus, fnObj) => {
+        let dataset = fnObj.multilines
         d[0] = fnObj.xScaleFn.invert(d3.event.x);
         d[1] = fnObj.yScaleFn.invert(d3.event.y);
-        // console.log(d[0],d[1])
         d3.select(this).attr('cx', fnObj.xScaleFn(d[0])).attr('cy', fnObj.yScaleFn(d[1]))
-        focus.select('path').attr('d', fnObj.lineFn);
+        for (let i = 0; i < dataset.length; i++) {
+            let {candrag} = dataset[i]
+            if (candrag === true) {
+                console.log('X', d[0], 'Y', d[1])
+                focus.select('path.xline' + i).attr('d', fnObj.lineFn);
+            }
+        }
     }
 
     const dragended = (d) => {
@@ -92,7 +102,10 @@ const Chart2 = props => {
 
         let points = lineData.map((v, i) => [i, v])
         let points2 = lineData2.map((v, i) => [i, v])
-        let multilines = [{candrag:true,data:points}, {candrag:false,data:points2}]
+        let multilines = [
+            {name: 'line1', candrag: true, data: points},
+            {name: 'line2', candrag: false, data: points2}
+        ]
 
         const xScaleFn = getX(width);
         const yScaleFn = getY(height)
