@@ -17,10 +17,8 @@ svg{
     font-weight: bold;
 }
 
-.tick{
-    font-size: 10px;
-    font-weight: bold;
-    color: black;
+.chartwrapper{
+    margin-top: 20px;
 }
 
 .center{

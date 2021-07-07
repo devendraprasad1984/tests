@@ -33,7 +33,8 @@ function App() {
         {/*<span>put * to see all</span>*/}
         {/*<Combine/>*/}
 
-        <Chart2 name='chart2' color={['tomato','gray']}/>
+        <Chart2 name='chart1' color={['tomato', 'gray']} height={250} width={750}/>
+        <Chart2 name='chart2' color={['magenta', 'blue']} height={250} width={750}/>
 
     </div>
 }

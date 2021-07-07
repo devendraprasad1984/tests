@@ -4,14 +4,15 @@ import data from "../black_hawk/data.json";
 const d3 = window.d3
 
 const Chart2 = props => {
-    const {name, color} = props
+    const {name, color, height, width} = props
+    const [showLabel, setShowLabel] = useState(true)
     const [lineData, setLineData] = useState([10, 15, 45, 60, 30, 20, 33, 10])
     const [lineData2, setLineData2] = useState([5, 12, 43, 67, 38, 17, 23, 18])
     const svgRef = useRef()
 
     const getX = width => d3.scaleLinear().rangeRound([0, width])
     const getY = height => d3.scaleLinear().rangeRound([height, 0])
-    const Tooltip = d3.select('#chartMainDiv').append('div').attr("class", "tooltip")
+    const Tooltip = d3.select('#chartMainDiv').append('div').attr("class", "tooltip tooltip_"+name)
     const mouseover = d => Tooltip.style("opacity", 1)
     const mousemove = (d) => {
         let curPos = d3.event
@@ -26,6 +27,7 @@ const Chart2 = props => {
         focus.selectAll('.domain').remove()
         focus.selectAll('.tick').remove()
         focus.selectAll('.points').remove()
+        focus.selectAll('.labels').remove()
     }
 
     const drawlines = (focus, fnObj) => {
@@ -44,9 +46,11 @@ const Chart2 = props => {
         }
     }
     const drawcircle = (focus, fnObj) => {
+        focus.selectAll('.points').remove()
         let dataset = fnObj.multilines
         for (let i = 0; i < dataset.length; i++) {
             let {candrag, data} = dataset[i]
+            if (candrag !== true) continue
             focus.selectAll('.dots' + i).data(data)
                 .enter()
                 .append('circle')
@@ -61,8 +65,27 @@ const Chart2 = props => {
                 .on("mousedown", mousemove)
                 .on("mouseleave", mouseleave)
                 .on("mouseout", mouseleave)
-                .call(candrag ? fnObj.dragFn : () => {
-                })
+                .call(fnObj.dragFn)
+        }
+        if (showLabel === true) drawtextonpoints(focus, fnObj)
+    }
+    const drawtextonpoints = (focus, fnObj) => {
+        focus.selectAll('.labels').remove()
+        let dataset = fnObj.multilines
+        for (let i = 0; i < dataset.length; i++) {
+            let {candrag, data} = dataset[i]
+            if (candrag !== true) continue
+            focus.selectAll(".labels" + i)
+                .data(data)
+                .enter()
+                .append('g')
+                .append("text")
+                .attr("class", 'labels')
+                .attr("x", d => fnObj.xScaleFn(d[0]) - 10)
+                .attr("y", d => fnObj.yScaleFn(d[1]) - 10)
+                .text(d => Math.round(d[1], 0))
+                .style("fill", color[i])
+                .style("font-size", 11)
         }
     }
 
@@ -83,6 +106,7 @@ const Chart2 = props => {
                 focus.select('path.xline' + i).attr('d', fnObj.lineFn);
             }
         }
+        drawcircle(focus, fnObj)
     }
 
     const dragended = (d) => {
@@ -90,15 +114,16 @@ const Chart2 = props => {
     }
 
     const drawaxes = (focus, fnObj) => {
-        focus.append('g').attr('class', 'axis axis--x' + name).attr('transform', 'translate(0,' + fnObj.height + ')').call(d3.axisBottom(fnObj.xScaleFn))
+        let axisBottomObj = d3.axisBottom(fnObj.xScaleFn).ticks(lineData.length)
+        focus.append('g').attr('class', 'axis axis--x' + name).attr('transform', 'translate(0,' + fnObj.ht + ')').call(axisBottomObj)
         focus.append('g').attr('class', 'axis axis--y' + name).call(d3.axisLeft(fnObj.yScaleFn))
     }
 
     const lineChartHandler = () => {
         const svg = d3.select(svgRef.current)
         const margin = {top: 20, right: 20, bottom: 30, left: 50},
-            width = +svg.attr("width") - margin.left - margin.right,
-            height = +svg.attr("height") - margin.top - margin.bottom;
+            wid = +svg.attr("width") - margin.left - margin.right,
+            ht = +svg.attr("height") - margin.top - margin.bottom;
 
         let points = lineData.map((v, i) => [i, v])
         let points2 = lineData2.map((v, i) => [i, v])
@@ -107,14 +132,14 @@ const Chart2 = props => {
             {name: 'line2', candrag: false, data: points2}
         ]
 
-        const xScaleFn = getX(width);
-        const yScaleFn = getY(height)
+        const xScaleFn = getX(wid);
+        const yScaleFn = getY(ht)
         xScaleFn.domain(d3.extent(points, d => d[0]));
         yScaleFn.domain(d3.extent(points, d => d[1]));
 
         const lineFn = d3.line().x(d => xScaleFn(d[0])).y(d => yScaleFn(d[1])).curve(d3.curveMonotoneX);
         const focus = svg.select('.chart' + name).attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-        const fnObj = {multilines, lineFn, xScaleFn, yScaleFn, height, width, margin}
+        const fnObj = {multilines, lineFn, xScaleFn, yScaleFn, ht, wid, margin}
         const dragFn = d3.drag().on('start', dragstarted).on('drag', d => dragged(d, focus, fnObj)).on('end', dragended);
         fnObj['dragFn'] = dragFn
         cleanup(focus)
@@ -131,15 +156,20 @@ const Chart2 = props => {
     }
     useEffect(() => {
         lineChartHandler()
-    }, [lineData])
+    }, [lineData, showLabel])
+
+    const handleTextMode = () => {
+        setShowLabel(!showLabel)
+    }
 
     return (
-        <div id='chartMainDiv'>
-            <svg ref={svgRef} height={350} width={750} preserveAspectRatio={'xMinYMid'}>
+        <div id='chartMainDiv' className='chartwrapper'>
+            <svg ref={svgRef} height={height} width={width} preserveAspectRatio={'xMinYMid'}>
                 <g className={"chart" + name}></g>
             </svg>
             <br/>
             <button onClick={updateLineData}>update</button>
+            <button onClick={handleTextMode}>show/hide label</button>
         </div>
     )
 }
