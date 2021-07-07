@@ -1,18 +1,17 @@
 import React, {useState, useEffect, useRef} from 'react'
-import data from "../black_hawk/data.json";
 
 const d3 = window.d3
 
 const Chart2 = props => {
-    const {name, color, height, width} = props
+    const {name, color, height, width, linesArray} = props
     const [showLabel, setShowLabel] = useState(true)
-    const [lineData, setLineData] = useState([10, 15, 45, 60, 30, 20, 33, 10])
-    const [lineData2, setLineData2] = useState([5, 12, 43, 67, 38, 17, 23, 18])
+    const [lineData, setLineData] = useState(linesArray)
+    const [updateCounter, setUpdateCounter] = useState(0)
     const svgRef = useRef()
 
     const getX = width => d3.scaleLinear().rangeRound([0, width])
     const getY = height => d3.scaleLinear().rangeRound([height, 0])
-    const Tooltip = d3.select('#chartMainDiv').append('div').attr("class", "tooltip tooltip_"+name)
+    const Tooltip = d3.select('#chartMainDiv').append('div').attr("class", "tooltip tooltip_" + name)
     const mouseover = d => Tooltip.style("opacity", 1)
     const mousemove = (d) => {
         let curPos = d3.event
@@ -31,33 +30,34 @@ const Chart2 = props => {
     }
 
     const drawlines = (focus, fnObj) => {
-        let dataset = fnObj.multilines
-        let lineNames = dataset.map(x => x.name)
-        // const myColor = d3.scaleOrdinal().domain([lineNames]).range(d3.schemeSet2);
-        // console.log(dataset,lineNames, myColor)
-        for (let i = 0; i < dataset.length; i++) {
+        // console.log('object', fnObj)
+        const {lineFn, multilines} = fnObj
+        for (let i = 0; i < multilines.length; i++) {
+            let {points} = multilines[i]
+            // console.log('data line', points)
             focus.append("path")
-                .datum(dataset[i].data)
+                .datum(points)
                 .attr("fill", 'none')
                 .attr('class', 'line xline' + i)
                 .attr("stroke", color[i])
                 .attr("stroke-width", 1.5)
-                .attr("d", fnObj.lineFn);
+                .attr("d", lineFn);
         }
     }
     const drawcircle = (focus, fnObj) => {
         focus.selectAll('.points').remove()
-        let dataset = fnObj.multilines
-        for (let i = 0; i < dataset.length; i++) {
-            let {candrag, data} = dataset[i]
+        const {xScaleFn, yScaleFn, dragFn, multilines} = fnObj
+        for (let i = 0; i < multilines.length; i++) {
+            let {candrag, points} = multilines[i]
             if (candrag !== true) continue
-            focus.selectAll('.dots' + i).data(data)
+            focus.selectAll('.dots' + i)
+                .data(points)
                 .enter()
                 .append('circle')
                 .attr('r', 6.0)
                 .attr('class', 'points dots' + i)
-                .attr('cx', d => fnObj.xScaleFn(d[0]))
-                .attr('cy', d => fnObj.yScaleFn(d[1]))
+                .attr('cx', d => xScaleFn(d[0]))
+                .attr('cy', d => yScaleFn(d[1]))
                 .style('cursor', 'pointer')
                 .style('fill', color[i])
                 .on("mouseover", mouseover)
@@ -65,24 +65,24 @@ const Chart2 = props => {
                 .on("mousedown", mousemove)
                 .on("mouseleave", mouseleave)
                 .on("mouseout", mouseleave)
-                .call(fnObj.dragFn)
+                .call(dragFn)
         }
         if (showLabel === true) drawtextonpoints(focus, fnObj)
     }
     const drawtextonpoints = (focus, fnObj) => {
         focus.selectAll('.labels').remove()
-        let dataset = fnObj.multilines
-        for (let i = 0; i < dataset.length; i++) {
-            let {candrag, data} = dataset[i]
+        const {xScaleFn, yScaleFn, multilines} = fnObj
+        for (let i = 0; i < multilines.length; i++) {
+            let {candrag, points} = multilines[i]
             if (candrag !== true) continue
             focus.selectAll(".labels" + i)
-                .data(data)
+                .data(points)
                 .enter()
                 .append('g')
                 .append("text")
                 .attr("class", 'labels')
-                .attr("x", d => fnObj.xScaleFn(d[0]) - 10)
-                .attr("y", d => fnObj.yScaleFn(d[1]) - 10)
+                .attr("x", d => xScaleFn(d[0]) - 10)
+                .attr("y", d => yScaleFn(d[1]) - 10)
                 .text(d => Math.round(d[1], 0))
                 .style("fill", color[i])
                 .style("font-size", 11)
@@ -114,7 +114,7 @@ const Chart2 = props => {
     }
 
     const drawaxes = (focus, fnObj) => {
-        let axisBottomObj = d3.axisBottom(fnObj.xScaleFn).ticks(lineData.length)
+        let axisBottomObj = d3.axisBottom(fnObj.xScaleFn)//.ticks(lineData.length)
         focus.append('g').attr('class', 'axis axis--x' + name).attr('transform', 'translate(0,' + fnObj.ht + ')').call(axisBottomObj)
         focus.append('g').attr('class', 'axis axis--y' + name).call(d3.axisLeft(fnObj.yScaleFn))
     }
@@ -124,18 +124,14 @@ const Chart2 = props => {
         const margin = {top: 20, right: 20, bottom: 30, left: 50},
             wid = +svg.attr("width") - margin.left - margin.right,
             ht = +svg.attr("height") - margin.top - margin.bottom;
-
-        let points = lineData.map((v, i) => [i, v])
-        let points2 = lineData2.map((v, i) => [i, v])
-        let multilines = [
-            {name: 'line1', candrag: true, data: points},
-            {name: 'line2', candrag: false, data: points2}
-        ]
-
+        let multilines = lineData.map((x, i) => {
+            return {...x, points: x.data.map((v, i) => [i, v])}
+        })
         const xScaleFn = getX(wid);
         const yScaleFn = getY(ht)
-        xScaleFn.domain(d3.extent(points, d => d[0]));
-        yScaleFn.domain(d3.extent(points, d => d[1]));
+        let line0 = multilines[0].points
+        xScaleFn.domain(d3.extent(line0, d => d[0]));
+        yScaleFn.domain(d3.extent(line0, d => d[1]));
 
         const lineFn = d3.line().x(d => xScaleFn(d[0])).y(d => yScaleFn(d[1])).curve(d3.curveMonotoneX);
         const focus = svg.select('.chart' + name).attr("transform", "translate(" + margin.left + "," + margin.top + ")")
@@ -149,14 +145,16 @@ const Chart2 = props => {
     }
 
     const updateLineData = () => {
-        let updateData = lineData.map(x => x + Math.random() * 5)
-        let updateData2 = lineData.map(x => x + Math.random() * 10)
+        let updateData = lineData.map((x, i) => {
+            return {...x, data: x.data.map(x => Math.round(Math.random() * 10, 0))}
+        })
         setLineData(updateData)
-        setLineData2(updateData2)
+        console.log('update', updateData, lineData)
+        setUpdateCounter(() => updateCounter + 1)
     }
     useEffect(() => {
         lineChartHandler()
-    }, [lineData, showLabel])
+    }, [updateCounter, showLabel])
 
     const handleTextMode = () => {
         setShowLabel(!showLabel)
