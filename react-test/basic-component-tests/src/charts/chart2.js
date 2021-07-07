@@ -11,7 +11,7 @@ const Chart2 = props => {
 
     const getX = width => d3.scaleLinear().rangeRound([0, width])
     const getY = height => d3.scaleLinear().rangeRound([height, 0])
-    const Tooltip = d3.select('#chartMainDiv').append('div').attr("class", "tooltip tooltip_" + name)
+    const Tooltip = d3.select(".tooltip_" + name)
     const mouseover = d => Tooltip.style("opacity", 1)
     const mousemove = (d) => {
         let curPos = d3.event
@@ -161,7 +161,8 @@ const Chart2 = props => {
     }
 
     return (
-        <div id='chartMainDiv' className='chartwrapper'>
+        <div id={'chartMainDiv' + name} className='chartwrapper'>
+            <div className={"tooltip tooltip_" + name}></div>
             <svg ref={svgRef} height={height} width={width} preserveAspectRatio={'xMinYMid'}>
                 <g className={"chart" + name}></g>
             </svg>
