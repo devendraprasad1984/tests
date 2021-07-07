@@ -5,6 +5,7 @@ const d3 = window.d3
 const Chart2 = props => {
     const {name, color, height, width, linesArray} = props
     const [showLabel, setShowLabel] = useState(true)
+    const [changedPoint, setChangedPoint] = useState({})
     const [lineData, setLineData] = useState(linesArray)
     const [updateCounter, setUpdateCounter] = useState(0)
     const svgRef = useRef()
@@ -20,8 +21,11 @@ const Chart2 = props => {
         let y = curPos.pageY + 10
         Tooltip.style("left", x + "px").style("top", y + "px").html("value: " + val)
     }
-    const mouseleave = d => Tooltip.style("opacity", 0)
+    const mouseleave = d => {
+        Tooltip.style("opacity", 0)
+    }
     const cleanup = focus => {
+        focus.selectAll('.axis').remove()
         focus.selectAll('.line').remove()
         focus.selectAll('.domain').remove()
         focus.selectAll('.tick').remove()
@@ -93,26 +97,34 @@ const Chart2 = props => {
     const dragstarted = (d) => {
         d3.select(this).raise().classed('active', true);
     }
-
     const dragged = (d, focus, fnObj) => {
-        let dataset = fnObj.multilines
-        d[0] = fnObj.xScaleFn.invert(d3.event.x);
-        d[1] = fnObj.yScaleFn.invert(d3.event.y);
-        d3.select(this).attr('cx', fnObj.xScaleFn(d[0])).attr('cy', fnObj.yScaleFn(d[1]))
-        for (let i = 0; i < dataset.length; i++) {
-            let {candrag} = dataset[i]
+        let {multilines, lineFn, xScaleFn, yScaleFn} = fnObj
+        d[0] = xScaleFn.invert(d3.event.x);
+        d[1] = yScaleFn.invert(d3.event.y);
+        d3.select(this).attr('cx', xScaleFn(d[0])).attr('cy', yScaleFn(d[1]))
+        for (let i = 0; i < multilines.length; i++) {
+            let {candrag, data, copy} = multilines[i]
+            let lineName = multilines[i].name
             if (candrag === true) {
-                console.log('X', d[0], 'Y', d[1])
-                focus.select('path.xline' + i).attr('d', fnObj.lineFn);
+                let xval = Math.round(d[0], 0)
+                let yval = Math.round(d[1], 0)
+                data[xval] = yval
+                let oldVal = copy[xval]
+                let newVal = yval
+                let selected = {name, lineName, data, copy, oldVal, newVal, "index": xval}
+                focus.select('path.xline' + i).attr('d', lineFn);
+                //console.log(selected)
+                setChangedPoint(() => {
+                    return {...selected}
+                })
             }
         }
         drawcircle(focus, fnObj)
     }
-
     const dragended = (d) => {
         d3.select(this).classed('active', false);
+        console.log('dragended', changedPoint, lineData)
     }
-
     const drawaxes = (focus, fnObj) => {
         let axisBottomObj = d3.axisBottom(fnObj.xScaleFn)//.ticks(lineData.length)
         focus.append('g').attr('class', 'axis axis--x' + name).attr('transform', 'translate(0,' + fnObj.ht + ')').call(axisBottomObj)
@@ -146,12 +158,13 @@ const Chart2 = props => {
 
     const updateLineData = () => {
         let updateData = lineData.map((x, i) => {
-            return {...x, data: x.data.map(x => Math.round(Math.random() * 10, 0))}
+            return {...x, data: x.data.map(x => Math.round(Math.random() * 100, 0))}
         })
         setLineData(updateData)
         console.log('update', updateData, lineData)
         setUpdateCounter(() => updateCounter + 1)
     }
+
     useEffect(() => {
         lineChartHandler()
     }, [updateCounter, showLabel])
