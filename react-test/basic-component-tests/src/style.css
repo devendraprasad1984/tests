@@ -21,6 +21,25 @@ svg{
     margin-top: 20px;
 }
 
+.axis {
+    font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+    stroke-width: 2px;
+}
+
+.axis .tick text{
+    font-size: 10px;
+    font-weight: bold;
+    fill: black;
+}
+
+
 .center{
     text-align: center;
 }
