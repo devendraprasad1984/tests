@@ -7,10 +7,10 @@
 ### command to run the app
 `npm run app`
 
-### command test with coverage
+### command to run test with coverage
 `npm run testc`
 
-### command test without coverage
+### command to run test without coverage
 `npm run test`
 
 
