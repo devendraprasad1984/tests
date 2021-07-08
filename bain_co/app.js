@@ -1,5 +1,7 @@
-// Nodejs BMI Calculator Coding Challenge
+// Nodejs BMI Calculator Coding Challenge - Devendra Prasad - devendraprasad1984@gmail.com
 /*
+NAME: Devendra Prasad
+Coding Assessment for Bain and Co
 Problem Statement
 1) Calculate the BMI (Body Mass Index) using Formula 1, BMI Category and Health risk from Table 1 of the person and add them as 3 new columns
 2) Count the total number of overweight people using ranges in the column BMI Category of Table 1, check this is consistent programmatically and add any other observations in the documentation
@@ -22,10 +24,10 @@ Health risk: Malnutrition risk, Low risk, Enhanced risk, Medium risk, High risk,
 import data from './data/bmi_data.js'
 import * as calci from './utils/calculations.js'
 
-const updateDatasetAddColumns = () => {
+const updateDatasetWithCalculations = () => {
     if (data === undefined || data.length === 0) return []
     return data.map(row => {
-        let {bmiVal, bmiUnit,bmiRangeIndex} = calci.calculateBMI(row)
+        let {bmiVal, bmiUnit, bmiRangeIndex} = calci.calculateBMI(row)
         return {
             ...row, ...{
                 bmi: bmiVal,
@@ -36,5 +38,15 @@ const updateDatasetAddColumns = () => {
         }
     })
 }
-const updateDataset = updateDatasetAddColumns()
-console.log('updated dataset', updateDataset, 'raw_object', calci.raw_objects())
+const updateDataset = updateDatasetWithCalculations()
+// console.log('updated dataset', updateDataset, 'raw_object', calci.raw_objects())
+for (let row of updateDataset) {
+    let {Gender, HeightCm, WeightKg, bmi, bmi_unit, category, risk} = row
+    let printMsg = ''
+    printMsg += Gender.toLowerCase() === 'male' ? 'He is ' : 'She is '
+    printMsg += '"' + category + '"'
+    printMsg += ' having bmi at "' + bmi + bmi_unit + '"'
+    printMsg += ' and has health risk category as "' + risk + '".'
+    printMsg += ' [height=' + HeightCm + 'cm, weight=' + WeightKg + 'kg]'
+    console.log(printMsg)
+}
