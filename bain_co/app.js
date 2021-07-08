@@ -23,6 +23,7 @@ Health risk: Malnutrition risk, Low risk, Enhanced risk, Medium risk, High risk,
 
 import data from './data/bmi_data.js'
 import * as calci from './utils/calculations.js'
+import {printRecords} from "./utils/print.js"
 
 const updateDatasetWithCalculations = () => {
     if (data === undefined || data.length === 0) return []
@@ -39,21 +40,4 @@ const updateDatasetWithCalculations = () => {
     })
 }
 const updateDataset = updateDatasetWithCalculations()
-// console.log('updated dataset', updateDataset, 'raw_object', calci.raw_objects())
-let foundRecords = updateDataset.length
-console.log('printing BMI calculation results for ' + foundRecords + ' patients')
-for (let row = 0; row < foundRecords; row++) {
-    let {Gender, HeightCm, WeightKg, bmi, bmi_unit, category, risk} = updateDataset[row]
-    let printMsg = ''
-    if (bmi === -1) {
-        printMsg = `ROW-${row + 1} - insufficient data`
-    } else {
-        printMsg = `ROW-${row + 1} - `
-        printMsg += Gender.toLowerCase() === 'male' ? 'He is ' : 'She is '
-        printMsg += '"' + category + '"'
-        printMsg += ' having bmi at "' + bmi + bmi_unit + '"'
-        printMsg += ' and has health risk category as "' + risk + '".'
-        printMsg += ' [height=' + HeightCm + 'cm, weight=' + WeightKg + 'kg]'
-    }
-    console.log(printMsg)
-}
+printRecords(updateDataset)
