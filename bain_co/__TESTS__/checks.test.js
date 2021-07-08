@@ -12,3 +12,8 @@ test('check people with overweight counter', () => {
     // const exp = mock.getPeopleByCategory(dataset, cat_enums.OVERWEIGHT)
     expect(act.length).toBeGreaterThan(0)
 })
+
+test('check people with high risk', () => {
+    const act = getPeopleByCategory(dataset, cat_enums.SEVERELY_OBESE)
+    expect(act.length).toBeGreaterThanOrEqual(0)
+})

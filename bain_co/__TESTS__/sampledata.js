@@ -12,5 +12,9 @@ export const sampledata=[
         Gender: 'female',
         HeightCm: 165,
         WeightKg: 72,
+    }, {
+        Gender: 'female',
+        HeightCm: 140,
+        WeightKg: 150,
     }
 ]

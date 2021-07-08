@@ -1,7 +1,6 @@
 import {print, printRecords} from "../utils/print.js";
 import {sampledata} from "./sampledata.js";
 import {updateDatasetWithCalculations} from "../app/update.js";
-import data from "../data/bmi_data";
 
 const mock = {
     print: jest.fn(),
