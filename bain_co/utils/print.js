@@ -11,7 +11,7 @@ export const printRecords=(dataset)=>{
             printMsg += Gender.toLowerCase() === 'male' ? 'He is ' : 'She is '
             printMsg += '"' + category + '"'
             printMsg += ' having bmi at "' + bmi + bmi_unit + '"'
-            printMsg += ' and has health risk category as "' + risk + '".'
+            printMsg += ' and has "' + risk + '".'
             printMsg += ' [height=' + HeightCm + 'cm, weight=' + WeightKg + 'kg]'
         }
         console.log(printMsg)
