@@ -1,9 +1,11 @@
+import {risks_enum} from "../utils/consts.js";
+
 const risks = [
-    'Malnutrition health risk',
-    'Low health risk',
-    'Enhanced health risk',
-    'Medium health risk',
-    'High health risk',
-    'Very high health risk'
+    risks_enum.MALNUTRITION_HEALTH_RISK,
+    risks_enum.LOW_HEALTH_RISK,
+    risks_enum.ENHANCED_HEALTH_RISK,
+    risks_enum.MEDIUM_HEALTH_RISK,
+    risks_enum.HIGH_HEALTH_RISK,
+    risks_enum.VERY_HIGH_HEALTH_RISK
 ]
 export default risks

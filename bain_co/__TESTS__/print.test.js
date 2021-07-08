@@ -1,4 +1,5 @@
 import {print, printRecords} from "../utils/print.js";
+import {cat_enums, risks_enum} from "../utils/consts";
 
 const mock = {
     print: jest.fn(),
@@ -15,8 +16,24 @@ test('print test -- hello', () => {
 
 test('printRecords with data', () => {
     let dataset = [
-        {Gender: 'male', HeightCm: 180, WeightKg: 87, bmi: -1, bmi_unit: 'kg/m2', risk: 'dummy', category: 'dummy'},
-        {Gender: 'female', HeightCm: 165, WeightKg: 72, bmi: 35.8, bmi_unit: 'kg/m2', risk: 'dummy', category: 'dummy'}
+        {
+            Gender: 'male',
+            HeightCm: 180,
+            WeightKg: 87,
+            bmi: -1,
+            bmi_unit: 'kg/m2',
+            risk: risks_enum.LOW_HEALTH_RISK,
+            category: cat_enums.OVERWEIGHT
+        },
+        {
+            Gender: 'female',
+            HeightCm: 165,
+            WeightKg: 72,
+            bmi: 35.8,
+            bmi_unit: 'kg/m2',
+            risk: risks_enum.VERY_HIGH_HEALTH_RISK,
+            category: cat_enums.NORMAL_WEIGHT
+        }
     ]
     let printTop = 2
     const act = printRecords(dataset, printTop)
