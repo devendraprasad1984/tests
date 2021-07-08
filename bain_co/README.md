@@ -1,8 +1,8 @@
 # Bain & Co - online problem solving assessment
 
 ## steps to run the project
-###clone the repo
-###go to the folder where package.json is and run `npm install`
+### `clone the repo`
+### `go to the folder where package.json is and run npm install`
 
 ## Available Scripts
 command to run the app
