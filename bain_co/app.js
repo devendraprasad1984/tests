@@ -21,28 +21,21 @@ BMI Range (kg/m2)
 Health risk: Malnutrition risk, Low risk, Enhanced risk, Medium risk, High risk, Very high risk
  */
 
-import data from './data/bmi_data.js'
-import * as calci from './utils/calculations.js'
 import {getPeopleByCategory} from './utils/calculations.js'
 import {print, printRecords} from "./utils/print.js"
 import {cat_enums} from "./utils/consts.js"
+import {updateDatasetWithCalculations} from "./app/update.js";
 
-const updateDatasetWithCalculations = () => {
-    let dataset = (data || [])
-    if (dataset.length === 0) return []
-    return dataset.map(row => {
-        let {bmiVal, bmiUnit, bmiRangeIndex} = calci.calculateBMI(row)
-        return {
-            ...row, ...{
-                bmi: bmiVal,
-                bmi_unit: bmiUnit,
-                category: calci.calculateCategory(bmiRangeIndex),
-                risk: calci.calculateRisk(bmiRangeIndex)
-            }
-        }
-    })
+
+function main(){
+    const updateDataset = updateDatasetWithCalculations()
+    const overWeightPeople = getPeopleByCategory(updateDataset, cat_enums.OVERWEIGHT)
+    print('printing BMI calculation results for ' + updateDataset.length + ' patients')
+    print(`found ${overWeightPeople.length} ${cat_enums.OVERWEIGHT} patients`)
+    let printTop = 4 //undefined //leave this undefined, if print all is needed
+    printRecords(updateDataset, printTop)
 }
-const updateDataset = updateDatasetWithCalculations()
-const overWeightPeople = getPeopleByCategory(updateDataset, cat_enums.OVERWEIGHT)
-print(`found ${overWeightPeople.length} ${cat_enums.OVERWEIGHT} people`)
-printRecords(updateDataset)
+
+
+
+main()

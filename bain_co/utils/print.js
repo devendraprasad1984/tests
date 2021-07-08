@@ -1,6 +1,15 @@
-export const printRecords=(dataset)=>{
+
+export const print = msg => {
+    console.log(msg)
+}
+
+
+export const printRecords = (dataset, printTop) => {
     let foundRecords = dataset.length
-    console.log('printing BMI calculation results for ' + foundRecords + ' patients')
+    if (printTop !== undefined) {
+        foundRecords = printTop
+        print(`printing only top ${printTop}`)
+    }
     for (let row = 0; row < foundRecords; row++) {
         let {Gender, HeightCm, WeightKg, bmi, bmi_unit, category, risk} = dataset[row]
         let printMsg = ''
@@ -14,10 +23,6 @@ export const printRecords=(dataset)=>{
             printMsg += ' and has "' + risk + '".'
             printMsg += ' [height=' + HeightCm + 'cm, weight=' + WeightKg + 'kg]'
         }
-        console.log(printMsg)
+        print(printMsg)
     }
-}
-
-export const print=msg=>{
-    console.log(msg)
 }
