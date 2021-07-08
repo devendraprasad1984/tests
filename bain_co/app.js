@@ -21,6 +21,7 @@ BMI Range (kg/m2)
 Health risk: Malnutrition risk, Low risk, Enhanced risk, Medium risk, High risk, Very high risk
  */
 
+import data from "./data/bmi_data.js";
 import {getPeopleByCategory} from './utils/calculations.js'
 import {print, printRecords} from "./utils/print.js"
 import {cat_enums} from "./utils/consts.js"
@@ -28,7 +29,7 @@ import {updateDatasetWithCalculations} from "./app/update.js";
 
 
 function main() {
-    const updateDataset = updateDatasetWithCalculations()
+    const updateDataset = updateDatasetWithCalculations(data)
     print('printing BMI calculation results for ' + updateDataset.length + ' patients')
 
     const overWeightPeople = getPeopleByCategory(updateDataset, cat_enums.OVERWEIGHT)

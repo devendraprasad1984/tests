@@ -5,7 +5,9 @@
   "description": "bainnco bmi assessment by devendra prasad (devendraprasad1984@gmail.com), 8jul2021",
   "main": "app.js",
   "scripts": {
-    "test": "jest --coverage"
+    "app": "node app.js",
+    "testc": "jest --coverage",
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",

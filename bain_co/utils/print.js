@@ -6,6 +6,9 @@ export const print = msg => {
 
 export const printRecords = (dataset, printTop) => {
     let foundRecords = dataset.length
+    if(foundRecords===0){
+        return
+    }
     if (printTop !== undefined) {
         foundRecords = printTop
         print(`printing only top ${printTop}`)
