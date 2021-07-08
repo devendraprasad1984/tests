@@ -32,7 +32,7 @@ function main(){
     const overWeightPeople = getPeopleByCategory(updateDataset, cat_enums.OVERWEIGHT)
     print('printing BMI calculation results for ' + updateDataset.length + ' patients')
     print(`found ${overWeightPeople.length} ${cat_enums.OVERWEIGHT} patients`)
-    let printTop = 4 //undefined //leave this undefined, if print all is needed
+    let printTop=5 //put a number if want to top N records or leave undefined to print all
     printRecords(updateDataset, printTop)
 }
 
