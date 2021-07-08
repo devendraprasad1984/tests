@@ -27,7 +27,7 @@ import {cat_enums} from "./utils/consts.js"
 import {updateDatasetWithCalculations} from "./app/update.js";
 
 
-function main(){
+function main() {
     const updateDataset = updateDatasetWithCalculations()
     print('printing BMI calculation results for ' + updateDataset.length + ' patients')
 
@@ -36,10 +36,9 @@ function main(){
     print(`found ${overWeightPeople.length} ${cat_enums.OVERWEIGHT} patients`)
     print(`found ${ModObesPeople.length} ${cat_enums.MODERATELY_OBESE} patients`)
 
-    let printTop=5 //put a number if want to top N records or leave undefined to print all
+    let printTop = 5 //put a number if want to top N records or leave undefined to print all
     printRecords(updateDataset, printTop)
 }
-
 
 
 main()
