@@ -40,13 +40,20 @@ const updateDatasetWithCalculations = () => {
 }
 const updateDataset = updateDatasetWithCalculations()
 // console.log('updated dataset', updateDataset, 'raw_object', calci.raw_objects())
-for (let row of updateDataset) {
-    let {Gender, HeightCm, WeightKg, bmi, bmi_unit, category, risk} = row
+let foundRecords = updateDataset.length
+console.log('printing BMI calculation results for ' + foundRecords + ' patients')
+for (let row = 0; row < foundRecords; row++) {
+    let {Gender, HeightCm, WeightKg, bmi, bmi_unit, category, risk} = updateDataset[row]
     let printMsg = ''
-    printMsg += Gender.toLowerCase() === 'male' ? 'He is ' : 'She is '
-    printMsg += '"' + category + '"'
-    printMsg += ' having bmi at "' + bmi + bmi_unit + '"'
-    printMsg += ' and has health risk category as "' + risk + '".'
-    printMsg += ' [height=' + HeightCm + 'cm, weight=' + WeightKg + 'kg]'
+    if (bmi === -1) {
+        printMsg = `ROW-${row + 1} - insufficient data`
+    } else {
+        printMsg = `ROW-${row + 1} - `
+        printMsg += Gender.toLowerCase() === 'male' ? 'He is ' : 'She is '
+        printMsg += '"' + category + '"'
+        printMsg += ' having bmi at "' + bmi + bmi_unit + '"'
+        printMsg += ' and has health risk category as "' + risk + '".'
+        printMsg += ' [height=' + HeightCm + 'cm, weight=' + WeightKg + 'kg]'
+    }
     console.log(printMsg)
 }

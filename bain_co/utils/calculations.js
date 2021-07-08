@@ -15,8 +15,11 @@ const getbmiIndex = val => {
 export const calculateBMI = person => {
     let bmiVal = -1
     let bmiRangeIndex = -1
-    let height = (person.HeightCm === undefined || person.HeightCm <= 0) ? -1 : person.HeightCm
-    let weight = (person.WeightKg === undefined || person.WeightKg <= 0) ? -1 : person.WeightKg
+    let height = person.HeightCm || -1
+    let weight = person.WeightKg || -1
+
+    height = height <= 0 ? -1 : height
+    weight = weight <= 0 ? -1 : weight
 
     if (height !== -1 && weight !== -1) {
         let heightM2 = (height * height) / (100 * 100)
@@ -26,8 +29,8 @@ export const calculateBMI = person => {
             //calculate bmi range index from ranges so that risk/category can be found based on this
             bmiRangeIndex = getbmiIndex(bmiVal)
         }
-        return {bmiVal, bmiUnit: 'kg/m2', bmiRangeIndex}
     }
+    return {bmiVal, bmiUnit: 'kg/m2', bmiRangeIndex}
 }
 
 export const calculateRisk = bmiRangeIndex => {

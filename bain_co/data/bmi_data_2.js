@@ -32,16 +32,6 @@ const data=[
   {
     "Gender": "Female",
     "HeightCm": 192
-  },
-  {
-    "Gender": "male",
-    "WeightKg": 89
-  }
-  ,
-  {
-    "Gender": "male",
-    "WeightKg": 20,
-    "HeightCm": -1,
   }
 ]
 export default data
