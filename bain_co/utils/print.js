@@ -17,3 +17,7 @@ export const printRecords=(dataset)=>{
         console.log(printMsg)
     }
 }
+
+export const print=msg=>{
+    console.log(msg)
+}

@@ -23,7 +23,9 @@ Health risk: Malnutrition risk, Low risk, Enhanced risk, Medium risk, High risk,
 
 import data from './data/bmi_data.js'
 import * as calci from './utils/calculations.js'
-import {printRecords} from "./utils/print.js"
+import {getPeopleByCategory} from './utils/calculations.js'
+import {print, printRecords} from "./utils/print.js"
+import {cat_enums} from "./utils/consts.js"
 
 const updateDatasetWithCalculations = () => {
     let dataset = (data || [])
@@ -41,4 +43,6 @@ const updateDatasetWithCalculations = () => {
     })
 }
 const updateDataset = updateDatasetWithCalculations()
+const overWeightPeople = getPeopleByCategory(updateDataset, cat_enums.OVERWEIGHT)
+print(`found ${overWeightPeople.length} ${cat_enums.OVERWEIGHT} people`)
 printRecords(updateDataset)

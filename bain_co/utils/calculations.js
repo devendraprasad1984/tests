@@ -2,6 +2,7 @@ import category from '../data/bmi_cat.js'
 import risks from '../data/bmi_health_risks.js'
 import bmi_range from '../data/bmi_range.js'
 
+
 const getbmiIndex = val => {
     let filtered = bmi_range.map(ranges => {
         if (ranges[1] !== undefined)
@@ -52,4 +53,9 @@ export const calculateCategory = bmiRangeIndex => {
 
 export const raw_objects = () => {
     return {category, risks, bmi_range}
+}
+
+export const getPeopleByCategory = (dataset, cat_type) => {
+    let filterRecords = dataset.filter(x => x.category === cat_type)
+    return filterRecords
 }
