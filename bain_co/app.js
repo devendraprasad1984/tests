@@ -26,8 +26,9 @@ import * as calci from './utils/calculations.js'
 import {printRecords} from "./utils/print.js"
 
 const updateDatasetWithCalculations = () => {
-    if (data === undefined || data.length === 0) return []
-    return data.map(row => {
+    let dataset = (data || [])
+    if (dataset.length === 0) return []
+    return dataset.map(row => {
         let {bmiVal, bmiUnit, bmiRangeIndex} = calci.calculateBMI(row)
         return {
             ...row, ...{
