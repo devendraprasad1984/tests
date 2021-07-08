@@ -1,19 +1,17 @@
 # Bain & Co - online problem solving assessment
 
 ## steps to run the project
-### `clone the repo`
-### `go to the folder where package.json is and run npm install`
+    1. clone the repo
+    2. go to the folder where package.json is and run npm install
 
-## Available Scripts
-command to run the app
-### `npm run app`
+### command to run the app
+`npm run app`
 
-command test with coverage
-### `npm run testc`
+### command test with coverage
+`npm run testc`
 
-command test without coverage
-### `npm run test`
-
+### command test without coverage
+`npm run test`
 
 
 ## code structure
@@ -35,3 +33,6 @@ command test without coverage
 
 ### app folder
     update.js - holds logic for manipulating actual data with 3 needed columns and calculation calls to get those results 
+
+### __TESTS__ folder
+    contains unit test cases using JEST framework 
