@@ -20,16 +20,21 @@ Health risk: Malnutrition risk, Low risk, Enhanced risk, Medium risk, High risk,
  */
 
 import data from './data/bmi_data.js'
-import category from './data/bmi_cat.js'
-import risks from './data/bmi_health_risks.js'
-import bmi_range from './data/bmi_range.js'
+import * as calci from './utils/calculations.js'
 
 const updateDatasetAddColumns = () => {
     if (data === undefined || data.length === 0) return []
     return data.map(row => {
-        return {...row, ...{bmi: -1, category: '', risk: ''}}
+        let {bmiVal, bmiUnit,bmiRangeIndex} = calci.calculateBMI(row)
+        return {
+            ...row, ...{
+                bmi: bmiVal,
+                bmi_unit: bmiUnit,
+                category: calci.calculateCategory(bmiRangeIndex),
+                risk: calci.calculateRisk(bmiRangeIndex)
+            }
+        }
     })
 }
 const updateDataset = updateDatasetAddColumns()
-
-console.log('dataset', data, 'category', category, 'risks', risks, 'bmi range', bmi_range, 'updated dataset', updateDataset)
+console.log('updated dataset', updateDataset, 'raw_object', calci.raw_objects())
