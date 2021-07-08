@@ -29,9 +29,13 @@ import {updateDatasetWithCalculations} from "./app/update.js";
 
 function main(){
     const updateDataset = updateDatasetWithCalculations()
-    const overWeightPeople = getPeopleByCategory(updateDataset, cat_enums.OVERWEIGHT)
     print('printing BMI calculation results for ' + updateDataset.length + ' patients')
+
+    const overWeightPeople = getPeopleByCategory(updateDataset, cat_enums.OVERWEIGHT)
+    const ModObesPeople = getPeopleByCategory(updateDataset, cat_enums.MODERATELY_OBESE)
     print(`found ${overWeightPeople.length} ${cat_enums.OVERWEIGHT} patients`)
+    print(`found ${ModObesPeople.length} ${cat_enums.MODERATELY_OBESE} patients`)
+
     let printTop=5 //put a number if want to top N records or leave undefined to print all
     printRecords(updateDataset, printTop)
 }
