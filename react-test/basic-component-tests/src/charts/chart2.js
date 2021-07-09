@@ -25,6 +25,8 @@ const Chart2 = props => {
         Tooltip.style("opacity", 0)
     }
     const cleanup = focus => {
+        focus.selectAll('g').remove()
+        focus.selectAll('.xtrag').remove()
         focus.selectAll('.axis').remove()
         focus.selectAll('.line').remove()
         focus.selectAll('.domain').remove()
@@ -40,9 +42,8 @@ const Chart2 = props => {
             let {points} = multilines[i]
             // console.log('data line', points)
             focus.append("path")
-                .datum(points)
+                .datum(points).attr('class', 'line xline' + i)
                 .attr("fill", 'none')
-                .attr('class', 'line xline' + i)
                 .attr("stroke", color[i])
                 .attr("stroke-width", 1.5)
                 .attr("d", lineFn);
@@ -57,9 +58,8 @@ const Chart2 = props => {
             focus.selectAll('.dots' + i)
                 .data(points)
                 .enter()
-                .append('circle')
+                .append('circle').attr('class', 'points dots' + i)
                 .attr('r', 6.0)
-                .attr('class', 'points dots' + i)
                 .attr('cx', d => xScaleFn(d[0]))
                 .attr('cy', d => yScaleFn(d[1]))
                 .style('cursor', 'pointer')
@@ -74,6 +74,7 @@ const Chart2 = props => {
         if (showLabel === true) drawtextonpoints(focus, fnObj)
     }
     const drawtextonpoints = (focus, fnObj) => {
+        focus.selectAll('.xtrag').remove()
         focus.selectAll('.labels').remove()
         const {xScaleFn, yScaleFn, multilines} = fnObj
         for (let i = 0; i < multilines.length; i++) {
@@ -82,9 +83,8 @@ const Chart2 = props => {
             focus.selectAll(".labels" + i)
                 .data(points)
                 .enter()
-                .append('g')
-                .append("text")
-                .attr("class", 'labels')
+                .append('g').attr("class", 'xtrag')
+                .append("text").attr("class", 'labels')
                 .attr("x", d => xScaleFn(d[0]) - 10)
                 .attr("y", d => yScaleFn(d[1]) - 10)
                 .text(d => Math.round(d[1], 0))
