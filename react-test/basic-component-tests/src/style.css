@@ -3,11 +3,11 @@ ul, #myUL {
     list-style-type: none;
 }
 
-svg{
+svg {
     overflow: visible;
 }
 
-.tooltip{
+.tooltip {
     position: absolute;
     padding: 5px;
     border-radius: 5px;
@@ -17,8 +17,34 @@ svg{
     font-weight: bold;
 }
 
-.chartwrapper{
+.chartwrapper {
     margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.actioBarChart{
+    display: flex;
+    margin: 5px;
+    padding: 5px;
+    text-align: center;
+}
+.row{
+    flex-direction: row;
+}
+.col{
+    flex-direction: column;
+}
+.markLabel{
+    font-size: 10px;
+}
+.markLabel90{
+    transform: rotate(-270deg);
+    display: table-row-group;
+}
+
+.actioBarChart button{
+    margin: 5px;
+    padding: 5px;
 }
 
 .axis {
@@ -33,17 +59,18 @@ svg{
     stroke-width: 2px;
 }
 
-.axis .tick text{
+.axis .tick text {
     font-size: 10px;
     font-weight: bold;
     fill: black;
 }
-.tooltip{
+
+.tooltip {
     opacity: 0;
 }
 
 
-.center{
+.center {
     text-align: center;
 }
 
@@ -60,7 +87,7 @@ svg{
     user-select: none;
 }
 
-text{
+text {
     cursor: pointer;
     font-size: 12pt;
     font-weight: bolder;

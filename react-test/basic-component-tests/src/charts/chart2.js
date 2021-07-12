@@ -1,9 +1,10 @@
 import React, {useState, useEffect, useRef} from 'react'
+import RangeSlider from "../component/slider";
 
 const d3 = window.d3
 
 const Chart2 = props => {
-    const {name, color, height, width, linesArray} = props
+    const {name, color, height, width, linesArray, tickmarks} = props
     const [showLabel, setShowLabel] = useState(true)
     const [changedPoint, setChangedPoint] = useState({})
     const [lineData, setLineData] = useState(linesArray)
@@ -173,15 +174,25 @@ const Chart2 = props => {
         setShowLabel(!showLabel)
     }
 
+    const handleTickChange = (event, v) => {
+        console.log(v)
+    };
+
     return (
         <div id={'chartMainDiv' + name} className='chartwrapper'>
             <div className={"tooltip tooltip_" + name}></div>
             <svg ref={svgRef} height={height} width={width} preserveAspectRatio={'xMinYMid'}>
                 <g className={"chart" + name}></g>
             </svg>
-            <br/>
-            <button onClick={updateLineData}>update</button>
-            <button onClick={handleTextMode}>show/hide label</button>
+
+
+            <div className='actioBarChart col'>
+                <div><RangeSlider onchange={handleTickChange} tickmarks={tickmarks}/></div>
+                <div>
+                    <button onClick={updateLineData}>update</button>
+                    <button onClick={handleTextMode}>show/hide label</button>
+                </div>
+            </div>
         </div>
     )
 }

@@ -2,6 +2,7 @@ import './App.css';
 import './style.css';
 import Chart2 from "./charts/chart2";
 import {useState} from "react";
+import {getMarks, getYrs} from "./charts/config";
 // import Combine from "./black_hawk/combine";
 // import Chart1 from "./charts/chart1";
 // import SelectBox from "./component/selectBox";
@@ -25,8 +26,11 @@ function App() {
     //     console.log('tags', values)
     // }
     const deepCopy=d=>Object.values(d)
-    const data = [10, 15, 45, 60, 30, 20, 33, 10]
-    const data2 = [5, 12, 43, 67, 38, 17, 23, 18]
+    const yrs=getYrs(2010,2028)
+    const data = yrs.map(x=>Math.round(Math.random()*x,2))
+    const data2 = yrs.map(x=>Math.round(Math.random()*x,2))
+    const marks=yrs.map((x,i)=>getMarks(x,i))
+
     let dataset = [
         {name: 'line1', candrag: true, copy: deepCopy(data), data: deepCopy(data)},
         {name: 'line2', candrag: false, copy: deepCopy(data2), data: deepCopy(data2)}
@@ -42,8 +46,8 @@ function App() {
         {/*<span>put * to see all</span>*/}
         {/*<Combine/>*/}
 
-        <Chart2 name='chart1' linesArray={dataset} color={['tomato', 'gray']} height={250} width={750}/>
-        <Chart2 name='chart2' linesArray={dataset} color={['magenta', 'blue']} height={250} width={750}/>
+        <Chart2 name='chart1' linesArray={dataset} tickmarks={marks} color={['tomato', 'gray']} height={250} width={750}/>
+        <Chart2 name='chart2' linesArray={dataset} tickmarks={marks} color={['magenta', 'blue']} height={250} width={750}/>
 
     </div>
 }
