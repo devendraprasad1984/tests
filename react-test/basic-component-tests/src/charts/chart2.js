@@ -6,7 +6,8 @@ const d3 = window.d3
 const Chart2 = props => {
     const {name, color, height, width, linesArray, tickmarks,defaultRange} = props
 
-    const [tickVals, setTickVals] = useState([...tickmarks.map(x => x.value)])
+    const [tickVals, setTickVals] = useState([...tickmarks.map(x => x.ival)])
+    const [tickValsTxt, setTickValsTxt] = useState([...tickmarks.map(x => x.value)])
     const [showLabel, setShowLabel] = useState(true)
     const [changedPoint, setChangedPoint] = useState({})
     const [lineData, setLineData] = useState([...linesArray])
@@ -145,11 +146,11 @@ const Chart2 = props => {
         let multilines = lineData.map((x, i) => {
             return {...x, points: x.data.map((v, i) => [tickVals[i], v])}
         })
-        const xScaleFn = getXS(wid);
+        const xScaleFn = getX(wid);
         const yScaleFn = getY(ht)
         let line0 = multilines[0].points
         xScaleFn.domain(d3.extent(line0,d => {
-            console.log('x vals',d[0])
+            console.log('x vals',d[0], tickValsTxt[d[0]])
             return d[0]
         }));
         yScaleFn.domain(d3.extent(line0,d => d[1]));
