@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {makeStyles, withStyles} from '@material-ui/core/styles';
 import Slider from '@material-ui/core/Slider';
+import {getMarkIndex} from "../charts/config";
 
 const useStyles = makeStyles({
     root: {
@@ -46,17 +47,6 @@ const MySlider = withStyles({
     },
 })(Slider);
 
-const getMarkIndex = (marks, val) => {
-    let found = -1
-    for (let i = 0; i < marks.length; i++) {
-        if (marks[i] === val) {
-            found = i
-            break
-        }
-    }
-    return found
-}
-
 export default function RangeSlider(props) {
     const {onchange, tickmarks, defaultRange} = props
 
@@ -88,7 +78,7 @@ export default function RangeSlider(props) {
                 max={marks[marks.length]}
                 valueLabelFormat={i => {
                     // console.log('value label', marksVal[i])
-                    return <span className='sliderLabel'>{marksVal[i]}</span>
+                    return <span key={'label-x-'+i} className='sliderLabel'>{marksVal[i]}</span>
                 }}
                 step={1}
             />

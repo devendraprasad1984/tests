@@ -21,3 +21,23 @@ export const getQtrs = (start, end) => {
     }
     return yrsArr
 }
+
+export const getMarkIndex = (marks, val) => {
+    let found = -1
+    for (let i = 0; i < marks.length; i++) {
+        if (marks[i] === val) {
+            found = i
+            break
+        }
+    }
+    return found
+}
+
+export const getUpdatedDataByRange=(data,start,end)=>{
+    let tmp=[]
+    // console.log(start,end, data)
+    for(let i=start; i<end; i++){
+        tmp.push(data[i])
+    }
+    return tmp
+}

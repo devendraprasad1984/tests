@@ -1,13 +1,21 @@
 import React, {useState, useEffect, useRef} from 'react'
 import RangeSlider from "../component/slider";
+import {getMarkIndex, getUpdatedDataByRange} from "../charts/config";
 
 const d3 = window.d3
 
-const Chart2 = props => {
-    const {name, color, height, width, linesArray, tickmarks,defaultRange} = props
 
-    const [tickVals, setTickVals] = useState([...tickmarks.map(x => x.ival)])
-    const [tickValsTxt, setTickValsTxt] = useState([...tickmarks.map(x => x.value)])
+const Chart2 = props => {
+    const {name, color, height, width, linesArray, tickmarks, defaultRange} = props
+    const [marksVal, setMarksVal] = useState([...tickmarks.map(x => x.value)])
+
+    const startRangeIndex = getMarkIndex(marksVal, defaultRange[0])
+    const endRangeIndex = getMarkIndex(marksVal, defaultRange[1])
+    const tickmarksX = getUpdatedDataByRange(tickmarks, startRangeIndex, endRangeIndex)
+    const linesArrayX = getUpdatedDataByRange(linesArray, startRangeIndex, endRangeIndex)
+
+    const [tickVals, setTickVals] = useState([...tickmarksX.map(x => x.ival)])
+    const [tickValsTxt, setTickValsTxt] = useState([...tickmarksX.map(x => x.value)])
     const [showLabel, setShowLabel] = useState(true)
     const [changedPoint, setChangedPoint] = useState({})
     const [lineData, setLineData] = useState([...linesArray])
@@ -15,7 +23,7 @@ const Chart2 = props => {
     const svgRef = useRef()
 
     const getX = width => d3.scaleLinear().rangeRound([0, width])
-    const getXS = width => d3.scaleOrdinal().range([0, width],.2)
+    const getXS = width => d3.scaleOrdinal().range([0, width], .2)
     const getY = height => d3.scaleLinear().rangeRound([height, 0])
     const Tooltip = d3.select(".tooltip_" + name)
     const mouseover = d => Tooltip.style("opacity", 1)
@@ -130,9 +138,18 @@ const Chart2 = props => {
         console.log('dragended', changedPoint, lineData)
     }
     const drawaxes = (focus, fnObj) => {
-        let axisBottomObj = d3.axisBottom(fnObj.xScaleFn).ticks(1)//.tickFormat((d,i)=>tickVals[i])
+        let axisBottomObj = d3.axisBottom(fnObj.xScaleFn)
         focus.append('g').attr('class', 'axis axis--x' + name).attr('transform', 'translate(0,' + fnObj.ht + ')').call(axisBottomObj)
         focus.append('g').attr('class', 'axis axis--y' + name).call(d3.axisLeft(fnObj.yScaleFn))
+    }
+
+    const alterPointsData = data => {
+        let tmp = []
+        for (let i = startRangeIndex; i <= endRangeIndex; i++) {
+            tmp.push([i, data[i], marksVal[i]])
+        }
+        console.log('tmp', tmp)
+        return tmp
     }
 
     const lineChartHandler = () => {
@@ -142,18 +159,12 @@ const Chart2 = props => {
         const margin = {top: 20, right: 20, bottom: 30, left: 50},
             wid = +svg.attr("width") - margin.left - margin.right,
             ht = +svg.attr("height") - margin.top - margin.bottom;
-        // console.log('lines', lineData, 'marks', tickVals)
-        let multilines = lineData.map((x, i) => {
-            return {...x, points: x.data.map((v, i) => [tickVals[i], v])}
-        })
+        let multilines = lineData.map((x, i) => ({...x, points: alterPointsData(x.data)}))
         const xScaleFn = getX(wid);
         const yScaleFn = getY(ht)
         let line0 = multilines[0].points
-        xScaleFn.domain(d3.extent(line0,d => {
-            console.log('x vals',d[0], tickValsTxt[d[0]])
-            return d[0]
-        }));
-        yScaleFn.domain(d3.extent(line0,d => d[1]));
+        xScaleFn.domain(d3.extent(line0, d => d[0]));
+        yScaleFn.domain(d3.extent(line0, d => d[1]));
 
         // xScaleFn.domain(d3.extent(line0, d=> d[0]));//numeric
         // yScaleFn.domain(d3.extent(line0, d => d[1]));
