@@ -46,31 +46,50 @@ const MySlider = withStyles({
     },
 })(Slider);
 
+const getMarkIndex = (marks, val) => {
+    let found = -1
+    for (let i = 0; i < marks.length; i++) {
+        if (marks[i] === val) {
+            found = i
+            break
+        }
+    }
+    return found
+}
+
 export default function RangeSlider(props) {
-    const {onchange,tickmarks}=props
+    const {onchange, tickmarks, defaultRange} = props
 
-    const [marks, setMarks] = useState([])
-    const [minmax, setMinmax] = useState({min: 0, max: 0, curYear: 0})
+    const [marks, setMarks] = useState([...tickmarks.map(x => x.ival)])
+    const [marksVal, setMarksVal] = useState([...tickmarks.map(x => x.value)])
+    // console.log('tickmarks', marks, marksVal)
     const classes = useStyles();
-
-    useEffect(() => {
-        let yrs = tickmarks.map(x=>x.value)
-        setMarks(tickmarks)
-        setMinmax({min: Math.min(...yrs), max: Math.max(...yrs), curYear: new Date().getFullYear()})
-    }, [])
+    const defaultValStart = getMarkIndex(marksVal, defaultRange[0])
+    const defaultValEnd = getMarkIndex(marksVal, defaultRange[1])
 
     return (
         <div className={classes.root}>
             <MySlider
                 track={'normal'}
-                defaultValue={[minmax.curYear, minmax.curYear + 3]}
+                defaultValue={[defaultValStart, defaultValEnd]}
                 onChangeCommitted={onchange}
-                marks={marks}
-                valueLabelDisplay="auto"
-                aria-labelledby="range-slider"
-                getAriaValueText={v => `${v}`}
-                min={minmax.min}
-                max={minmax.max}
+                marks={marksVal}
+                valueLabelDisplay="on"
+                aria-labelledby="discrete-slider-always"
+                getArriaLabel={i => {
+                    //console.log('LABEL',i, marksVal[i])
+                    return `${marksVal[i]}`
+                }}
+                getAriaValueText={i => {
+                    //console.log('selected',i, marksVal[i])
+                    return `${i}`
+                }}
+                min={marks[0]}
+                max={marks[marks.length]}
+                valueLabelFormat={i => {
+                    // console.log('value label', marksVal[i])
+                    return <span className='sliderLabel'>{marksVal[i]}</span>
+                }}
                 step={1}
             />
         </div>

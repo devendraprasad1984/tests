@@ -4,14 +4,17 @@ import RangeSlider from "../component/slider";
 const d3 = window.d3
 
 const Chart2 = props => {
-    const {name, color, height, width, linesArray, tickmarks} = props
+    const {name, color, height, width, linesArray, tickmarks,defaultRange} = props
+
+    const [tickVals, setTickVals] = useState([...tickmarks.map(x => x.value)])
     const [showLabel, setShowLabel] = useState(true)
     const [changedPoint, setChangedPoint] = useState({})
-    const [lineData, setLineData] = useState(linesArray)
+    const [lineData, setLineData] = useState([...linesArray])
     const [updateCounter, setUpdateCounter] = useState(0)
     const svgRef = useRef()
 
     const getX = width => d3.scaleLinear().rangeRound([0, width])
+    const getXS = width => d3.scaleOrdinal().range([0, width],.2)
     const getY = height => d3.scaleLinear().rangeRound([height, 0])
     const Tooltip = d3.select(".tooltip_" + name)
     const mouseover = d => Tooltip.style("opacity", 1)
@@ -94,7 +97,6 @@ const Chart2 = props => {
         }
     }
 
-
     const dragstarted = (d) => {
         d3.select(this).raise().classed('active', true);
     }
@@ -127,24 +129,33 @@ const Chart2 = props => {
         console.log('dragended', changedPoint, lineData)
     }
     const drawaxes = (focus, fnObj) => {
-        let axisBottomObj = d3.axisBottom(fnObj.xScaleFn)//.ticks(lineData.length)
+        let axisBottomObj = d3.axisBottom(fnObj.xScaleFn).ticks(1)//.tickFormat((d,i)=>tickVals[i])
         focus.append('g').attr('class', 'axis axis--x' + name).attr('transform', 'translate(0,' + fnObj.ht + ')').call(axisBottomObj)
         focus.append('g').attr('class', 'axis axis--y' + name).call(d3.axisLeft(fnObj.yScaleFn))
     }
 
     const lineChartHandler = () => {
+        if (tickVals.length === 0 || tickmarks.length === 0) return
+
         const svg = d3.select(svgRef.current)
         const margin = {top: 20, right: 20, bottom: 30, left: 50},
             wid = +svg.attr("width") - margin.left - margin.right,
             ht = +svg.attr("height") - margin.top - margin.bottom;
+        // console.log('lines', lineData, 'marks', tickVals)
         let multilines = lineData.map((x, i) => {
-            return {...x, points: x.data.map((v, i) => [i, v])}
+            return {...x, points: x.data.map((v, i) => [tickVals[i], v])}
         })
-        const xScaleFn = getX(wid);
+        const xScaleFn = getXS(wid);
         const yScaleFn = getY(ht)
         let line0 = multilines[0].points
-        xScaleFn.domain(d3.extent(line0, d => d[0]));
-        yScaleFn.domain(d3.extent(line0, d => d[1]));
+        xScaleFn.domain(d3.extent(line0,d => {
+            console.log('x vals',d[0])
+            return d[0]
+        }));
+        yScaleFn.domain(d3.extent(line0,d => d[1]));
+
+        // xScaleFn.domain(d3.extent(line0, d=> d[0]));//numeric
+        // yScaleFn.domain(d3.extent(line0, d => d[1]));
 
         const lineFn = d3.line().x(d => xScaleFn(d[0])).y(d => yScaleFn(d[1])).curve(d3.curveMonotoneX);
         const focus = svg.select('.chart' + name).attr("transform", "translate(" + margin.left + "," + margin.top + ")")
@@ -162,20 +173,19 @@ const Chart2 = props => {
             return {...x, data: x.data.map(x => Math.round(Math.random() * 100, 0))}
         })
         setLineData(updateData)
-        console.log('update', updateData, lineData)
         setUpdateCounter(() => updateCounter + 1)
     }
 
     useEffect(() => {
         lineChartHandler()
-    }, [updateCounter, showLabel])
+    }, [updateCounter, showLabel, tickVals, tickmarks])
 
     const handleTextMode = () => {
         setShowLabel(!showLabel)
     }
 
     const handleTickChange = (event, v) => {
-        console.log(v)
+        console.log(v, tickVals[v[0]], tickVals[v[1]])
     };
 
     return (
@@ -187,7 +197,7 @@ const Chart2 = props => {
 
 
             <div className='actioBarChart col'>
-                <div><RangeSlider onchange={handleTickChange} tickmarks={tickmarks}/></div>
+                <div><RangeSlider onchange={handleTickChange} tickmarks={tickmarks} defaultRange={defaultRange}/></div>
                 <div>
                     <button onClick={updateLineData}>update</button>
                     <button onClick={handleTextMode}>show/hide label</button>
