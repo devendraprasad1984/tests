@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import RangeSlider from "../component/slider";
 import { getMarkIndex, getUpdatedDataByRange } from "../charts/config";
 
+
 const d3 = window.d3
 
 
