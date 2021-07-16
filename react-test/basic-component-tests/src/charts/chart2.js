@@ -216,7 +216,7 @@ const Chart2 = props => {
 
 
             <div className='actioBarChart col'>
-                <div><RangeSlider onchange={handleTickChange} tickmarks={tickmarks} defaultRange={defaultRange} /></div>
+                <div style={{ width: width }} className='center'><RangeSlider onchange={handleTickChange} tickmarks={tickmarks} defaultRange={defaultRange} /></div>
                 <div>
                     <button onClick={handleTextMode}>show/hide label</button>
                 </div>
