@@ -48,7 +48,7 @@ function App() {
         {/*<span>put * to see all</span>*/}
         {/*<Combine/>*/}
 
-        <Chart2 name='chart1' linesArray={dataset} tickmarks={marks} color={['tomato', 'gray']} height={250} width={750} defaultRange={defaultRange}/>
+        <Chart2 name='chart1' linesArray={dataset} tickmarks={marks} color={['tomato', 'gray']} height={250} width={1000} defaultRange={defaultRange}/>
         {/*<Chart2 name='chart2' linesArray={dataset} tickmarks={marks} color={['magenta', 'blue']} height={250}*/}
         {/*        width={750}/>*/}
 

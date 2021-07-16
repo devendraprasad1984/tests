@@ -68,8 +68,8 @@ export default function RangeSlider(props) {
                 aria-labelledby="discrete-slider-always"
                 getAriaValueText={i => `${i}`}
                 getAriaLabel={i => `${i}`}
-                min={marks[0]}
-                max={marks[marks.length]}
+                min={0}
+                max={marks.length-1}
                 valueLabelFormat={i => {
                     return <span key={'label-x-' + i+marksVal[i]} className='sliderLabel markLabel90'>{marksVal[i]}</span>
                 }}
