@@ -138,9 +138,10 @@ const Chart2 = props => {
         console.log('dragended', changedPoint, lineData)
     }
     const drawaxes = (focus, fnObj) => {
-        let axisBottomObj = d3.axisBottom(fnObj.xScaleFn)
+        let axisBottomObj = d3.axisBottom(fnObj.xScaleFn).tickFormat(i=>marksVal[i])
         focus.append('g').attr('class', 'axis axis--x' + name).attr('transform', 'translate(0,' + fnObj.ht + ')').call(axisBottomObj)
         focus.append('g').attr('class', 'axis axis--y' + name).call(d3.axisLeft(fnObj.yScaleFn))
+        // focus.selectAll(`.axis--x${name} text`).attr('transform', 'rotate(90)')
     }
 
     const alterPointsData = data => {
@@ -148,7 +149,7 @@ const Chart2 = props => {
         for (let i = startRangeIndex; i <= endRangeIndex; i++) {
             tmp.push([i, data[i], marksVal[i]])
         }
-        console.log('tmp', tmp)
+        // console.log('tmp', tmp)
         return tmp
     }
 
@@ -180,13 +181,13 @@ const Chart2 = props => {
         drawaxes(focus, fnObj)
     }
 
-    const updateLineData = () => {
-        let updateData = lineData.map((x, i) => {
-            return {...x, data: x.data.map(x => Math.round(Math.random() * 100, 0))}
-        })
-        setLineData(updateData)
-        setUpdateCounter(() => updateCounter + 1)
-    }
+    // const updateLineData = () => {
+    //     let updateData = lineData.map((x, i) => {
+    //         return {...x, data: x.data.map(x => Math.round(Math.random() * 100, 0))}
+    //     })
+    //     setLineData(updateData)
+    //     setUpdateCounter(() => updateCounter + 1)
+    // }
 
     useEffect(() => {
         lineChartHandler()
@@ -197,7 +198,7 @@ const Chart2 = props => {
     }
 
     const handleTickChange = (event, v) => {
-        console.log(v, tickVals[v[0]], tickVals[v[1]])
+        console.log(v, marksVal[v[0]], marksVal[v[1]])
     };
 
     return (
@@ -211,7 +212,6 @@ const Chart2 = props => {
             <div className='actioBarChart col'>
                 <div><RangeSlider onchange={handleTickChange} tickmarks={tickmarks} defaultRange={defaultRange}/></div>
                 <div>
-                    <button onClick={updateLineData}>update</button>
                     <button onClick={handleTextMode}>show/hide label</button>
                 </div>
             </div>

@@ -22,32 +22,58 @@ svg {
     margin-bottom: 20px;
 }
 
-.actioBarChart{
+.actioBarChart {
     display: flex;
     margin: 5px;
     padding: 5px;
     text-align: center;
 }
-.row{
+
+.center, .center > *{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex{
+    display: flex;
+}
+
+input[type='text']{
+    width: 250px;
+}
+
+.row {
     flex-direction: row;
 }
-.col{
+
+.gap *{
+    margin: 3px;
+    padding: 3px;
+}
+
+.wid50{
+    width: 50%;
+}
+
+.col {
     flex-direction: column;
 }
-.markLabel{
+
+.markLabel {
     font-size: 10px;
 }
-.markLabel90{
-    transform: rotate(-270deg);
-    display: table-row-group;
-}
-.sliderLabel{
-    font-size: 8px;
+
+.markLabel90 {
     transform: rotate(90deg);
     display: table-row-group;
 }
 
-.actioBarChart button{
+.sliderLabel {
+    font-size: 8px;
+}
+
+.actioBarChart button {
     margin: 5px;
     padding: 5px;
 }

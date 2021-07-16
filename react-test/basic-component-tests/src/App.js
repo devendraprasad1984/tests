@@ -1,8 +1,9 @@
-import './App.css';
+// import './App.css';
 import './style.css';
 import Chart2 from "./charts/chart2";
 import {useState} from "react";
 import {getMarks, getQtrs, getYrs} from "./charts/config";
+import QuickForm from './component/quickForm';
 // import Combine from "./black_hawk/combine";
 // import Chart1 from "./charts/chart1";
 // import SelectBox from "./component/selectBox";
@@ -50,6 +51,8 @@ function App() {
         <Chart2 name='chart1' linesArray={dataset} tickmarks={marks} color={['tomato', 'gray']} height={250} width={750} defaultRange={defaultRange}/>
         {/*<Chart2 name='chart2' linesArray={dataset} tickmarks={marks} color={['magenta', 'blue']} height={250}*/}
         {/*        width={750}/>*/}
+
+        <QuickForm />
 
     </div>
 }

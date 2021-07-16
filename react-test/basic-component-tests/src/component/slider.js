@@ -64,21 +64,14 @@ export default function RangeSlider(props) {
                 defaultValue={[defaultValStart, defaultValEnd]}
                 onChangeCommitted={onchange}
                 marks={marksVal}
-                valueLabelDisplay="on"
+                valueLabelDisplay="auto"
                 aria-labelledby="discrete-slider-always"
-                getArriaLabel={i => {
-                    //console.log('LABEL',i, marksVal[i])
-                    return `${marksVal[i]}`
-                }}
-                getAriaValueText={i => {
-                    //console.log('selected',i, marksVal[i])
-                    return `${i}`
-                }}
+                getAriaValueText={i => `${i}`}
+                getAriaLabel={i => `${i}`}
                 min={marks[0]}
                 max={marks[marks.length]}
                 valueLabelFormat={i => {
-                    // console.log('value label', marksVal[i])
-                    return <span key={'label-x-'+i} className='sliderLabel'>{marksVal[i]}</span>
+                    return <span key={'label-x-' + i+marksVal[i]} className='sliderLabel markLabel90'>{marksVal[i]}</span>
                 }}
                 step={1}
             />
