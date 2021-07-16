@@ -31,18 +31,17 @@ const QuickForm=props=>{
 
     const handleReset=e=>{
         setMeta({ ...defaultFormVal })
-        console.log('reset', e)
+        // console.log('reset', e)
         e.preventDefault()
-        form1.reset()
     }
 
     return (
         <div className='center'>
             <h1>quick form check</h1>
             <form ref={form1} className='flex col gap'>
-                <input name={labels.text1} type='text' onChange={handleChange} />
-                <input name={labels.text2} type='text' onChange={handleChange} />
-                <input name={labels.text3} type='text' onChange={handleChange} />
+                <input name={labels.text1} type='text' onChange={handleChange} value={meta[labels.text1]} />
+                <input name={labels.text2} type='text' onChange={handleChange} value={meta[labels.text2]} />
+                <input name={labels.text3} type='text' onChange={handleChange} value={meta[labels.text3]} />
                 <div className='row'>
                     <input type='button' value='Submit' onClick={handleSubmit} />
                     <input type='button' value='Reset' onClick={handleReset} />
