@@ -52,7 +52,7 @@ function App() {
         {/*<Chart2 name='chart2' linesArray={dataset} tickmarks={marks} color={['magenta', 'blue']} height={250}*/}
         {/*        width={750}/>*/}
 
-        <QuickForm />
+        {/* <QuickForm /> */}
 
     </div>
 }
