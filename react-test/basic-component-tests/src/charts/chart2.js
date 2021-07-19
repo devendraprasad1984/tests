@@ -140,18 +140,19 @@ const Chart2 = props => {
     const dragended = (d) => {
         d3.select(this).classed('active', false);
         //get changed indexes and points
-        const changed=[]
-        for(let line of lineData){
-            const tmp=[]
-            const {candrag}=line
-            if(candrag===true){
-                const {data, copy, name}=line
-                for(let index=0; index<data.length; index++){
-                    if(data[index]!==copy[index]){
-                        tmp.push({index, oldVal: copy[index], newVal: data[index]})
+        const changed = []
+        for (let line of lineData) {
+            const tmp = []
+            const { candrag } = line
+            if (candrag === true) {
+                const { data, copy } = line
+                for (let index = 0; index < data.length; index++) {
+                    if (data[index] !== copy[index]) {
+                        tmp.push({ index, oldVal: copy[index], newVal: data[index] })
                     }
                 }
-                changed.push({ [name]: [...tmp] })
+                let key = `${name}_${line.name}`
+                changed.push({ [key]: [...tmp] })
             }
         }
         console.log(changed)
