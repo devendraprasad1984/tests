@@ -119,27 +119,42 @@ const Chart2 = props => {
         d[1] = yScaleFn.invert(d3.event.y);
         d3.select(this).attr('cx', xScaleFn(d[0])).attr('cy', yScaleFn(d[1]))
         for (let i = 0; i < multilines.length; i++) {
-            let { candrag, data, copy } = multilines[i]
-            let lineName = multilines[i].name
+            let { candrag, data } = multilines[i]
+            // let lineName = multilines[i].name
             if (candrag === true) {
                 let xval = Math.round(d[0], 0)
                 let yval = Math.round(d[1], 0)
                 data[xval] = yval
-                let oldVal = copy[xval]
-                let newVal = yval
-                let selected = { name, lineName, data, copy, oldVal, newVal, "index": xval }
+                // let oldVal = copy[xval]
+                // let newVal = yval
+                // let selected = { name, lineName, data, copy, oldVal, newVal, "index": xval }
                 focus.select('path.xline' + i).attr('d', lineFn);
-                //console.log(selected)
-                setChangedPoint(() => {
-                    return { ...selected }
-                })
+                // console.log(lineName,copy[xval], data[xval])
+                // setChangedPoint(() => {
+                //     return { ...selected }
+                // })
             }
         }
         drawcircle(focus, fnObj)
     }
     const dragended = (d) => {
         d3.select(this).classed('active', false);
-        console.log('dragended', changedPoint, lineData)
+        //get changed indexes and points
+        const changed=[]
+        for(let line of lineData){
+            const tmp=[]
+            const {candrag}=line
+            if(candrag===true){
+                const {data, copy, name}=line
+                for(let index=0; index<data.length; index++){
+                    if(data[index]!==copy[index]){
+                        tmp.push({index, oldVal: copy[index], newVal: data[index]})
+                    }
+                }
+                changed.push({ [name]: [...tmp] })
+            }
+        }
+        console.log(changed)
     }
     const drawaxes = (focus, fnObj) => {
         let axisBottomObj = d3.axisBottom(fnObj.xScaleFn).tickFormat(i => marksVal[i])
