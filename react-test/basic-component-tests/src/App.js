@@ -38,10 +38,11 @@ function App() {
         { name: 'line2', candrag: false, copy: deepCopy(data2), data: deepCopy(data2) }
     ]
     let dataset2 = JSON.parse(JSON.stringify(dataset))
-    let dataset3 = JSON.parse(JSON.stringify(dataset))
-    let dataset4 = JSON.parse(JSON.stringify(dataset))
-    let dataset5 = JSON.parse(JSON.stringify(dataset))
-    let dataset6 = JSON.parse(JSON.stringify(dataset))
+    // let dataset3 = JSON.parse(JSON.stringify(dataset))
+    // let dataset4 = JSON.parse(JSON.stringify(dataset))
+    // let dataset5 = JSON.parse(JSON.stringify(dataset))
+    // let dataset6 = JSON.parse(JSON.stringify(dataset))
+    // let dataset7 = JSON.parse(JSON.stringify(dataset))
 
     return <div className='center'>
         {/*<SelectBox multi={true} data={data} change={handleChange}/>*/}
@@ -53,12 +54,13 @@ function App() {
         {/*<span>put * to see all</span>*/}
         {/*<Combine/>*/}
 
-        <Chart2 name='chart1' linesArray={dataset} tickmarks={marks} color={['tomato', 'gray']} height={250} width={1000} defaultRange={defaultRange} />
-        <Chart2 name='chart2' linesArray={dataset2} tickmarks={marks} color={['red', 'black']} height={250} width={1000} defaultRange={defaultRange} />
-        <Chart2 name='chart3' linesArray={dataset3} tickmarks={marks} color={['blue', 'purple']} height={250} width={1000} defaultRange={defaultRange} />
+        <Chart2 name='chart1' linesArray={dataset} tickmarks={marks} color={['tomato', '#f2f2f2']} height={200} width={1000} defaultRange={defaultRange} />
+        <Chart2 name='chart2' linesArray={dataset2} tickmarks={marks} color={['black', 'bisque']} height={200} width={1000} defaultRange={defaultRange} />
+        {/* <Chart2 name='chart3' linesArray={dataset3} tickmarks={marks} color={['blue', 'purple']} height={250} width={1000} defaultRange={defaultRange} />
         <Chart2 name='chart4' linesArray={dataset4} tickmarks={marks} color={['magenta', 'cyan']} height={250} width={1000} defaultRange={defaultRange} />
         <Chart2 name='chart5' linesArray={dataset5} tickmarks={marks} color={['magenta', 'cyan']} height={250} width={1000} defaultRange={defaultRange} />
         <Chart2 name='chart6' linesArray={dataset6} tickmarks={marks} color={['black', 'blue']} height={250} width={1000} defaultRange={defaultRange} />
+        <Chart2 name='chart7' linesArray={dataset7} tickmarks={marks} color={['bisque', 'cyan']} height={150} width={1000} defaultRange={defaultRange} /> */}
         {/* <QuickForm /> */}
 
     </div>

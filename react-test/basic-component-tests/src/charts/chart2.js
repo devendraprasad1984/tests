@@ -231,7 +231,6 @@ const Chart2 = props => {
                 <g className={"chart" + name}></g>
             </svg>
 
-
             <div className='actioBarChart col'>
                 <div style={{ width: width }}>
                     <RangeSlider onchange={handleTickChange} tickmarks={tickmarks} defaultRange={defaultRange} />
