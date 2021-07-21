@@ -16,34 +16,20 @@ const Chart2 = props => {
     const [qtrRange, setQtrRange] = useState({ start: startRangeIndex, end: endRangeIndex })
 
     const tickmarksX = getUpdatedDataByRange(tickmarks, startRangeIndex, endRangeIndex)
-    // const linesArrayX = getUpdatedDataByRange(linesArray, startRangeIndex, endRangeIndex)
-
     const [tickVals, setTickVals] = useState([...tickmarksX.map(x => x.ival)])
-    // const [tickValsTxt, setTickValsTxt] = useState([...tickmarksX.map(x => x.value)])
     const [showLabel, setShowLabel] = useState(true)
     const [changedPoint, setChangedPoint] = useState({})
     const [lineData, setLineData] = useState([...linesArray])
-    // const [updateCounter, setUpdateCounter] = useState(0)
     const svgRef = useRef()
 
     const getX = width => d3.scaleLinear().rangeRound([0, width])
-    // const getXS = width => d3.scaleOrdinal().range([0, width], .2)
     const getY = height => d3.scaleLinear().rangeRound([height, 0])
     const Tooltip = d3.select(".tooltip_" + name)
     const mouseover = d => Tooltip.style("opacity", 1)
     const mousemove = (d) => {
         let curPos = d3.event
         let pointIndex = Math.round(d[0], 0)
-        // console.log('changed', pointIndex, d, changedData)
-        // const filterChangedIndexData = changedData.filter(x => x.index === pointIndex)
         let val = 'index: ' + pointIndex + '=>' + marksVal[pointIndex] + ',' + Math.round(d[1], 0)
-        // console.log(filterChangedIndexData, changedData)
-        // if (filterChangedIndexData.length > 0) {
-        //     let updateValifAny = filterChangedIndexData[0].oldVal || ''
-        //     val = 'index: ' + pointIndex + '=>' + marksVal[pointIndex] + ',' + updateValifAny + '=>' + Math.round(d[1], 0)
-        // } else {
-        //     val = 'index: ' + pointIndex + '=>' + marksVal[pointIndex] + ',' + Math.round(d[1], 0)
-        // }
         let x = curPos.pageX + 10
         let y = curPos.pageY + 10
         Tooltip.style("left", x + "px").style("top", y + "px").html(val)
@@ -63,11 +49,9 @@ const Chart2 = props => {
     }
 
     const drawlines = (focus, fnObj) => {
-        // console.log('object', fnObj)
         const { lineFn, multilines } = fnObj
         for (let i = 0; i < multilines.length; i++) {
             let { points } = multilines[i]
-            // console.log('data line', points)
             focus.append("path")
                 .datum(points).attr('class', 'line xline' + i)
                 .attr("fill", 'none')
@@ -125,12 +109,11 @@ const Chart2 = props => {
     }
     const dragged = (d, focus, fnObj) => {
         let { multilines, lineFn, xScaleFn, yScaleFn } = fnObj
-        d[0] = xScaleFn.invert(d3.event.x);
+        // d[0] = xScaleFn.invert(d3.event.x); //stop dragging horizontal along x-axis
         d[1] = yScaleFn.invert(d3.event.y);
         d3.select(this).attr('cx', xScaleFn(d[0])).attr('cy', yScaleFn(d[1]))
         for (let i = 0; i < multilines.length; i++) {
-            let { candrag, data, copy } = multilines[i]
-            // let lineName = multilines[i].name
+            let { candrag, data } = multilines[i]
             if (candrag === true) {
                 let xval = Math.round(d[0], 0)
                 let yval = Math.round(d[1], 0)
@@ -265,7 +248,7 @@ const Chart2 = props => {
                     </div>
                 </div>
                 <div className='col wid20 border'>
-                    <div className='bl'>Watch <span className='xred right bl size12 point xymargin' onClick={undoAllChanges}>RESET</span></div>
+                    <div className='bl'>Watch - {name} <span className='xred right bl size12 point xymargin' onClick={undoAllChanges}>RESET</span></div>
                     <div className='overflow-container height150 left size12'>{displayChanginDataset()}</div>
                 </div>
             </div>
