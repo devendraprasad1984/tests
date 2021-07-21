@@ -26,23 +26,53 @@ function App() {
     // const handleTagsCallBack=values=>{
     //     console.log('tags', values)
     // }
+    const chartHeight = 200
+    const chartWidth = 1000
     const deepCopy = d => Object.values(d)
     const yrs = getQtrs(2010, 2028)
-    const data = yrs.map(x => Math.round(Math.random() * 1000, 2))
-    const data2 = yrs.map(x => Math.round(Math.random() * 1000, 2))
+    const data = yrs.map(x => Math.round(100 + Math.random() * 1000, 2))
+    const data2 = yrs.map(x => Math.round(100 + Math.random() * 1000, 2))
+    // const data3 = yrs.map(x => Math.round(100 + Math.random() * 1000, 2))
+    // const data4 = yrs.map(x => Math.round(100 + Math.random() * 1000, 2))
     const marks = yrs.map((x, i) => getMarks(x, i))
     const defaultRange = ['2015Q1', '2020Q3']
 
     let dataset = [
         { name: 'line1', candrag: true, copy: deepCopy(data), data: deepCopy(data) },
-        { name: 'line2', candrag: false, copy: deepCopy(data2), data: deepCopy(data2) }
+        { name: 'line2', candrag: false, copy: deepCopy(data2), data: deepCopy(data2) },
+        // { name: 'line3', candrag: true, copy: deepCopy(data3), data: deepCopy(data3) },
+        // { name: 'line4', candrag: false, copy: deepCopy(data4), data: deepCopy(data4) }
     ]
     let dataset2 = JSON.parse(JSON.stringify(dataset))
-    // let dataset3 = JSON.parse(JSON.stringify(dataset))
-    // let dataset4 = JSON.parse(JSON.stringify(dataset))
-    // let dataset5 = JSON.parse(JSON.stringify(dataset))
-    // let dataset6 = JSON.parse(JSON.stringify(dataset))
-    // let dataset7 = JSON.parse(JSON.stringify(dataset))
+    let dataset3 = JSON.parse(JSON.stringify(dataset))
+    let dataset4 = JSON.parse(JSON.stringify(dataset))
+    let dataset5 = JSON.parse(JSON.stringify(dataset))
+    let dataset6 = JSON.parse(JSON.stringify(dataset))
+    let dataset7 = JSON.parse(JSON.stringify(dataset))
+    const charts = ['chart1', 'chart2', 'chart3', 'chart4', 'chart5', 'chart6', 'chart7']
+    const datasets = [dataset, dataset2, dataset3, dataset4, dataset5, dataset6, dataset7]
+    const colrors = [
+        ['tomato', '#f2f2f2'],
+        ['blue', '#f2f2f2'],
+        ['purple', '#f2f2f2'],
+        ['red', '#f2f2f2'],
+        ['gray', '#f2f2f2'],
+        ['black', '#f2f2f2'],
+        ['magenta', '#f2f2f2']
+    ]
+
+    const displayAllCharts = () => {
+        return charts.map((name, i) => {
+            return <Chart2 name={name}
+                linesArray={datasets[i]}
+                tickmarks={marks}
+                color={colrors[i]}
+                height={chartHeight}
+                width={chartWidth}
+                defaultRange={defaultRange}
+            />
+        })
+    }
 
     return <div className='center'>
         {/*<SelectBox multi={true} data={data} change={handleChange}/>*/}
@@ -54,15 +84,7 @@ function App() {
         {/*<span>put * to see all</span>*/}
         {/*<Combine/>*/}
 
-        <Chart2 name='chart1' linesArray={dataset} tickmarks={marks} color={['tomato', '#f2f2f2']} height={200} width={1000} defaultRange={defaultRange} />
-        <Chart2 name='chart2' linesArray={dataset2} tickmarks={marks} color={['black', 'bisque']} height={200} width={1000} defaultRange={defaultRange} />
-        {/* <Chart2 name='chart3' linesArray={dataset3} tickmarks={marks} color={['blue', 'purple']} height={250} width={1000} defaultRange={defaultRange} />
-        <Chart2 name='chart4' linesArray={dataset4} tickmarks={marks} color={['magenta', 'cyan']} height={250} width={1000} defaultRange={defaultRange} />
-        <Chart2 name='chart5' linesArray={dataset5} tickmarks={marks} color={['magenta', 'cyan']} height={250} width={1000} defaultRange={defaultRange} />
-        <Chart2 name='chart6' linesArray={dataset6} tickmarks={marks} color={['black', 'blue']} height={250} width={1000} defaultRange={defaultRange} />
-        <Chart2 name='chart7' linesArray={dataset7} tickmarks={marks} color={['bisque', 'cyan']} height={150} width={1000} defaultRange={defaultRange} /> */}
-        {/* <QuickForm /> */}
-
+        {displayAllCharts()}
     </div>
 }
 

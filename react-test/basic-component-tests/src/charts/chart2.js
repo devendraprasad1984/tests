@@ -4,7 +4,7 @@ import { getMarkIndex, getUpdatedDataByRange } from "../charts/config";
 
 
 const d3 = window.d3
-
+const defaultColor='darkgray'
 
 const Chart2 = props => {
     const { name, color, height, width, linesArray, tickmarks, defaultRange } = props
@@ -55,7 +55,7 @@ const Chart2 = props => {
             focus.append("path")
                 .datum(points).attr('class', 'line xline' + i)
                 .attr("fill", 'none')
-                .attr("stroke", color[i])
+                .attr("stroke", color[i] || defaultColor)
                 .attr("stroke-width", 1.5)
                 .attr("d", lineFn);
         }
