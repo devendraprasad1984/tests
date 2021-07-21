@@ -30,9 +30,9 @@ svg {
 }
 
 .center, .center > *{
-    text-align: center;
+text-align: center;
     justify-content: center;
-    align-items: center;
+align-items: center;
 }
 
 .flex{
@@ -85,14 +85,58 @@ input[type='text']{
     width: 100%;
 }
 
+.height150{
+    height: 150px;
+}
+.height200{
+    height: 200px;
+}
+.height250{
+    height: 250px;
+}
+
+.border{
+    border: 2px solid gray;
+    margin: 5px;
+}
+
+.xred{
+    color: red !important;
+}
+.xgray{
+    color: gray !important;
+}
+.xgreen{
+    color: rgb(54, 192, 107) !important;
+}
+.bl{
+ font-weight: bolder;
+}
+.point{
+    cursor: pointer;
+}
+.right{
+    text-align: right;
+    float: right;
+}
+
+.overflow-container{
+    overflow: auto;
+    position: relative;
+}
+
 
 .col {
     flex-direction: column;
-    top: 0;
 }
 
 .markLabel {
     font-size: 10px;
+}
+
+.left{
+    text-align: left;
+    padding: 5px;
 }
 
 .markLabel90 {
@@ -129,11 +173,15 @@ input[type='text']{
 
 .tooltip {
     opacity: 0;
+    z-index: 10000;
 }
 
+.size12{
+    font-size: 12px;
+}
 
 .center {
-    text-align: center;
+text-align: center;
 }
 
 #myUL {

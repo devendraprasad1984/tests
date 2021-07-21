@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
-import {makeStyles, withStyles} from '@material-ui/core/styles';
+import React, { useEffect, useState } from 'react';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Slider from '@material-ui/core/Slider';
-import {getMarkIndex} from "../charts/config";
+import { getMarkIndex } from "../charts/config";
 
 const useStyles = makeStyles({
     root: {
@@ -48,7 +48,7 @@ const MySlider = withStyles({
 })(Slider);
 
 export default function RangeSlider(props) {
-    const {onchange, tickmarks, defaultRange} = props
+    const { onchange, tickmarks, defaultRange } = props
 
     const [marks, setMarks] = useState([...tickmarks.map(x => x.ival)])
     const [marksVal, setMarksVal] = useState([...tickmarks.map(x => x.value)])
@@ -69,9 +69,9 @@ export default function RangeSlider(props) {
                 getAriaValueText={i => `${i}`}
                 getAriaLabel={i => `${i}`}
                 min={0}
-                max={marks.length-1}
+                max={marks.length - 1}
                 valueLabelFormat={i => {
-                    return <span key={'label-x-' + i+marksVal[i]} className='sliderLabel markLabel90'>{marksVal[i]}</span>
+                    return <span key={'label-x-' + i + marksVal[i]} className='sliderLabel markLabel90'>{marksVal[i]}</span>
                 }}
                 step={1}
             />

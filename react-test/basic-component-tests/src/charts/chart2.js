@@ -27,16 +27,26 @@ const Chart2 = props => {
     const svgRef = useRef()
 
     const getX = width => d3.scaleLinear().rangeRound([0, width])
-    const getXS = width => d3.scaleOrdinal().range([0, width], .2)
+    // const getXS = width => d3.scaleOrdinal().range([0, width], .2)
     const getY = height => d3.scaleLinear().rangeRound([height, 0])
     const Tooltip = d3.select(".tooltip_" + name)
     const mouseover = d => Tooltip.style("opacity", 1)
     const mousemove = (d) => {
         let curPos = d3.event
-        let val = 'X=' + Math.round(d[0], 0) + ', Y=' + Math.round(d[1], 0)
+        let pointIndex = Math.round(d[0], 0)
+        // console.log('changed', pointIndex, d, changedData)
+        // const filterChangedIndexData = changedData.filter(x => x.index === pointIndex)
+        let val = 'index: ' + pointIndex + '=>' + marksVal[pointIndex] + ',' + Math.round(d[1], 0)
+        // console.log(filterChangedIndexData, changedData)
+        // if (filterChangedIndexData.length > 0) {
+        //     let updateValifAny = filterChangedIndexData[0].oldVal || ''
+        //     val = 'index: ' + pointIndex + '=>' + marksVal[pointIndex] + ',' + updateValifAny + '=>' + Math.round(d[1], 0)
+        // } else {
+        //     val = 'index: ' + pointIndex + '=>' + marksVal[pointIndex] + ',' + Math.round(d[1], 0)
+        // }
         let x = curPos.pageX + 10
         let y = curPos.pageY + 10
-        Tooltip.style("left", x + "px").style("top", y + "px").html("value: " + val)
+        Tooltip.style("left", x + "px").style("top", y + "px").html(val)
     }
     const mouseleave = d => {
         Tooltip.style("opacity", 0)
@@ -125,14 +135,7 @@ const Chart2 = props => {
                 let xval = Math.round(d[0], 0)
                 let yval = Math.round(d[1], 0)
                 data[xval] = yval
-                // let oldVal = copy[xval]
-                // let newVal = yval
-                // let selected = { name, lineName, data, copy, oldVal, newVal, "index": xval }
                 focus.select('path.xline' + i).attr('d', lineFn);
-                // console.log(lineName,copy[xval], data[xval])
-                // setChangedPoint(() => {
-                //     return { ...selected }
-                // })
             }
         }
         drawcircle(focus, fnObj)
@@ -151,12 +154,11 @@ const Chart2 = props => {
                         tmp.push({ index, oldVal: copy[index], newVal: data[index] })
                     }
                 }
-                let key = `${name}_${line.name}`
                 changed.push(...tmp)
             }
         }
-        console.log(changed)
-        setChangedData(changed)
+        // console.log(changed)
+        setChangedData([...changed])
     }
     const drawaxes = (focus, fnObj) => {
         let axisBottomObj = d3.axisBottom(fnObj.xScaleFn).tickFormat(i => marksVal[i])
@@ -202,23 +204,31 @@ const Chart2 = props => {
         drawaxes(focus, fnObj)
     }
 
-    // const updateLineData = () => {
-    //     let updateData = lineData.map((x, i) => {
-    //         return {...x, data: x.data.map(x => Math.round(Math.random() * 100, 0))}
-    //     })
-    //     setLineData(updateData)
-    //     setUpdateCounter(() => updateCounter + 1)
-    // }
+    const handleUndo = index => {
+        let upd = changedData.filter(x => x.index !== index)
+        setChangedData([...upd])
+        let copyLineData = [...lineData]
+        // console.log('clicked index', index, copyLineData)
+        let line1 = copyLineData.filter(x => x.name === 'line1')[0]
+        if (line1 === undefined || line1.length === 0) return
+
+        line1.data[index] = line1.copy[index]
+        // console.log('updated', line1.data[index], line1.copy[index])
+        setLineData([...copyLineData])
+    }
 
     const displayChanginDataset = () => {
         return changedData.map((x, i) => {
-            return <div key={`${name}${i}${x.index}`}>{marksVal[x.index]} - {x.oldVal} - {x.newVal}</div>
+            return <div key={`${name}${i}${x.index}`} className='bl'>
+                <span className='xgray'>{x.index}={marksVal[x.index]}</span> - <span className='xred'>{x.oldVal}</span> - <span className='xgreen'>{x.newVal}</span>
+                <span className='xred point right' onClick={() => handleUndo(x.index)}> X </span>
+            </div>
         })
     }
 
     useEffect(() => {
         lineChartHandler()
-    }, [showLabel, qtrRange])
+    }, [showLabel, qtrRange, lineData])
 
     const handleTextMode = () => {
         setShowLabel(!showLabel)
@@ -239,17 +249,17 @@ const Chart2 = props => {
                     <svg ref={svgRef} height={height} width={width} preserveAspectRatio={'xMinYMid'}>
                         <g className={"chart" + name}></g>
                     </svg>
+                    <div style={{ width: width }} className='col wid80'>
+                        <RangeSlider onchange={handleTickChange} tickmarks={tickmarks} defaultRange={defaultRange} />
+                    </div>
                 </div>
-                <div className='col wid20'>
-                    <span>changing data</span>
-                    {displayChanginDataset()}
+                <div className='col wid20 border'>
+                    <h3>changing data</h3>
+                    <div className='overflow-container height150 left size12'>{displayChanginDataset()}</div>
                 </div>
             </div>
 
             <div className='actioBarChart col'>
-                <div style={{ width: width }}>
-                    <RangeSlider onchange={handleTickChange} tickmarks={tickmarks} defaultRange={defaultRange} />
-                </div>
                 <div>
                     <button onClick={handleTextMode}>show/hide label</button>
                 </div>
