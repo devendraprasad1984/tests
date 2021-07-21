@@ -231,7 +231,7 @@ const Chart2 = props => {
     const displayChanginDataset = () => {
         return changedData.map((x, i) => {
             return <div key={`${name}${i}${x.index}`} className='bl'>
-                <span className='xgray'>{x.index}={marksVal[x.index]}</span> - <span className='xred'>{x.oldVal}</span> - <span className='xgreen'>{x.newVal}</span>
+                <span className='xgray'>{i+1}) {marksVal[x.index]}</span> - <span className='xred'>{x.oldVal}</span> - <span className='xgreen'>{x.newVal}</span>
                 <span className='xred point right' onClick={() => handleUndo(x.index)}> X </span>
             </div>
         })
