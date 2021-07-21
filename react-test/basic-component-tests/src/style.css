@@ -37,6 +37,8 @@ svg {
 
 .flex{
     display: flex;
+    top: 0;
+    justify-content: flex-start;
 }
 
 input[type='text']{
@@ -52,12 +54,41 @@ input[type='text']{
     padding: 3px;
 }
 
+.wid10{
+    width: 10%;
+}
+.wid20{
+    width: 20%;
+}
+.wid30{
+    width: 30%;
+}
+.wid40{
+    width: 40%;
+}
 .wid50{
     width: 50%;
 }
+.wid60{
+    width: 60%;
+}
+.wid70{
+    width: 70%;
+}
+.wid80{
+    width: 80%;
+}
+.wid90{
+    width: 90%;
+}
+.wid100{
+    width: 100%;
+}
+
 
 .col {
     flex-direction: column;
+    top: 0;
 }
 
 .markLabel {

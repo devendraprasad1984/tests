@@ -9,11 +9,11 @@ const d3 = window.d3
 const Chart2 = props => {
     const { name, color, height, width, linesArray, tickmarks, defaultRange } = props
     const [marksVal, setMarksVal] = useState([...tickmarks.map(x => x.value)])
+    const [changedData, setChangedData] = useState([])
 
     const startRangeIndex = getMarkIndex(marksVal, defaultRange[0])
     const endRangeIndex = getMarkIndex(marksVal, defaultRange[1])
     const [qtrRange, setQtrRange] = useState({ start: startRangeIndex, end: endRangeIndex })
-
 
     const tickmarksX = getUpdatedDataByRange(tickmarks, startRangeIndex, endRangeIndex)
     // const linesArrayX = getUpdatedDataByRange(linesArray, startRangeIndex, endRangeIndex)
@@ -152,10 +152,11 @@ const Chart2 = props => {
                     }
                 }
                 let key = `${name}_${line.name}`
-                changed.push({ [key]: [...tmp] })
+                changed.push(...tmp)
             }
         }
         console.log(changed)
+        setChangedData(changed)
     }
     const drawaxes = (focus, fnObj) => {
         let axisBottomObj = d3.axisBottom(fnObj.xScaleFn).tickFormat(i => marksVal[i])
@@ -209,6 +210,12 @@ const Chart2 = props => {
     //     setUpdateCounter(() => updateCounter + 1)
     // }
 
+    const displayChanginDataset = () => {
+        return changedData.map((x, i) => {
+            return <div key={`${name}${i}${x.index}`}>{marksVal[x.index]} - {x.oldVal} - {x.newVal}</div>
+        })
+    }
+
     useEffect(() => {
         lineChartHandler()
     }, [showLabel, qtrRange])
@@ -227,9 +234,17 @@ const Chart2 = props => {
     return (
         <div id={'chartMainDiv' + name} className='chartwrapper center'>
             <div className={"tooltip tooltip_" + name}></div>
-            <svg ref={svgRef} height={height} width={width} preserveAspectRatio={'xMinYMid'}>
-                <g className={"chart" + name}></g>
-            </svg>
+            <div className='flex row'>
+                <div className='col wid80'>
+                    <svg ref={svgRef} height={height} width={width} preserveAspectRatio={'xMinYMid'}>
+                        <g className={"chart" + name}></g>
+                    </svg>
+                </div>
+                <div className='col wid20'>
+                    <span>changing data</span>
+                    {displayChanginDataset()}
+                </div>
+            </div>
 
             <div className='actioBarChart col'>
                 <div style={{ width: width }}>
