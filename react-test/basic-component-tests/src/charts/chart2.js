@@ -129,7 +129,7 @@ const Chart2 = props => {
         d[1] = yScaleFn.invert(d3.event.y);
         d3.select(this).attr('cx', xScaleFn(d[0])).attr('cy', yScaleFn(d[1]))
         for (let i = 0; i < multilines.length; i++) {
-            let { candrag, data } = multilines[i]
+            let { candrag, data, copy } = multilines[i]
             // let lineName = multilines[i].name
             if (candrag === true) {
                 let xval = Math.round(d[0], 0)
@@ -150,6 +150,7 @@ const Chart2 = props => {
             if (candrag === true) {
                 const { data, copy } = line
                 for (let index = 0; index < data.length; index++) {
+                    // console.log(index,data[index],copy[index])
                     if (data[index] !== copy[index]) {
                         tmp.push({ index, oldVal: copy[index], newVal: data[index] })
                     }
@@ -157,7 +158,6 @@ const Chart2 = props => {
                 changed.push(...tmp)
             }
         }
-        // console.log(changed)
         setChangedData([...changed])
     }
     const drawaxes = (focus, fnObj) => {
@@ -202,6 +202,17 @@ const Chart2 = props => {
         drawlines(focus, fnObj)
         drawcircle(focus, fnObj)
         drawaxes(focus, fnObj)
+    }
+
+    const undoAllChanges = () => {
+        let copyLineData = [...lineData]
+        let line1 = copyLineData.filter(x => x.name === 'line1')[0]
+        if (line1 === undefined || line1.length === 0) return
+
+        line1.data = [...line1.copy]
+        // console.log('line1',line1,lineData, copyLineData, changedData)
+        setChangedData([])
+        setLineData([...copyLineData])
     }
 
     const handleUndo = index => {
@@ -255,6 +266,7 @@ const Chart2 = props => {
                 </div>
                 <div className='col wid20 border'>
                     <h3>changing data</h3>
+                    <div className='xred right bl size12 point' onClick={undoAllChanges}>reset</div>
                     <div className='overflow-container height150 left size12'>{displayChanginDataset()}</div>
                 </div>
             </div>
