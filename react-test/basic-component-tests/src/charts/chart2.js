@@ -18,7 +18,6 @@ const Chart2 = props => {
     const tickmarksX = getUpdatedDataByRange(tickmarks, startRangeIndex, endRangeIndex)
     const [tickVals, setTickVals] = useState([...tickmarksX.map(x => x.ival)])
     const [showLabel, setShowLabel] = useState(true)
-    const [changedPoint, setChangedPoint] = useState({})
     const [lineData, setLineData] = useState([...linesArray])
     const svgRef = useRef()
 
