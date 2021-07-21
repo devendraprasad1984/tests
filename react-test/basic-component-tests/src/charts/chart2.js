@@ -256,16 +256,16 @@ const Chart2 = props => {
         <div id={'chartMainDiv' + name} className='chartwrapper center'>
             <div className={"tooltip tooltip_" + name}></div>
             <div className='flex row'>
-                <div className='col wid80'>
+                <div className='col wid80 xymargin'>
                     <svg ref={svgRef} height={height} width={width} preserveAspectRatio={'xMinYMid'}>
                         <g className={"chart" + name}></g>
                     </svg>
-                    <div style={{ width: width }} className='col wid80'>
+                    <div className='col wid100'>
                         <RangeSlider onchange={handleTickChange} tickmarks={tickmarks} defaultRange={defaultRange} />
                     </div>
                 </div>
                 <div className='col wid20 border'>
-                    <h3>changing data</h3>
+                    <div className='bl'>Watch</div>
                     <div className='xred right bl size12 point' onClick={undoAllChanges}>reset</div>
                     <div className='overflow-container height150 left size12'>{displayChanginDataset()}</div>
                 </div>

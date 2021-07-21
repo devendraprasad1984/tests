@@ -30,15 +30,18 @@ svg {
 }
 
 .center, .center > *{
-text-align: center;
+    text-align: center;
     justify-content: center;
-align-items: center;
+    align-items: center;
+}
+
+.xymargin{
+    margin-left:10px;
+    margin-right: 10px;
 }
 
 .flex{
     display: flex;
-    top: 0;
-    justify-content: flex-start;
 }
 
 input[type='text']{

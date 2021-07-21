@@ -17,8 +17,8 @@ const MySlider = withStyles({
         padding: '13px 0',
     },
     thumb: {
-        height: 27,
-        width: 27,
+        height: 20,
+        width: 20,
         backgroundColor: '#fff',
         border: '1px solid currentColor',
         marginTop: -12,
@@ -29,7 +29,7 @@ const MySlider = withStyles({
         },
         '& .bar': {
             // display: inline-block !important;
-            height: 9,
+            height: 5,
             width: 1,
             backgroundColor: 'currentColor',
             marginLeft: 1,
@@ -38,12 +38,12 @@ const MySlider = withStyles({
     },
     active: {},
     track: {
-        height: 3,
+        height: 2,
     },
     rail: {
         color: '#8e8d8d',
         opacity: 1,
-        height: 3,
+        height: 2,
     },
 })(Slider);
 
