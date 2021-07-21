@@ -231,7 +231,7 @@ const Chart2 = props => {
     const displayChanginDataset = () => {
         return changedData.map((x, i) => {
             return <div key={`${name}${i}${x.index}`} className='bl'>
-                <span className='xgray'>{i+1}) {marksVal[x.index]}</span> - <span className='xred'>{x.oldVal}</span> - <span className='xgreen'>{x.newVal}</span>
+                <span className='xgray'>{i + 1}) {marksVal[x.index]}</span> - <span className='xred'>{x.oldVal}</span> - <span className='xgreen'>{x.newVal}</span>
                 <span className='xred point right' onClick={() => handleUndo(x.index)}> X </span>
             </div>
         })
@@ -265,8 +265,7 @@ const Chart2 = props => {
                     </div>
                 </div>
                 <div className='col wid20 border'>
-                    <div className='bl'>Watch</div>
-                    <div className='xred right bl size12 point' onClick={undoAllChanges}>reset</div>
+                    <div className='bl'>Watch <span className='xred right bl size12 point xymargin' onClick={undoAllChanges}>RESET</span></div>
                     <div className='overflow-container height150 left size12'>{displayChanginDataset()}</div>
                 </div>
             </div>
