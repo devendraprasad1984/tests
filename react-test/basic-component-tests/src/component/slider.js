@@ -61,6 +61,9 @@ export default function RangeSlider(props) {
         <div className={classes.root}>
             <MySlider
                 track={'normal'}
+                orientation="horizontal"
+                // track={true}
+                // scale={x => x ** 5}
                 defaultValue={[defaultValStart, defaultValEnd]}
                 onChangeCommitted={onchange}
                 marks={marksVal}
@@ -71,7 +74,7 @@ export default function RangeSlider(props) {
                 min={0}
                 max={marks.length - 1}
                 valueLabelFormat={i => {
-                    return <span key={'label-x-' + i + marksVal[i]} className='sliderLabel markLabel90'>{marksVal[i]}</span>
+                    return <span key={'label-x-' + i + marksVal[i]} className='sliderLabel bl'>{marksVal[i]}</span>
                 }}
                 step={1}
             />
