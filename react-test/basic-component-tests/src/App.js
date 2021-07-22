@@ -83,7 +83,7 @@ function App() {
         {/*<h1>Black Hawk Test</h1>*/}
         {/*<span>put * to see all</span>*/}
         {/*<Combine/>*/}
-
+        <h1 className='xgray'>Drag points to make changes</h1>
         {displayAllCharts()}
     </div>
 }
