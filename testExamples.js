@@ -9,7 +9,7 @@ const pad = (n, width, z) => {
 const sampleLoop = () => {
     console.log('hello')
     let list = [1, 2, 3, 4, 5, 6]
-    let obj = {1: 'dev', 2: 'kittu', 3: 'akshat'}
+    let obj = { 1: 'dev', 2: 'kittu', 3: 'akshat' }
     for (let i in list) {
         console.log(i, list[i])
     }
@@ -19,15 +19,15 @@ const sampleLoop = () => {
     }
 }
 const minMaxIndexes = () => {
-//find min max and sum at indexes
+    //find min max and sum at indexes
     let array = [
         [1001, 50]
         , [1001, 68]
         , [1002, 69]
         , [1002, 68]
         , [1004, 9], [1004, 13], [1005, 56], [1005, 96], [1005, 30], [1006, 46], [1006, 6], [1006, 48], [1007, 59], [1007, 30], [1007, 9], [1009, 79], [1010, 42], [1012, 37], [1013, 64], [1017, 55], [1018, 29], [1020, 60], [1020, 29], [1021, 44], [1022, 62], [1024, 2], [1025, 6], [1028, 5], [1029, 6], [1029, 82]];
-// find min,max at index 0
-// and 1 and sum up min-max at 0 with index 1
+    // find min,max at index 0
+    // and 1 and sum up min-max at 0 with index 1
     let [min0, max0, min1, max1] = [array[0][0], array[0][1], array[0][0], array[0][1]]
     for (let i in array) {
         let valArr = array[i]
@@ -43,7 +43,7 @@ const minMaxIndexes = () => {
 // minMaxIndexes()
 
 const findPairSum = () => {
-// find pair of sum
+    // find pair of sum
     let array = [1, 2, 3, 4, 5, 6, 8]
     let collectionResults = {}
     let sum = 9
@@ -117,7 +117,7 @@ const testArrayStringReverse = () => {
     // console.log('[test]', '==', 'test'.split('').reverseme())
 }
 const countOfObjects = () => {
-    let objects = [{x: 1, y: 1}, {x: 3, y: 3}, {x: 5, y: 2}, {x: 1, y: 2}, {x: 3, y: 5}, {x: 4, y: 4}]
+    let objects = [{ x: 1, y: 1 }, { x: 3, y: 3 }, { x: 5, y: 2 }, { x: 1, y: 2 }, { x: 3, y: 5 }, { x: 4, y: 4 }]
     let objCounter = {}
     for (let i in objects) {
         let curObj = objects[i]
@@ -127,7 +127,7 @@ const countOfObjects = () => {
 }
 const quickDateTest = () => {
     var format = 'dd/mm/yyyy hh:mm:ss'
-// var format = 'yyyy-mm-dd hh:mm:ss'
+    // var format = 'yyyy-mm-dd hh:mm:ss'
     var newFormatteDate = format;
     var date_test = new Date(Date.now());
     console.log(pad(date_test.getDate(), 2), pad(date_test.getMonth(), 2), pad(date_test.getFullYear(), 4));
@@ -226,7 +226,7 @@ const profilingClosure = (func) => {
         let start = new Date()
         let retval = func.apply(this, arguments)
         let end = new Date()
-        return {msg: ` took ${end.getTime() - start.getTime()}s to execute`, result: retval}
+        return { msg: ` took ${end.getTime() - start.getTime()}s to execute`, result: retval }
     }
 }
 // console.log(profilingClosure(Math.max).call(undefined, [2, 3, 4]))
@@ -301,8 +301,8 @@ const testClassVanilaTypes = () => {
     let dp = new user('Devendra')
     let jyoti = new user('jyoti')
     let users = [dp, jyoti]
-// console.log(dp.sayhello(), dp.fine())
-// console.log(jyoti.sayhello())
+    // console.log(dp.sayhello(), dp.fine())
+    // console.log(jyoti.sayhello())
     for (let u of users) {
         console.log(u.sayhello(), u.fine())
 
@@ -515,7 +515,7 @@ const longestPalindrome = () => {
                 }
             }
         }
-        return {maxString, maxLength}
+        return { maxString, maxLength }
     }
     console.log(findPalindrome('abracadabra'))
     console.log(findPalindrome('HYTBCABADEFGHABCDEDCBAGHTFYW12345678987654321ZWETYGDE'))
@@ -875,7 +875,7 @@ const checkArrayElementUsingBinarySearchAndInsertAtRelevantPosIfNotFound = () =>
         // if (end > start) found = {start, mid, end, found: false}
         let check = elementValue === arr[mid]
         if (check === true || end > start) {
-            found = {start, mid, end, found: check}
+            found = { start, mid, end, found: check }
             isFound = true
         } else if (elementValue > arr[mid]) {
             startX = mid + 1
@@ -890,66 +890,85 @@ const checkArrayElementUsingBinarySearchAndInsertAtRelevantPosIfNotFound = () =>
     arr = [1, 2, 5, 6, 8, 9]
     let element = 5
     findElementPosUsingBinary(0, arr.length - 1, element)
-// let isFound = found['foundAt'] !== -1
-// let newArray = !isFound ? [...arr, element].sort((a, b) => a - b) : arr
+    // let isFound = found['foundAt'] !== -1
+    // let newArray = !isFound ? [...arr, element].sort((a, b) => a - b) : arr
     if (found['found'] === false) arr.splice(found['start'], 0, element)
     console.log(arr, found)
 }
+
+const createEveryCombinationInAString = () => {
+    //generate all possible combinations of a string
+    let str = 'abc'
+    // let len=Math.pow(2*str.length)
+    let len = str.length
+    let res = []
+    res.push(str)
+    for (let i = 0; i < len; i++) {
+        for (let j = i; j < len; j++) {
+            let substr = str.substr(i, j)
+            if (substr.length !== 0)
+                res.push(str.substr(i, j))
+        }
+    }
+    console.log(res)
+}
+
+createEveryCombinationInAString()
 // checkArrayElementUsingBinarySearchAndInsertAtRelevantPosIfNotFound()
 
-const swapCaseAndNumbers=()=>{
-    function switchCase(char){
-        if(typeof char!=="string") return ''
+const swapCaseAndNumbers = () => {
+    function switchCase(char) {
+        if (typeof char !== "string") return ''
 
-        let charCode=char.charCodeAt(0)
-        if(charCode>=65 && charCode<=90)
+        let charCode = char.charCodeAt(0)
+        if (charCode >= 65 && charCode <= 90)
             return char.toLowerCase()
-        else if(charCode>=97 && charCode<=122)
+        else if (charCode >= 97 && charCode <= 122)
             return char.toUpperCase()
         else
             return char
     }
 
     function swap(param) {
-        let newParam='';
-        let numFirstFound=false
-        let firstNumIndex=-1
-        for(let index in param){
-            let chr=param[index]
-            let isnum=(isNaN(chr)===false && chr!==' ')
+        let newParam = '';
+        let numFirstFound = false
+        let firstNumIndex = -1
+        for (let index in param) {
+            let chr = param[index]
+            let isnum = (isNaN(chr) === false && chr !== ' ')
 
             // if(isnum){
             //   console.log(isnum, chr, index)
             // }
 
-            if(chr===' '){
-                numFirstFound=false
-                firstNumIndex=-1
-                newParam+=chr
-            }else if(isnum===true && index!==firstNumIndex && numFirstFound===true){
+            if (chr === ' ') {
+                numFirstFound = false
+                firstNumIndex = -1
+                newParam += chr
+            } else if (isnum === true && index !== firstNumIndex && numFirstFound === true) {
                 //console.log('found 2nd number',chr, 'at', index)
-                let tmp=newParam.split('')
-                tmp[firstNumIndex]=param[index]
-                newParam=tmp.join('').toString() + param[firstNumIndex]
+                let tmp = newParam.split('')
+                tmp[firstNumIndex] = param[index]
+                newParam = tmp.join('').toString() + param[firstNumIndex]
                 //newParam+=param[firstNumIndex]
                 //console.log('updated',param[index], param[firstNumIndex], newParam)
-                numFirstFound=false
-                firstNumIndex=-1
-            }else if(isnum===true && firstNumIndex===-1 && numFirstFound===false){
+                numFirstFound = false
+                firstNumIndex = -1
+            } else if (isnum === true && firstNumIndex === -1 && numFirstFound === false) {
                 //console.log('found 1st number',chr,'at',index)
-                firstNumIndex=index
-                numFirstFound=true
-                newParam+=chr
-            }else{
-                newParam+=switchCase(chr)
+                firstNumIndex = index
+                numFirstFound = true
+                newParam += chr
+            } else {
+                newParam += switchCase(chr)
             }
         }
         return newParam;
     }
 
-    let str1=swap("6Hello4 -8World, 7 yes3")
+    let str1 = swap("6Hello4 -8World, 7 yes3")
     console.log(str1);
     console.log(swap("Hello -5LOL6du5d4e"));
     // console.log(swap("2S 6 du5d4e"));
 }
-swapCaseAndNumbers()
+// swapCaseAndNumbers()
