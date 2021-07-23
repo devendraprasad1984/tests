@@ -913,7 +913,7 @@ const createEveryCombinationInAString = () => {
     console.log(res)
 }
 
-createEveryCombinationInAString()
+// createEveryCombinationInAString()
 // checkArrayElementUsingBinarySearchAndInsertAtRelevantPosIfNotFound()
 
 const swapCaseAndNumbers = () => {
@@ -972,3 +972,37 @@ const swapCaseAndNumbers = () => {
     // console.log(swap("2S 6 du5d4e"));
 }
 // swapCaseAndNumbers()
+
+
+const test=()=>{
+    function CountingAnagrams(str) { 
+        let anagramObject={}
+        let words=str.split(' ')
+        let anagramCounter=0
+        for(let w of words){
+          if(w.length==1) continue
+          let sortChars=w.split('').sort((a,b)=>b.charCodeAt(0)-a.charCodeAt(0)).join('')
+          if(anagramObject[sortChars]===undefined){
+            anagramObject[sortChars]=[w]
+          }else{
+            let temp=anagramObject[sortChars]
+            temp.push(w)
+            let uniqVals=[...new Set(temp)]
+            anagramObject[sortChars]=uniqVals
+          }
+        }
+        for(let key in anagramObject){
+          let vals=anagramObject[key]
+          if(vals.length>1 || vals.indexOf(key.toString())>=0){
+            anagramCounter+=1
+          }
+        }
+        return anagramCounter; 
+      
+      }
+      console.log(CountingAnagrams("aa aa odg dog gdo"));
+      //"cars are very cool so are arcs and my os"
+      //"a c b c run urn urn"
+}
+
+test()
