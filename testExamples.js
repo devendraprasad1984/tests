@@ -974,35 +974,62 @@ const swapCaseAndNumbers = () => {
 // swapCaseAndNumbers()
 
 
-const test=()=>{
-    function CountingAnagrams(str) { 
-        let anagramObject={}
-        let words=str.split(' ')
-        let anagramCounter=0
-        for(let w of words){
-          if(w.length==1) continue
-          let sortChars=w.split('').sort((a,b)=>b.charCodeAt(0)-a.charCodeAt(0)).join('')
-          if(anagramObject[sortChars]===undefined){
-            anagramObject[sortChars]=[w]
-          }else{
-            let temp=anagramObject[sortChars]
+const CountingAnagrams = (str) => {
+    let anagramObject = {}
+    let words = str.split(' ')
+    let anagramCounter = 0
+    for (let w of words) {
+        if (w.length == 1) continue
+        let sortChars = w.split('').sort((a, b) => b.charCodeAt(0) - a.charCodeAt(0)).join('')
+        if (anagramObject[sortChars] === undefined) {
+            anagramObject[sortChars] = [w]
+        } else {
+            let temp = anagramObject[sortChars]
             temp.push(w)
-            let uniqVals=[...new Set(temp)]
-            anagramObject[sortChars]=uniqVals
-          }
+            let uniqVals = [...new Set(temp)]
+            anagramObject[sortChars] = uniqVals
         }
-        for(let key in anagramObject){
-          let vals=anagramObject[key]
-          if(vals.length>1 || vals.indexOf(key.toString())>=0){
-            anagramCounter+=1
-          }
+    }
+    for (let key in anagramObject) {
+        let vals = anagramObject[key]
+        if (vals.length > 1 || vals.indexOf(key.toString()) >= 0) {
+            anagramCounter += 1
         }
-        return anagramCounter; 
-      
-      }
-      console.log(CountingAnagrams("aa aa odg dog gdo"));
-      //"cars are very cool so are arcs and my os"
-      //"a c b c run urn urn"
+    }
+    return anagramCounter;
 }
+//   console.log(CountingAnagrams("aa aa odg dog gdo"));
+//"cars are very cool so are arcs and my os"
+//"a c b c run urn urn"
 
-test()
+const quickSortExample = () => {
+    const quicksort_recursion = arr =>
+        arr.length <= 1
+            ? arr
+            : [
+                ...quicksort_recursion(arr.slice(1).filter((el) => el < arr[0])),
+                arr[0],
+                ...quicksort_recursion(arr.slice(1).filter((el) => el >= arr[0])),
+            ];
+    let counter=0
+    function quicksort_swap(array) {
+        if (array.length <= 1) {
+            return array;
+        }
+
+        counter+=1
+        var pivot = array[0];
+        var left = [];
+        var right = [];
+        console.log('iterating',counter)
+        for (var i = 1; i < array.length; i++) {
+            array[i] < pivot ? left.push(array[i]) : right.push(array[i]);
+        }
+
+        return quicksort_swap(left).concat(pivot, quicksort_swap(right));
+    };
+
+    const arr = [10, 6, 7, 4, 7, 3, 2, 1, 0]
+    console.log('array', arr, 'FASTEST: quick sort example (best/average-OnLogn, worst: 0n^2)', quicksort_swap(arr))
+}
+quickSortExample()
