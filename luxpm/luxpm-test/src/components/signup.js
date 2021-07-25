@@ -1,8 +1,10 @@
 import React from 'react'
+import HeaderName from "./headerName";
 
 const SignUp = props => {
     return <>
-        <div className='bg page-container'>
+        <div>
+            <HeaderName/>
             <div>Sign Up</div>
         </div>
     </>

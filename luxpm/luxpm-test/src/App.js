@@ -1,7 +1,6 @@
 import './App.css';
-import Splash from './screens/splash';
 import {BrowserRouter} from "react-router-dom";
-import Routes from "./screens/route";
+import Routes from "./components/route";
 
 function App() {
     return (

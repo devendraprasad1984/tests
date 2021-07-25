@@ -1,0 +1,23 @@
+import React from 'react'
+import {config} from '../common/config'
+import {useHistory} from 'react-router-dom'
+import HeaderName from "./headerName";
+
+const Splash = (props) => {
+    const history = useHistory()
+
+    const handleClick = (route) => {
+        history.push(route)
+    }
+    return <>
+        <div className='col'>
+            <HeaderName/>
+            <span>{config.labels.splashMsg.name}</span>
+            <span className='btn' onClick={() => handleClick(config.route.login.key)}>{config.labels.login.name}</span>
+            <span className='link'
+                  onClick={() => handleClick(config.route.signup.key)}>{config.labels.signup.name}</span>
+        </div>
+    </>
+}
+
+export default Splash
