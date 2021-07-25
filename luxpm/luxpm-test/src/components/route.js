@@ -14,7 +14,8 @@ const Routes = props => {
             </div>
             <div className='bg page-container center flexbox'>
                 <Switch>
-                    <Route exact path={config.route.home.key}><Splash/></Route>
+                    <Route exact path='/'><Splash/></Route>
+                    <Route path={config.route.home.key}><Splash/></Route>
                     <Route path={config.route.login.key}><Login/></Route>
                     <Route path={config.route.signup.key}><SignUp/></Route>
                 </Switch>
