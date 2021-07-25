@@ -32,7 +32,7 @@ const Login = props => {
             <HeaderName/>
             <div className='heading margin30'>LOGIN</div>
             <Input label={email.name} name={email.key} placeholder={email.placeholder} onchange={handleChange}/>
-            <Input type='password' label={password.name} name={password.key} placeholder={password.placeholder} onchange={handleChange}/>
+            <Input type='password' label={password.name} name={password.key} onchange={handleChange}/>
             <br/>
             <span className='btn' onClick={handleLogin}>{login.name}</span>
             <div>
