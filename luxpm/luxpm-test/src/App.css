@@ -14,7 +14,8 @@
 
 
 .bg {
-    background-color: rgb(217, 236, 246);
+    /*background-color: rgb(217, 236, 246);*/
+    background-color: white;
 }
 
 ::placeholder {
@@ -83,9 +84,10 @@ input {
 }
 
 .apptext {
-    font-size: 20px;
-    letter-spacing: 3px;
-    background: -webkit-linear-gradient(rgba(140, 213, 185, 0.99), #5540b1);
+    font-weight: bolder;
+    font-size: 25px;
+    letter-spacing: 5px;
+    background: -webkit-linear-gradient(90deg, #89bf84, #5540b1);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
