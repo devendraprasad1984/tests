@@ -19,8 +19,7 @@ const defaults = {
     [signup_opt1.key]: false,
     [signup_opt2.key]: false,
     [signup_opt3.key]: false,
-    [signup_opt4.key]: false,
-    ['pwdruleCounter']: {...defaultPwdRule}
+    [signup_opt4.key]: false
 }
 
 const SignUp = props => {
@@ -38,7 +37,6 @@ const SignUp = props => {
         tmp[3] = (pwdval.replace(config.special_char_reg, "").length >= config.min_other_char) ? true : false
         tmp[4] = (pwdval.replace(config.numeric_reg, "").length >= config.min_other_char) ? true : false
         setPwdRuleCounter({...tmp})
-        setMeta({...meta, pwdruleCounter: {...tmp}})
     }
     const handleChange = e => {
         let {name, value} = e.target
@@ -53,7 +51,7 @@ const SignUp = props => {
         })
     }, [pwdruleCounter])
     const handleSignUp = () => {
-        if (signup_validation(meta) === false) return
+        if (signup_validation(meta, pwdruleCounter) === false) return
         console.log('meta from signup', meta)
         notifyMe(config.app_messages.signup_completion)
     }
