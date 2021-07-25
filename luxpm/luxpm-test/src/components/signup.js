@@ -31,28 +31,28 @@ const SignUp = props => {
 
     const checkForPasswordRules = (pwdval) => {
         let tmp = {...pwdruleCounter}
-        tmp[0] = pwdval.length >= config.min_num_pwd ? true : false
-        tmp[1] = (pwdval.replace(config.uppercase_reg, "").length >= config.min_other_char) ? true : false
-        tmp[2] = (pwdval.replace(config.lowercase_reg, "").length >= config.min_other_char) ? true : false
-        tmp[3] = (pwdval.replace(config.special_char_reg, "").length >= config.min_other_char) ? true : false
-        tmp[4] = (pwdval.replace(config.numeric_reg, "").length >= config.min_other_char) ? true : false
+        tmp[0] = pwdval.length >= config.consts.min_num_pwd ? true : false
+        tmp[1] = (pwdval.replace(config.consts.regs.uppercase_reg, "").length >= config.consts.min_other_char) ? true : false
+        tmp[2] = (pwdval.replace(config.consts.regs.lowercase_reg, "").length >= config.consts.min_other_char) ? true : false
+        tmp[3] = (pwdval.replace(config.consts.regs.special_char_reg, "").length >= config.consts.min_other_char) ? true : false
+        tmp[4] = (pwdval.replace(config.consts.regs.numeric_reg, "").length >= config.consts.min_other_char) ? true : false
         setPwdRuleCounter({...tmp})
     }
     const handleChange = e => {
-        let {name, value} = e.target
+        let {name, value, type, checked} = e.target
+        let isCheckbox = (type === 'checkbox')
         let tmp = {}
-        tmp[name] = value
+        tmp[name] = isCheckbox === false ? value : (checked || false)
         setMeta({...meta, ...tmp})
         if (name === password.key) checkForPasswordRules(value)
     }
     const handleShowPasswordRule = useCallback(() => {
-        return config.PWD_RULE.map((x, i) => {
+        return config.consts.PWD_RULE.map((x, i) => {
             return <div key={`pwdrule${i}`} className={pwdruleCounter[i] === true ? `xgreen` : `xred`}>{x}</div>
         })
     }, [pwdruleCounter])
     const handleSignUp = () => {
         if (signup_validation(meta, pwdruleCounter) === false) return
-        console.log('meta from signup', meta)
         notifyMe(config.app_messages.signup_completion)
     }
     const handleLogin = () => {
