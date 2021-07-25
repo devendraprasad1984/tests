@@ -18,6 +18,7 @@ export const config = {
         password: {name: 'password', placeholder: 'min 8 chars (alphanumeric text uppercase, lower, number, special chars)',key:'_pwd'},
         confirmPassword: {name: 'confirm', placeholder: 'same as password',key:'_confirmpwd'},
         phone: {name: 'phone', placeholder: '+00 000 000 0000',key:'_phone'},
-        dob: {name: 'date of birth', placeholder: 'mm-dd-yyy',key:'_dob'}
+        dob: {name: 'date of birth', placeholder: 'mm-dd-yyy',key:'_dob'},
+        subscribe: {name: 'subscribe', placeholder: 'email Newsletter',key:'_subscibe_news_letter'}
     }
 }

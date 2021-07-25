@@ -7,7 +7,7 @@ import {useHistory} from "react-router-dom";
 const SignUp = props => {
     const [meta, setMeta] = useState()
     const history = useHistory()
-    const {name, dob, phone, email, password, confirmPassword, signup, login} = config.labels
+    const {name, dob, phone, email, password, confirmPassword, signup, login, subscribe} = config.labels
 
     const handleChange = e => {
         let {name, value} = e.target
@@ -31,6 +31,8 @@ const SignUp = props => {
             <Input label={email.name} name={email.key} placeholder={email.placeholder} onchange={handleChange}/>
             <Input type='password' label={password.name} name={password.key} placeholder={password.placeholder} onchange={handleChange}/>
             <Input type='password' label={confirmPassword.name} name={confirmPassword.key} placeholder={confirmPassword.placeholder} onchange={handleChange}/>
+            <br/>
+            <Input type='checkbox' label={subscribe.name} name={subscribe.key} placeholder={subscribe.placeholder} onchange={handleChange}/>
             <br/>
             <span className='btn' onClick={handleSignUp}>{signup.name}</span>
             <div>
