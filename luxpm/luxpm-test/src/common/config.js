@@ -14,7 +14,7 @@ export const config = {
         login: {name: 'Login'},
         forgot: {name: 'forgot?'},
         name: {name: 'name', placeholder: 'your name'},
-        email: {email: 'email', placeholder: 'abc@gmail.com'},
+        email: {name: 'email', placeholder: 'abc@gmail.com'},
         password: {
             name: 'password',
             placeholder: 'min 8 chars alphanumeric text uppercase, lower, number, special chars'

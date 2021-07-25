@@ -18,17 +18,20 @@ const Login = props => {
         console.log('meta login', meta)
     }
     const handleSignup = () => {
-        history.push(config.route.signup)
+        history.push(config.route.signup.key)
     }
     return <>
         <div className='col'>
             <HeaderName/>
-            <div>LOGIN</div>
+            <div className='heading'>LOGIN</div>
             <Input name={config.labels.email.name} placeholder={config.labels.email.placeholder}
                    onchange={handleChange}/>
-            <Input name={config.labels.password.name} onchange={handleChange}/>
-            <span className='btn' onClick={handleLogin}>{config.labels.login}</span>
-            <span className='link' onClick={handleSignup}>{config.labels.signup}</span>
+            <Input name={config.labels.password.name} placeholder={config.labels.password.placeholder} onchange={handleChange}/>
+            <br/>
+            <span className='btn' onClick={handleLogin}>{config.labels.login.name}</span>
+            <div>
+                <span>new user? <span className='link labelx' onClick={handleSignup}>{config.labels.signup.name}</span></span>
+            </div>
         </div>
     </>
 }

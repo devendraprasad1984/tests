@@ -5,7 +5,7 @@ const SignUp = props => {
     return <>
         <div>
             <HeaderName/>
-            <div>Sign Up</div>
+            <div className='heading'>Sign Up</div>
         </div>
     </>
 }
