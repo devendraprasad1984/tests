@@ -8,7 +8,7 @@ const SignUp = props => {
     const [meta, setMeta] = useState()
     const history = useHistory()
     const {name, dob, phone, email, password, confirmPassword, signup, login, subscribe} = config.labels
-    const {signup_opt1,signup_opt2,signup_opt3,signup_opt4} = config.labels
+    const {signup_opt1, signup_opt2, signup_opt3, signup_opt4} = config.labels
 
     const handleChange = e => {
         let {name, value} = e.target
@@ -35,12 +35,12 @@ const SignUp = props => {
             <br/>
             <div className='flexbox-2-row'>
                 <Input classname='checkbox-round' type='checkbox' label={signup_opt1.name} name={signup_opt1.key} placeholder={signup_opt1.placeholder} onchange={handleChange}/>
-                <Input classname='checkbox-round'  type='checkbox' label={signup_opt2.name} name={signup_opt2.key} placeholder={signup_opt2.placeholder} onchange={handleChange}/>
-                <Input classname='checkbox-round'  type='checkbox' label={signup_opt3.name} name={signup_opt3.key} placeholder={signup_opt3.placeholder} onchange={handleChange}/>
-                <Input classname='checkbox-round'  type='checkbox' label={signup_opt4.name} name={signup_opt4.key} placeholder={signup_opt4.placeholder} onchange={handleChange}/>
+                <Input classname='checkbox-round' type='checkbox' label={signup_opt2.name} name={signup_opt2.key} placeholder={signup_opt2.placeholder} onchange={handleChange}/>
+                <Input classname='checkbox-round' type='checkbox' label={signup_opt3.name} name={signup_opt3.key} placeholder={signup_opt3.placeholder} onchange={handleChange}/>
+                <Input classname='checkbox-round' type='checkbox' label={signup_opt4.name} name={signup_opt4.key} placeholder={signup_opt4.placeholder} onchange={handleChange}/>
             </div>
             <br/>
-            <Input type='checkbox' label={subscribe.name} name={subscribe.key} placeholder={subscribe.placeholder} onchange={handleChange}/>
+            <Input classname='checkbox' type='checkbox' label={subscribe.name} name={subscribe.key} placeholder={subscribe.placeholder} onchange={handleChange}/>
             <br/>
             <span className='btn' onClick={handleSignUp}>{signup.name}</span>
             <div>

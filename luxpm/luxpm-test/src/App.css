@@ -8,8 +8,8 @@
 }
 
 .page-container {
-    height: 100vh;
-    width: 100vw;
+    height: 98vh;
+    width: 90vw;
 }
 
 
@@ -49,8 +49,8 @@
 
 .xtop {
     top: 0;
-    position: absolute;
-    display: inline-block;
+    position: fixed;
+    /*display: inline-block;*/
 }
 
 .heading {
@@ -91,6 +91,25 @@ input[type=text], input[type=date], input[type=password] {
     display: inline-block;
 }
 
+input[type=checkbox]{
+    padding: 8px;
+}
+
+.checkbox {
+    width: 1.3em;
+    height: 1.3em;
+    background-color: white;
+    /*border-radius: 50%;*/
+    vertical-align: middle;
+    border: 2px solid #ddd;
+    -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+}
+.checkbox:checked {
+    background-color: #3B286D;
+}
+
 .checkbox-round {
     width: 1.3em;
     height: 1.3em;
@@ -104,7 +123,7 @@ input[type=text], input[type=date], input[type=password] {
 }
 
 .checkbox-round:checked {
-    background-color: #512b89;
+    background-color: #3B286D;
 }
 
 .apptext {
@@ -122,7 +141,10 @@ input[type=text], input[type=date], input[type=password] {
 }
 
 .flexbox-2-row {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 2fr));
+    text-align: center;
+    justify-content: center;
+    /*grid-template-columns: repeat(auto-fill, minmax(200px, 2fr));*/
+    grid-template-columns: repeat(2, 1fr);
     display: grid;
 }
 
