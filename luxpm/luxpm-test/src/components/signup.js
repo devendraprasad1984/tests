@@ -8,6 +8,7 @@ const SignUp = props => {
     const [meta, setMeta] = useState()
     const history = useHistory()
     const {name, dob, phone, email, password, confirmPassword, signup, login, subscribe} = config.labels
+    const {signup_opt1,signup_opt2,signup_opt3,signup_opt4} = config.labels
 
     const handleChange = e => {
         let {name, value} = e.target
@@ -31,6 +32,13 @@ const SignUp = props => {
             <Input label={email.name} name={email.key} placeholder={email.placeholder} onchange={handleChange}/>
             <Input type='password' label={password.name} name={password.key} placeholder={password.placeholder} onchange={handleChange}/>
             <Input type='password' label={confirmPassword.name} name={confirmPassword.key} placeholder={confirmPassword.placeholder} onchange={handleChange}/>
+            <br/>
+            <div className='flexbox-2-row'>
+                <Input classname='checkbox-round' type='checkbox' label={signup_opt1.name} name={signup_opt1.key} placeholder={signup_opt1.placeholder} onchange={handleChange}/>
+                <Input classname='checkbox-round'  type='checkbox' label={signup_opt2.name} name={signup_opt2.key} placeholder={signup_opt2.placeholder} onchange={handleChange}/>
+                <Input classname='checkbox-round'  type='checkbox' label={signup_opt3.name} name={signup_opt3.key} placeholder={signup_opt3.placeholder} onchange={handleChange}/>
+                <Input classname='checkbox-round'  type='checkbox' label={signup_opt4.name} name={signup_opt4.key} placeholder={signup_opt4.placeholder} onchange={handleChange}/>
+            </div>
             <br/>
             <Input type='checkbox' label={subscribe.name} name={subscribe.key} placeholder={subscribe.placeholder} onchange={handleChange}/>
             <br/>

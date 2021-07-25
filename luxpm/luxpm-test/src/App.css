@@ -83,6 +83,30 @@ input[type=text], input[type=date], input[type=password] {
     border-bottom: 1px solid black;
 }
 
+.dot {
+    height: 25px;
+    width: 25px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.checkbox-round {
+    width: 1.3em;
+    height: 1.3em;
+    background-color: white;
+    border-radius: 50%;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+    -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.checkbox-round:checked {
+    background-color: #512b89;
+}
+
 .apptext {
     font-weight: bolder;
     font-size: 25px;
@@ -96,6 +120,24 @@ input[type=text], input[type=date], input[type=password] {
     margin-top: 8px;
     margin-bottom: 12px;
 }
+
+.flexbox-2-row {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 2fr));
+    display: grid;
+}
+
+.cards > span, .cards > a {
+    padding: 5px;
+    margin: 3px;
+    height: 100px;
+    vertical-align: middle;
+    text-align: center;
+    box-sizing: border-box;
+    border-radius: 5px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
+    opacity: 0.7;
+}
+
 
 .flexbox {
     display: flex;
