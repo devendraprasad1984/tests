@@ -7,6 +7,8 @@ import {useHistory} from 'react-router-dom'
 const Login = props => {
     const [meta, setMeta] = useState()
     const history = useHistory()
+    const {email, password, signup, login} = config.labels
+
 
     const handleChange = e => {
         let {name, value} = e.target
@@ -24,13 +26,12 @@ const Login = props => {
         <div className='col'>
             <HeaderName/>
             <div className='heading'>LOGIN</div>
-            <Input name={config.labels.email.name} placeholder={config.labels.email.placeholder}
-                   onchange={handleChange}/>
-            <Input name={config.labels.password.name} placeholder={config.labels.password.placeholder} onchange={handleChange}/>
+            <Input label={email.name} name={email.key} placeholder={email.placeholder} onchange={handleChange}/>
+            <Input type='password' label={password.name} name={password.key} placeholder={password.placeholder} onchange={handleChange}/>
             <br/>
-            <span className='btn' onClick={handleLogin}>{config.labels.login.name}</span>
+            <span className='btn' onClick={handleLogin}>{login.name}</span>
             <div>
-                <span>new user? <span className='link labelx' onClick={handleSignup}>{config.labels.signup.name}</span></span>
+                <span>new user? <span className='link labelx' onClick={handleSignup}>{signup.name}</span></span>
             </div>
         </div>
     </>
