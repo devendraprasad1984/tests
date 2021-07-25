@@ -12,12 +12,16 @@ const Splash = (props) => {
     }
     return <>
         <div className='col'>
-            <HeaderName/>
-            <Logo/>
-            <span>{config.labels.splashMsg.name}</span>
-            <span className='btn' onClick={() => handleClick(config.route.login.key)}>{config.labels.login.name}</span>
-            <span className='link'
-                  onClick={() => handleClick(config.route.signup.key)}>{config.labels.signup.name}</span>
+            <div><HeaderName/></div>
+            <div className='margin30'><Logo/></div>
+            <div className='margin30 col'>
+                <span className='size25'>{config.labels.splashMsg.name}</span>
+                <span className='size15 right'>{config.labels.splashMsg.line1}</span>
+            </div>
+            <div className='margin30 col'>
+                <span className='btn' onClick={() => handleClick(config.route.login.key)}>{config.labels.login.name}</span>
+                <span className='link' onClick={() => handleClick(config.route.signup.key)}>{config.labels.signup.name}</span>
+            </div>
         </div>
     </>
 }

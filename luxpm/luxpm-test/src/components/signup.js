@@ -1,9 +1,11 @@
-import React, {useState} from 'react'
+import React, {useState, useCallback} from 'react'
 import HeaderName from "./headerName";
 import Input from "../common/input";
-import {config} from "../common/config";
+import {config, notifyMe} from "../common/config";
 import {useHistory} from "react-router-dom";
+import signup_validation from "../validations/signup_validation";
 
+const defaultPwdRule = {0: false, 1: false, 2: false, 3: false, 4: false}
 const {name, dob, phone, email, password, confirmPassword, signup, login, subscribe} = config.labels
 const {signup_opt1, signup_opt2, signup_opt3, signup_opt4} = config.labels
 const defaults = {
@@ -12,27 +14,48 @@ const defaults = {
     [phone.key]: '',
     [email.key]: '',
     [password.key]: '',
+    [confirmPassword.key]: '',
     [subscribe.key]: false,
     [signup_opt1.key]: false,
-    [signup_opt1.key]: false,
-    [signup_opt1.key]: false,
-    [signup_opt4.key]: false
+    [signup_opt2.key]: false,
+    [signup_opt3.key]: false,
+    [signup_opt4.key]: false,
+    ['pwdruleCounter']: {...defaultPwdRule}
 }
 
 const SignUp = props => {
     const [meta, setMeta] = useState({...defaults})
+    const [pwdruleCounter, setPwdRuleCounter] = useState({...defaultPwdRule})
     const history = useHistory()
     const {name, dob, phone, email, password, confirmPassword, signup, login, subscribe} = config.labels
     const {signup_opt1, signup_opt2, signup_opt3, signup_opt4} = config.labels
 
+    const checkForPasswordRules = (pwdval) => {
+        let tmp = {...pwdruleCounter}
+        tmp[0] = pwdval.length >= config.min_num_pwd ? true : false
+        tmp[1] = (pwdval.replace(config.uppercase_reg, "").length >= config.min_other_char) ? true : false
+        tmp[2] = (pwdval.replace(config.lowercase_reg, "").length >= config.min_other_char) ? true : false
+        tmp[3] = (pwdval.replace(config.special_char_reg, "").length >= config.min_other_char) ? true : false
+        tmp[4] = (pwdval.replace(config.numeric_reg, "").length >= config.min_other_char) ? true : false
+        setPwdRuleCounter({...tmp})
+        setMeta({...meta, pwdruleCounter: {...tmp}})
+    }
     const handleChange = e => {
         let {name, value} = e.target
         let tmp = {}
         tmp[name] = value
         setMeta({...meta, ...tmp})
+        if (name === password.key) checkForPasswordRules(value)
     }
+    const handleShowPasswordRule = useCallback(() => {
+        return config.PWD_RULE.map((x, i) => {
+            return <div key={`pwdrule${i}`} className={pwdruleCounter[i] === true ? `xgreen` : `xred`}>{x}</div>
+        })
+    }, [pwdruleCounter])
     const handleSignUp = () => {
-        console.log('meta signup', meta)
+        if (signup_validation(meta) === false) return
+        console.log('meta from signup', meta)
+        notifyMe(config.app_messages.signup_completion)
     }
     const handleLogin = () => {
         history.push(config.route.login.key)
@@ -40,12 +63,13 @@ const SignUp = props => {
     return <>
         <div className='col'>
             <HeaderName/>
-            <div className='heading'>Sign Up</div>
+            <div className='heading margin20'>Sign Up</div>
             <Input label={name.name} name={name.key} placeholder={name.placeholder} onchange={handleChange}/>
             <Input label={phone.name} name={phone.key} placeholder={phone.placeholder} onchange={handleChange}/>
             <Input type='date' format='MM-DD-YYYY' label={dob.name} name={dob.key} placeholder={dob.placeholder} onchange={handleChange}/>
             <Input label={email.name} name={email.key} placeholder={email.placeholder} onchange={handleChange}/>
             <Input type='password' label={password.name} name={password.key} placeholder={password.placeholder} onchange={handleChange}/>
+            <div className='left size10'>{handleShowPasswordRule()}</div>
             <Input type='password' label={confirmPassword.name} name={confirmPassword.key} placeholder={confirmPassword.placeholder} onchange={handleChange}/>
             <br/>
             <div className='flexbox-2-row'>

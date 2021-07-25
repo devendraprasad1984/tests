@@ -39,7 +39,7 @@ const Login = props => {
     return <>
         <div className='col'>
             <HeaderName/>
-            <div className='heading'>LOGIN</div>
+            <div className='heading margin30'>LOGIN</div>
             <Input label={email.name} name={email.key} placeholder={email.placeholder} onchange={handleChange}/>
             <Input type='password' label={password.name} name={password.key} placeholder={password.placeholder} onchange={handleChange}/>
             <br/>

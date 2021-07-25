@@ -106,6 +106,13 @@ input[type='text']{
 .xred{
     color: red !important;
 }
+.left{
+    text-align: left;
+}
+.right{
+    text-align: right;
+    float: right;
+}
 .xgray{
     color: gray !important;
 }

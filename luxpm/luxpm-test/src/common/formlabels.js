@@ -1,5 +1,5 @@
 const labels={
-    splashMsg: {name: 'Stay on top of your finances'},
+    splashMsg: {name: 'Stay on top of your finances',line1:'welcome to world of alphametrica'},
     proceed: {name: 'Proceed'},
     signup: {name: 'Sign Up'},
     login: {name: 'Login'},
