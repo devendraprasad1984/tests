@@ -4,8 +4,23 @@ import Input from "../common/input";
 import {config} from "../common/config";
 import {useHistory} from "react-router-dom";
 
+const {name, dob, phone, email, password, confirmPassword, signup, login, subscribe} = config.labels
+const {signup_opt1, signup_opt2, signup_opt3, signup_opt4} = config.labels
+const defaults = {
+    [name.key]: '',
+    [dob.key]: '',
+    [phone.key]: '',
+    [email.key]: '',
+    [password.key]: '',
+    [subscribe.key]: false,
+    [signup_opt1.key]: false,
+    [signup_opt1.key]: false,
+    [signup_opt1.key]: false,
+    [signup_opt4.key]: false
+}
+
 const SignUp = props => {
-    const [meta, setMeta] = useState()
+    const [meta, setMeta] = useState({...defaults})
     const history = useHistory()
     const {name, dob, phone, email, password, confirmPassword, signup, login, subscribe} = config.labels
     const {signup_opt1, signup_opt2, signup_opt3, signup_opt4} = config.labels

@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Input = props => {
-    const {type, name, label, onchange, placeholder, format, classname} = props
+    const {type, name, label, onchange, placeholder, format, classname,value} = props
     const ifDateFormat = format !== undefined ? {"data-date-format": format} : {}
     const isCheckBox = (type === 'checkbox')
     let ifPlacehollder = {}
@@ -20,6 +20,7 @@ const Input = props => {
                 {...ifDateFormat}
                 {...ifPlacehollder}
                 className={classname}
+                value={value}
             />
             {isCheckBox ? <span className='label'>{placeholder}</span>:null}
         </div>

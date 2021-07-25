@@ -4,11 +4,14 @@ import Input from "../common/input";
 import {config, notifyMe} from "../common/config";
 import {useHistory} from 'react-router-dom'
 
+const {email, password, signup, login} = config.labels
+const defaults = {
+    [email.key]: '',
+    [password.key]: ''
+}
 const Login = props => {
-    const [meta, setMeta] = useState()
+    const [meta, setMeta] = useState({...defaults})
     const history = useHistory()
-    const {email, password, signup, login} = config.labels
-
 
     const handleChange = e => {
         let {name, value} = e.target
@@ -17,9 +20,18 @@ const Login = props => {
         setMeta({...meta, ...tmp})
     }
     const handleLogin = () => {
-        console.log('meta login', meta)
+        // console.log('meta login', meta)
+        let username = meta[email.key]
+        let pwd = meta[password.key]
+        if (username === '' || pwd === '') {
+            notifyMe(config.app_messages.missing_input)
+            return
+        }
+        if (username !== config.defaultUserName || pwd !== config.defaultPassword) {
+            notifyMe(config.app_messages.failed_login)
+            return
+        }
         notifyMe(config.app_messages.success_login)
-        notifyMe(config.app_messages.failed_login)
     }
     const handleSignup = () => {
         history.push(config.route.signup.key)
