@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import HeaderName from "./headerName";
 import Input from "../common/input";
-import {config} from "../common/config";
+import {config, notifyMe} from "../common/config";
 import {useHistory} from 'react-router-dom'
 
 const Login = props => {
@@ -18,6 +18,8 @@ const Login = props => {
     }
     const handleLogin = () => {
         console.log('meta login', meta)
+        notifyMe(config.app_messages.success_login)
+        notifyMe(config.app_messages.failed_login)
     }
     const handleSignup = () => {
         history.push(config.route.signup.key)
