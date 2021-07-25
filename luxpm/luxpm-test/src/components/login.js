@@ -3,6 +3,7 @@ import HeaderName from "./headerName";
 import Input from "../common/input";
 import {config, notifyMe} from "../common/config";
 import {useHistory} from 'react-router-dom'
+import login_validation from "../validations/login_validation";
 
 const {email, password, signup, login} = config.labels
 const defaults = {
@@ -20,17 +21,7 @@ const Login = props => {
         setMeta({...meta, ...tmp})
     }
     const handleLogin = () => {
-        // console.log('meta login', meta)
-        let username = meta[email.key]
-        let pwd = meta[password.key]
-        if (username === '' || pwd === '') {
-            notifyMe(config.app_messages.missing_input)
-            return
-        }
-        if (username !== config.defaultUserName || pwd !== config.defaultPassword) {
-            notifyMe(config.app_messages.failed_login)
-            return
-        }
+        if(login_validation(meta)===false) return;
         notifyMe(config.app_messages.success_login)
     }
     const handleSignup = () => {

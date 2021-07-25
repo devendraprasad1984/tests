@@ -2,7 +2,20 @@ import {config, notifyMe} from "../common/config";
 
 const signup_validation = (meta, pwdRuleCounter) => {
     console.log('signup meta', meta)
-    const {email, password, confirmPassword, phone} = config.labels
+    const {email, password, confirmPassword, phone, name,dob} = config.labels
+
+    if (
+        meta[name.key] === ''
+        || meta[phone.key] === ''
+        || meta[dob.key] === ''
+        || meta[email.key] === ''
+        || meta[password.key] === ''
+        || meta[confirmPassword.key] === ''
+    ) {
+        notifyMe(config.app_messages.missing_input)
+        return false
+    }
+
 
     if (config.consts.regs.email_reg.test(meta[email.key]) === false) {
         notifyMe(config.app_messages.incorrect_email)
