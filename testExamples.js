@@ -1097,41 +1097,26 @@ const symmetricalDiffrences = () => {
         sym([3, 3, 3, 2, 5], [2, 1, 5, 7], [3, 4, 6, 6], [1, 2, 3], [5, 3, 9, 8], [1]) should contain only eight elements.
     * */
 
-    function getRes(obj) {
+    function symdiff(arr1, arr2) {
         let arr = []
-        for (let i in obj) {
-            if (obj[i] === 0) arr.push(parseInt(i))
+        for (let i of arr1) {
+            if (arr.indexOf(i) !== -1 || arr2.indexOf(i) !== -1) continue
+            arr.push(i)
+        }
+        for (let i of arr2) {
+            if (arr.indexOf(i) !== -1 || arr1.indexOf(i) !== -1) continue
+            arr.push(i)
         }
         return arr
     }
 
-    let symObj = {}
-    let runcounter = 0
-
     function sym(...args) {
-        console.log('args', args)
-        for (let ar of args) {
-            console.log(runcounter, ar, symObj)
-            runcounter += 1
-            if (runcounter > 2) {
-                let arr=getRes(symObj)
-                symObj = {}
-                runcounter = 0
-                sym(ar, arr)
-                break
-            }
-            for (let i of ar) {
-                let cnt = ar.filter(x => x === i).length
-                if (cnt > 1 && symObj[i] !== undefined) continue
-                symObj[i] = (symObj[i] === undefined ? 0 : symObj[i] + 1)
-            }
-        }
-        return getRes(symObj)
+        return args.reduce(symdiff)
     }
 
-// sym([1, 2, 5], [2, 3, 5], [3, 4, 5]) should return [1, 4, 5]
     let res = sym([1, 2, 3], [5, 2, 1, 4])
-//     let res = sym([1, 2, 5], [2, 3, 5], [3, 4, 5])
+    // let res = sym([1, 2, 5], [2, 3, 5], [3, 4, 5])
+    // let res = sym([1, 2, 3, 3], [5, 2, 1, 4])
     console.log('result', res)
 }
 
