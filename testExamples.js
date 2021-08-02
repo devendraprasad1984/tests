@@ -9,7 +9,7 @@ const pad = (n, width, z) => {
 const sampleLoop = () => {
     console.log('hello')
     let list = [1, 2, 3, 4, 5, 6]
-    let obj = { 1: 'dev', 2: 'kittu', 3: 'akshat' }
+    let obj = {1: 'dev', 2: 'kittu', 3: 'akshat'}
     for (let i in list) {
         console.log(i, list[i])
     }
@@ -117,7 +117,7 @@ const testArrayStringReverse = () => {
     // console.log('[test]', '==', 'test'.split('').reverseme())
 }
 const countOfObjects = () => {
-    let objects = [{ x: 1, y: 1 }, { x: 3, y: 3 }, { x: 5, y: 2 }, { x: 1, y: 2 }, { x: 3, y: 5 }, { x: 4, y: 4 }]
+    let objects = [{x: 1, y: 1}, {x: 3, y: 3}, {x: 5, y: 2}, {x: 1, y: 2}, {x: 3, y: 5}, {x: 4, y: 4}]
     let objCounter = {}
     for (let i in objects) {
         let curObj = objects[i]
@@ -226,7 +226,7 @@ const profilingClosure = (func) => {
         let start = new Date()
         let retval = func.apply(this, arguments)
         let end = new Date()
-        return { msg: ` took ${end.getTime() - start.getTime()}s to execute`, result: retval }
+        return {msg: ` took ${end.getTime() - start.getTime()}s to execute`, result: retval}
     }
 }
 // console.log(profilingClosure(Math.max).call(undefined, [2, 3, 4]))
@@ -515,7 +515,7 @@ const longestPalindrome = () => {
                 }
             }
         }
-        return { maxString, maxLength }
+        return {maxString, maxLength}
     }
     console.log(findPalindrome('abracadabra'))
     console.log(findPalindrome('HYTBCABADEFGHABCDEDCBAGHTFYW12345678987654321ZWETYGDE'))
@@ -875,7 +875,7 @@ const checkArrayElementUsingBinarySearchAndInsertAtRelevantPosIfNotFound = () =>
         // if (end > start) found = {start, mid, end, found: false}
         let check = elementValue === arr[mid]
         if (check === true || end > start) {
-            found = { start, mid, end, found: check }
+            found = {start, mid, end, found: check}
             isFound = true
         } else if (elementValue > arr[mid]) {
             startX = mid + 1
@@ -1012,6 +1012,7 @@ const quickSortExample = () => {
                 ...quicksort_recursion(arr.slice(1).filter((el) => el >= arr[0])),
             ];
     let counter = 0
+
     function quicksort_swap(array) {
         if (array.length <= 1) {
             return array;
@@ -1074,4 +1075,64 @@ const powerSchoolTest = () => {
     jsIValueLoopCheck()
 }
 
-powerSchoolTest()
+// powerSchoolTest()
+
+const symmetricalDiffrences = () => {
+    /*
+        The mathematical term symmetric difference (△ or ⊕) of two sets is the set of elements which are in either of the two sets but not in both. For example, for sets A = {1, 2, 3} and B = {2, 3, 4}, A △ B = {1, 4}.
+        Symmetric difference is a binary operation, which means it operates on only two elements. So to evaluate an expression involving symmetric differences among three elements (A △ B △ C), you must complete one operation at a time. Thus, for sets A and B above, and C = {2, 3}, A △ B △ C = (A △ B) △ C = {1, 4} △ {2, 3} = {1, 2, 3, 4}.
+        sym([1, 2, 3], [5, 2, 1, 4]) should return [3, 4, 5].
+        Passed: sym([1, 2, 3], [5, 2, 1, 4]) should contain only three elements.
+        Passed: sym([1, 2, 3, 3], [5, 2, 1, 4]) should return [3, 4, 5].
+        Passed: sym([1, 2, 3, 3], [5, 2, 1, 4]) should contain only three elements.
+        Passed: sym([1, 2, 3], [5, 2, 1, 4, 5]) should return [3, 4, 5].
+        Passed: sym([1, 2, 3], [5, 2, 1, 4, 5]) should contain only three elements.
+        sym([1, 2, 5], [2, 3, 5], [3, 4, 5]) should return [1, 4, 5]
+        sym([1, 2, 5], [2, 3, 5], [3, 4, 5]) should contain only three elements.
+        sym([1, 1, 2, 5], [2, 2, 3, 5], [3, 4, 5, 5]) should return [1, 4, 5].
+        Passed: sym([1, 1, 2, 5], [2, 2, 3, 5], [3, 4, 5, 5]) should contain only three elements.
+        sym([3, 3, 3, 2, 5], [2, 1, 5, 7], [3, 4, 6, 6], [1, 2, 3]) should return [2, 3, 4, 6, 7].
+        sym([3, 3, 3, 2, 5], [2, 1, 5, 7], [3, 4, 6, 6], [1, 2, 3]) should contain only five elements.
+        sym([3, 3, 3, 2, 5], [2, 1, 5, 7], [3, 4, 6, 6], [1, 2, 3], [5, 3, 9, 8], [1]) should return [1, 2, 4, 5, 6, 7, 8, 9].
+        sym([3, 3, 3, 2, 5], [2, 1, 5, 7], [3, 4, 6, 6], [1, 2, 3], [5, 3, 9, 8], [1]) should contain only eight elements.
+    * */
+
+    function getRes(obj) {
+        let arr = []
+        for (let i in obj) {
+            if (obj[i] === 0) arr.push(parseInt(i))
+        }
+        return arr
+    }
+
+    let symObj = {}
+    let runcounter = 0
+
+    function sym(...args) {
+        console.log('args', args)
+        for (let ar of args) {
+            console.log(runcounter, ar, symObj)
+            runcounter += 1
+            if (runcounter > 2) {
+                let arr=getRes(symObj)
+                symObj = {}
+                runcounter = 0
+                sym(ar, arr)
+                break
+            }
+            for (let i of ar) {
+                let cnt = ar.filter(x => x === i).length
+                if (cnt > 1 && symObj[i] !== undefined) continue
+                symObj[i] = (symObj[i] === undefined ? 0 : symObj[i] + 1)
+            }
+        }
+        return getRes(symObj)
+    }
+
+// sym([1, 2, 5], [2, 3, 5], [3, 4, 5]) should return [1, 4, 5]
+    let res = sym([1, 2, 3], [5, 2, 1, 4])
+//     let res = sym([1, 2, 5], [2, 3, 5], [3, 4, 5])
+    console.log('result', res)
+}
+
+symmetricalDiffrences()
