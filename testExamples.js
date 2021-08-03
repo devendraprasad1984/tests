@@ -998,10 +998,6 @@ const CountingAnagrams = (str) => {
     }
     return anagramCounter;
 }
-//   console.log(CountingAnagrams("aa aa odg dog gdo"));
-//"cars are very cool so are arcs and my os"
-//"a c b c run urn urn"
-
 const quickSortExample = () => {
     const quicksort_recursion = arr =>
         arr.length <= 1
@@ -1033,8 +1029,6 @@ const quickSortExample = () => {
     const arr = [10, 6, 7, 4, 7, 3, 2, 1, 0]
     console.log('array', arr, 'FASTEST: quick sort example (best/average-OnLogn, worst: 0n^2)', quicksort_swap(arr))
 }
-// quickSortExample()
-
 const powerSchoolTest = () => {
     console.log('powerschool algoritham - finding given sum in list')
     const findIfGivenSumExists = () => {
@@ -1074,8 +1068,6 @@ const powerSchoolTest = () => {
     }
     jsIValueLoopCheck()
 }
-
-// powerSchoolTest()
 
 const symmetricalDiffrences = () => {
     /*
@@ -1119,5 +1111,35 @@ const symmetricalDiffrences = () => {
     // let res = sym([1, 2, 3, 3], [5, 2, 1, 4])
     console.log('result', res)
 }
+const updateInventoryInArray = () => {
+    //Compare and update the inventory stored in a 2D array against a second 2D array of a fresh delivery. Update the current existing inventory item quantities (in arr1). If an item cannot be found, add the new item and quantity into the inventory array. The returned inventory array should be in alphabetical order by item.
+    /*
+    The function updateInventory should return an array.
+        updateInventory([[21, "Bowling Ball"], [2, "Dirty Sock"], [1, "Hair Pin"], [5, "Microphone"]], [[2, "Hair Pin"], [3, "Half-Eaten Apple"], [67, "Bowling Ball"], [7, "Toothpaste"]]) should return an array with a length of 6.
+        updateInventory([[21, "Bowling Ball"], [2, "Dirty Sock"], [1, "Hair Pin"], [5, "Microphone"]], [[2, "Hair Pin"], [3, "Half-Eaten Apple"], [67, "Bowling Ball"], [7, "Toothpaste"]]) should return [[88, "Bowling Ball"], [2, "Dirty Sock"], [3, "Hair Pin"], [3, "Half-Eaten Apple"], [5, "Microphone"], [7, "Toothpaste"]].
+        updateInventory([[21, "Bowling Ball"], [2, "Dirty Sock"], [1, "Hair Pin"], [5, "Microphone"]], []) should return [[21, "Bowling Ball"], [2, "Dirty Sock"], [1, "Hair Pin"], [5, "Microphone"]].
+        updateInventory([], [[2, "Hair Pin"], [3, "Half-Eaten Apple"], [67, "Bowling Ball"], [7, "Toothpaste"]]) should return [[67, "Bowling Ball"], [2, "Hair Pin"], [3, "Half-Eaten Apple"], [7, "Toothpaste"]].
+        updateInventory([[0, "Bowling Ball"], [0, "Dirty Sock"], [0, "Hair Pin"], [0, "Microphone"]], [[1, "Hair Pin"], [1, "Half-Eaten Apple"], [1, "Bowling Ball"], [1, "Toothpaste"]]) should return [[1, "Bowling Ball"], [0, "Dirty Sock"], [1, "Hair Pin"], [1, "Half-Eaten Apple"], [0, "Microphone"], [1, "Toothpaste"]].
+    */
 
-symmetricalDiffrences()
+    function updateInventory(arr1, arr2) {
+        return arr1;
+    }
+
+    // Example inventory lists
+    var curInv = [
+        [21, "Bowling Ball"],
+        [2, "Dirty Sock"],
+        [1, "Hair Pin"],
+        [5, "Microphone"]
+    ];
+
+    var newInv = [
+        [2, "Hair Pin"],
+        [3, "Half-Eaten Apple"],
+        [67, "Bowling Ball"],
+        [7, "Toothpaste"]
+    ];
+
+    updateInventory(curInv, newInv);
+}
