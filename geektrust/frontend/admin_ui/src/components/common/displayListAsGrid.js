@@ -3,8 +3,7 @@ import Button from "./button";
 import Input from "./input";
 
 const DisplayListAsGrid = props => {
-    const {data, updateBack, selected} = props
-    const [list, setList] = useState([...data])
+    const {data, updateBack} = props
 
     const handleEditClick = id => {
         console.log('clicked edit', id)
@@ -16,20 +15,18 @@ const DisplayListAsGrid = props => {
         let isChecked = e.target.checked === true
         let found = data.filter(x => x.id === id)[0]
         found.checked = isChecked
-        updateBack([...data])
-        setList([...data])
-        // console.log('selected item', data)
+        updateBack(data)
     }
 
     const displayList = useCallback(() => {
-        return list.map((row, index) => {
+        // console.log('data', data)
+        return data.map((row, index) => {
             let {id, name, email, role} = row
-            let isSelRow = selected.filter(x => x.id === id)
-            let isInSel = isSelRow.length === 1
-            let selClass = (row.checked === true || isInSel === true) ? 'gray' : ''
+            let isRowChecked=row.checked === true
+            let selClass = isRowChecked ? 'gray' : ''
             return <div key={'grid-row' + index} id={'div-grid-row-' + index} className={'line ' + selClass}>
                 <span style={{minWidth: '30px'}}>
-                    <Input classname='checkbox' type='checkbox' onchange={(e) => handleRowSelect(e, id)}/>
+                    <Input classname='checkbox' type='checkbox' onchange={(e) => handleRowSelect(e, id)} isChecked={isRowChecked}/>
                 </span>
                 <span>{name}</span>
                 <span style={{minWidth: '250px'}}>{email}</span>

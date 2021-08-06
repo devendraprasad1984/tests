@@ -7,37 +7,38 @@ import DisplayListAsGrid from "../common/displayListAsGrid";
 import Button from "../common/button";
 
 const AdminDashboard = props => {
-    const [selectedRow, setSelectedRows] = useState([])
     const {data, loading} = useInAppAPI({url: config.apis.users})
+    const [updatedDataSet, setUpdatedDataSet] = useState([])
     const [filteredUsers, setFilteredUsers] = useState([])
 
     useEffect(() => {
-        setFilteredUsers(data.map(x => ({...x, checked: false})))
+        let updates = data.map(x => ({...x, checked: false}))
+        setUpdatedDataSet([...updates])
+        setFilteredUsers([...updates])
     }, [data])
 
     const handleSearchOnChange = (e) => {
         let val = e.target.value
         if (data.length === 0) return
-        let filter = data.filter(row => row.name.toLowerCase().indexOf(val.toLowerCase()) !== -1
+        let filter = updatedDataSet.filter(row => row.name.toLowerCase().indexOf(val.toLowerCase()) !== -1
             || row.email.toLowerCase().indexOf(val.toLowerCase()) !== -1
             || row.role.toLowerCase().indexOf(val.toLowerCase()) !== -1)
         setFilteredUsers(filter)
     }
     const updateCallbackDataUpdate = (updateData) => {
-        // console.log('update data', updateData)
-        let selected = updateData.filter(row => row.checked === true)
-        setSelectedRows([...selected])
+        setUpdatedDataSet([...updateData])
     }
 
     const handleDeleteAll = () => {
-        console.log('selected rows', selectedRow)
+        let selectedRows = updatedDataSet.filter(x => x.checked === true)
+        console.log('selected rows', selectedRows)
     }
 
     if (loading) return <PlzWait/>
     return <div>
         <div><Input classname='wid100p' placeholder={enums.placeholders.adminSearch} onchange={handleSearchOnChange}/></div>
         <div className=''>
-            <DisplayListAsGrid data={filteredUsers} updateBack={(d) => updateCallbackDataUpdate(d)} selected={selectedRow}/>
+            <DisplayListAsGrid data={filteredUsers} updateBack={(d) => updateCallbackDataUpdate(d)}/>
         </div>
         <div className=''>
             <div className='row'><Button val='delete all' onclick={handleDeleteAll}/></div>
