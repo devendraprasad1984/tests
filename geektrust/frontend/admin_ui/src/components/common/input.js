@@ -10,7 +10,7 @@ const Input = props => {
     if (isCheckBox)
         ifPlacehollder = {"value": placeholder}
 
-        const inputObj = isChecked ? <input
+    const inputObj = isChecked === true ? <input
         onChange={onchange}
         name={name}
         type={type || 'text'}
