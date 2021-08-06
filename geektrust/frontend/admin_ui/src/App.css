@@ -11,7 +11,7 @@
 
 .app-container {
     height: 100vh;
-    width: 650px;
+    width: 95vw;
     overflow: auto;
     position: relative;
 }
@@ -157,11 +157,15 @@ input[type=checkbox]{
     background-color: #3B286D;
 }
 
+.btn:hover{
+    opacity: 0.6;
+}
+
 .btn {
     font-weight: bold;
     background-color: #3B286D;
     text-align: center;
-    font-size: 16px;
+    font-size: 15px;
     cursor: pointer;
     color: white;
     display: inline-block;
@@ -172,7 +176,6 @@ input[type=checkbox]{
     -ms-user-select: none;
     user-select: none;
     padding: 10px 10px 10px 10px;
-    width: 287px;
     line-height: 1.1;
     border-radius: .25rem;
     transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
@@ -202,6 +205,72 @@ input[type=checkbox]{
     color: #68ba31;
     font-weight: bolder;
 }
+.pad, .pad > button  {
+    padding: 5px;
+    margin: 5px;
+}
+.red{
+    background-color: #f15c5c !important;
+}
+.gray{
+    background-color: #e7e5e5 !important;
+}
+
+.table {
+    overflow: auto;
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.line {
+    width: 100%;
+    border-bottom: 1px solid #8a8a8a;
+}
+.header {
+    font-weight: bolder;
+    font-size: 14px;
+    color: black;
+    opacity: 0.7;
+    background-color: #e7e6e6;
+}
+
+.line span {
+    font-size: 13px;
+    display: table-cell;
+    text-align: left;
+    justify-content: left;
+    min-width: 150px;
+    padding: 5px;
+    word-break: break-all;
+    text-overflow: ellipsis;
+    white-space: normal;
+    color: #222;
+    font-weight: bolder;
+}
+
+.icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px; /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'liga';
+}
+
+.height450{
+    height: 450px;
+}
+
 
 ::placeholder {
     color: #908d8d;

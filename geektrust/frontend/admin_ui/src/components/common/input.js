@@ -11,7 +11,7 @@ const Input = props => {
         ifPlacehollder = {"value": placeholder}
 
     return <div className='col v-space'>
-        <span className='label'>{isCheckBox ? '' : label}</span>
+        {isCheckBox ? null : <span className='label'>{label}</span>}
         <div className={`row ${!isCheckBox ? 'input-border':''}`}>
             <input
                 onChange={onchange}
@@ -22,7 +22,7 @@ const Input = props => {
                 className={classname}
                 value={value}
             />
-            {isCheckBox ? <span className='label'>{placeholder}</span>:null}
+            {isCheckBox && placeholder!==undefined ? <span className='label'>{placeholder}</span>:null}
         </div>
     </div>
 }

@@ -8,7 +8,7 @@ export default function useInAppAPI({url}) {
     useEffect(async () => {
         setLoading(true)
         const data = await GET_API_HOOK(url)
-        console.log('data from api', data)
+        // console.log('data from api', data)
         setData(data)
         setLoading(false)
     },[])

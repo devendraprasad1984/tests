@@ -9,7 +9,7 @@ const AdminDashboard = props => {
     const {data, loading} = useInAppAPI({url: config.apis.users})
     const [filteredUsers, setFilteredUsers] = useState([])
     useEffect(() => {
-        setFilteredUsers(data)
+        setFilteredUsers(data.map(x => ({...x, checked: false})))
     }, [data])
 
     const handleSearchOnChange = (e) => {
