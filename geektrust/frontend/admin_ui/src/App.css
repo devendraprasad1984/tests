@@ -1,7 +1,13 @@
+/*@font-face {*/
+/*    font-family: 'Material Icons';*/
+/*    font-style: normal;*/
+/*    font-weight: 400;*/
+/*    src: url(%PUBLIC_URL%/assets/materialfont.woff2) format('woff2');*/
+/*}*/
 
 * {
     font-family: 'lato';
-    color: #6a3db8;
+    color: #222;
 
 }
 

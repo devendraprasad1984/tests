@@ -17,7 +17,7 @@ const AdminDashboard = props => {
 
     const calculateUpdatePageCount = (arr) => {
         let numpages = Math.round(arr.length / enums.numberOfItemsPerPage)
-        console.log('calc pages',arr.length, numpages)
+        console.log('calc pages', arr.length, numpages)
         setPageCount(numpages)
     }
     useEffect(() => {
@@ -31,11 +31,17 @@ const AdminDashboard = props => {
         let val = e.target.value
         setTxtSearchVal(val)
     }
-    const onselect = (e, id) => {
+    const onSelectAll = (id) => {
+        let {_start, _end} = config.utils.getPageIndex(gridPageIndex)
+        //shallow copy magic here, changes reflect in main data and then we update parent and rerender
+        let tmp = [...updatedDataSet]
         if (id === -1) {
-            alert('header check is clicked')
-            return
+            tmp.slice(_start, _end).forEach(x => x.checked = !x.checked)
         }
+        setUpdatedDataSet([...tmp])
+    }
+    const onselect = (e, id) => {
+        let {_start, _end} = config.utils.getPageIndex(gridPageIndex)
         //shallow copy magic here, changes reflect in main data and then we update parent and rerender
         let tmp = [...updatedDataSet]
         let found = tmp.filter(x => parseInt(x.id) === parseInt(id))[0]
@@ -71,6 +77,7 @@ const AdminDashboard = props => {
             curPageIndex={gridPageIndex}
             numpages={pageCount}
             header={headerline}
+            onSelectAll={onSelectAll}
         />
     }, [updatedDataSet, txtSearchVal, gridPageIndex, pageCount])
 
