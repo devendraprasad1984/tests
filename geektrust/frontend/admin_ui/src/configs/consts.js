@@ -5,6 +5,7 @@ export const config = {
 }
 
 export const enums = {
+    numberOfItemsPerPage:10,
     headings: {
         admin: 'Admin Interface, XYZ Corp.',
     },

@@ -35,6 +35,10 @@
 .wid100p{
     width: 100%;
 }
+.wid80p{
+    width: 80%;
+}
+
 
 .label {
     font-size: 14px;
@@ -49,6 +53,10 @@
 .row {
     display: flex;
     flex-direction: row;
+}
+.space-around{
+    display: flex;
+    justify-content: space-between;
 }
 
 .col {
@@ -214,9 +222,9 @@ input[type=checkbox]{
     color: #68ba31;
     font-weight: bolder;
 }
-.pad, .pad > button  {
-    padding: 4px;
-    margin: 5px;
+.pad, .pad > button, .pad span  {
+    padding: 5px;
+    margin: 2px;
 }
 .red{
     background-color: #f15c5c !important;
@@ -238,14 +246,12 @@ input[type=checkbox]{
 }
 .header {
     font-weight: bolder;
-    font-size: 14px;
+    font-size: 18px;
     color: black;
-    opacity: 0.7;
-    background-color: #e7e6e6;
-}
+    }
 
 .line span {
-    font-size: 13px;
+    /*font-size: 13px;*/
     display: table-cell;
     text-align: left;
     justify-content: left;
@@ -290,6 +296,9 @@ input[type=checkbox]{
 }
 .size10{
     font-size: 10px;
+}
+.size12{
+    font-size: 12px;
 }
 .size15{
     font-size: 15px;
