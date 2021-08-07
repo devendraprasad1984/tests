@@ -291,6 +291,9 @@ input[type=checkbox]{
 .height450{
     height: 450px;
 }
+.height400{
+    height: 400px;
+}
 
 
 ::placeholder {
@@ -299,6 +302,9 @@ input[type=checkbox]{
 
 .right{
     text-align: right;
+}
+.atright{
+    float: right;
 }
 .size10{
     font-size: 10px;
@@ -321,6 +327,11 @@ input[type=checkbox]{
 .bl{
     font-weight: bolder;
 }
+.v-space {
+    margin-top: 8px;
+    margin-bottom: 12px;
+}
+
 
 /* Track */
 ::-webkit-scrollbar-track {

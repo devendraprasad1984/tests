@@ -65,6 +65,14 @@ const AdminDashboard = props => {
         setUpdatedDataSet([...nondeleted])
         calculateUpdatePageCount([...nondeleted])
     }
+    const pageSearchKeyDown = (e) => {
+        let isEnterPressed = e.keyCode === 13
+        if (!isEnterPressed) return
+        let keyval = e.target.value
+        if (isNaN(keyval) === true) return;
+        if (parseInt(keyval) <= 0 || parseInt(keyval) > pageCount) return;
+        setGridPageIndex(keyval)
+    }
 
     const displayGridSet = useCallback(() => {
         const headerline = [{id: -1, name: 'Name', email: 'Email', role: 'Role', checked: 'Actions'}]
@@ -78,6 +86,7 @@ const AdminDashboard = props => {
             numpages={pageCount}
             header={headerline}
             onSelectAll={onSelectAll}
+            pageSearchKeyDown={pageSearchKeyDown}
         />
     }, [updatedDataSet, txtSearchVal, gridPageIndex, pageCount])
 

@@ -4,7 +4,7 @@ import Input from "./input";
 import {config, enums} from "../../configs/consts";
 
 const DisplayListAsGrid = props => {
-    const {data, searchVal, onselect, onedit, ondelete, numpages, curPageIndex, header, onSelectAll} = props
+    const {data, searchVal, onselect, onedit, ondelete, numpages, curPageIndex, header, onSelectAll, pageSearchKeyDown} = props
 
     const foundAMatch = (row, valueToBeMatched) => {
         let val = valueToBeMatched.toLowerCase()
@@ -17,7 +17,7 @@ const DisplayListAsGrid = props => {
         return header.map((row, index) => {
             let {id, name, email, role, checked} = row
             return <div key={'grid-row' + index} className={'line header'}>
-                <span style={{minWidth: '30px'}}><Button val='S' onclick={() => onSelectAll(id)}/></span>
+                <span style={{minWidth: '30px'}}><Button val='' onclick={() => onSelectAll(id)}/></span>
                 <span>{name}</span>
                 <span style={{minWidth: '250px'}}>{email}</span>
                 <span style={{minWidth: '100px'}}>{role}</span>
@@ -48,10 +48,18 @@ const DisplayListAsGrid = props => {
         })
     }
 
-    return <div className='height450 table'>
-        <div className='right xymargin hwmargin bl'>{'found: ' + data.length} | page: {curPageIndex} \ {numpages}</div>
+    return <div className=''>
+        <div className='atright bl row pad'>
+            <span>found: {data.length}</span>
+            <span>page: {curPageIndex} / {numpages}</span>
+            <span>
+                <Input placeholder='jump to page' style={{width: '100px'}} inputInOneLine={true} onkeydown={pageSearchKeyDown}/>
+            </span>
+        </div>
         {displayHeader()}
-        {displayList()}
+        <div className='height400 table'>
+            {displayList()}
+        </div>
     </div>
 }
 export default React.memo(DisplayListAsGrid)
