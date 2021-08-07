@@ -4,7 +4,7 @@ import Input from "./input";
 import {config, enums} from "../../configs/consts";
 
 const DisplayListAsGrid = props => {
-    const {data, searchVal, onselect, onedit, ondelete, curPageIndex, header, onSelectAll} = props
+    const {data, searchVal, onselect, onedit, ondelete, numpages, curPageIndex, header, onSelectAll} = props
 
     const foundAMatch = (row, valueToBeMatched) => {
         let val = valueToBeMatched.toLowerCase()
@@ -49,7 +49,7 @@ const DisplayListAsGrid = props => {
     }
 
     return <div className='height450 table'>
-        <div className='right xymargin hwmargin bl'>{'found: ' + data.length} | page: {curPageIndex}</div>
+        <div className='right xymargin hwmargin bl'>{'found: ' + data.length} | page: {curPageIndex} \ {numpages}</div>
         {displayHeader()}
         {displayList()}
     </div>
