@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {GET_API_HOOK} from "../configs/api";
+import {config} from "../configs/consts";
 
 export default function useInAppAPI({url}) {
     const [loading, setLoading] = useState(false)

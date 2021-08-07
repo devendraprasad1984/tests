@@ -1,32 +1,32 @@
 import React from 'react'
 
 const Input = props => {
-    const {type, name, label, style, onchange, onkeydown, placeholder, format, classname, value, isChecked, inputInOneLine} = props
+    const {type, name, label, style, onchange, onkeydown, placeholder, format, classname, value, checked, inputInOneLine} = props
     const ifDateFormat = format !== undefined ? {"data-date-format": format} : {}
     const isCheckBox = (type === 'checkbox')
+    const isChecked = checked === undefined ? false : checked
     let ifPlacehollder = {}
     if (placeholder !== undefined)
         ifPlacehollder = {"placeholder": placeholder}
     if (isCheckBox)
         ifPlacehollder = {"value": placeholder}
 
-    const inputObj = isChecked === true ? <input
+    const inputObj = isChecked ? <input
         onChange={onchange}
-        name={name}
+        name={name || ''}
         type={type || 'text'}
         {...ifDateFormat}
         {...ifPlacehollder}
-        className={classname}
+        className={classname || ''}
         value={value}
         checked
     /> : <input
         onChange={onchange}
-        name={name}
-        onKeyDown={onkeydown}
+        name={name || ''}
         type={type || 'text'}
         {...ifDateFormat}
         {...ifPlacehollder}
-        className={classname}
+        className={classname || ''}
         value={value}
     />
 

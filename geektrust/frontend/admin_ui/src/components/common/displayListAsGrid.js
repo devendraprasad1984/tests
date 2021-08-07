@@ -1,7 +1,7 @@
-import React, {useCallback, useState} from "react";
+import React from "react";
 import Button from "./button";
 import Input from "./input";
-import {config, enums} from "../../configs/consts";
+import {config} from "../../configs/consts";
 
 const DisplayListAsGrid = props => {
     const {data, onselect, onedit, ondelete, numpages, curPageIndex, header, onSelectAll, pageSearchKeyDown} = props
@@ -26,7 +26,7 @@ const DisplayListAsGrid = props => {
             let selClass = checked ? 'gray' : ''
             return <div key={'grid-row' + index} className={'line size12 ' + selClass}>
                 <span style={{minWidth: '30px'}}>
-                    <Input classname='checkbox' type='checkbox' onchange={(e) => onselect(e, id)} isChecked={checked}/>
+                    <Input classname='checkbox' type='checkbox' onchange={(e) => onselect(e, id)} checked={checked}/>
                 </span>
                 <span>{name}</span>
                 <span style={{minWidth: '250px'}}>{email}</span>

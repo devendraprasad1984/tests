@@ -9,6 +9,7 @@ import Pagination from "./pagination";
 
 const AdminDashboard = props => {
     const {data, loading} = useInAppAPI({url: config.apis.users})
+    const [dataCopy, setDataCopy] = useState([])
 
     const [updatedDataSet, setUpdatedDataSet] = useState([])
     const [txtSearchVal, setTxtSearchVal] = useState('')
@@ -21,7 +22,8 @@ const AdminDashboard = props => {
         setPageCount(numpages)
     }
     useEffect(() => {
-        let updates = config.utils.deepCopy(data).map(x => ({...x, checked: false}))
+        let updates = data.map(x => ({...x, checked: false}))
+        setDataCopy(config.utils.deepCopy([...updates]))
         setUpdatedDataSet([...updates])
         calculateUpdatePageCount([...updates])
     }, [data])
@@ -36,9 +38,7 @@ const AdminDashboard = props => {
         if (updatedDataSet.length === 0) return
         let val = e.target.value
         // setTxtSearchVal(val)
-        let tmp = config.utils.deepCopy(data)
-        let filter = val === '' ? tmp : tmp.filter(x => foundAMatch(x, val))
-        // console.log('filtered', filter, updatedDataSet)
+        let filter = dataCopy.filter(x => val === '' || foundAMatch(x, val) === true)
         setUpdatedDataSet([...filter])
         calculateUpdatePageCount([...filter])
     }
@@ -52,7 +52,6 @@ const AdminDashboard = props => {
         setUpdatedDataSet([...tmp])
     }
     const onselect = (e, id) => {
-        let {_start, _end} = config.utils.getPageIndex(gridPageIndex)
         //shallow copy magic here, changes reflect in main data and then we update parent and rerender
         let tmp = [...updatedDataSet]
         let found = tmp.filter(x => parseInt(x.id) === parseInt(id))[0]
