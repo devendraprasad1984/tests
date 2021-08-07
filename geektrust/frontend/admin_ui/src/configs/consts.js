@@ -2,8 +2,9 @@ export const config = {
     apis: {
         users: 'https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json'
     },
-    utils:{
-        getPageIndex:(cur)=>{
+    utils: {
+        deepCopy: obj => JSON.parse(JSON.stringify(obj)),
+        getPageIndex: (cur) => {
             let itemsPerPage = enums.numberOfItemsPerPage
             let _start = (cur - 1) * itemsPerPage
             let _end = cur * itemsPerPage
@@ -13,7 +14,7 @@ export const config = {
 }
 
 export const enums = {
-    numberOfItemsPerPage:10,
+    numberOfItemsPerPage: 10,
     headings: {
         admin: 'Admin Interface, XYZ Corp.',
     },

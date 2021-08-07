@@ -17,11 +17,11 @@ const AdminDashboard = props => {
 
     const calculateUpdatePageCount = (arr) => {
         let numpages = Math.round(arr.length / enums.numberOfItemsPerPage)
-        console.log('calc pages', arr.length, numpages)
+        // console.log('calc pages', arr.length, numpages)
         setPageCount(numpages)
     }
     useEffect(() => {
-        let updates = data.map(x => ({...x, checked: false}))
+        let updates = config.utils.deepCopy(data).map(x => ({...x, checked: false}))
         setUpdatedDataSet([...updates])
         calculateUpdatePageCount([...updates])
     }, [data])
@@ -36,10 +36,11 @@ const AdminDashboard = props => {
         if (updatedDataSet.length === 0) return
         let val = e.target.value
         // setTxtSearchVal(val)
-        let tmp = [...updatedDataSet]
+        let tmp = config.utils.deepCopy(data)
         let filter = val === '' ? tmp : tmp.filter(x => foundAMatch(x, val))
-        console.log('filtered', filter)
+        // console.log('filtered', filter, updatedDataSet)
         setUpdatedDataSet([...filter])
+        calculateUpdatePageCount([...filter])
     }
     const onSelectAll = (id) => {
         let {_start, _end} = config.utils.getPageIndex(gridPageIndex)
