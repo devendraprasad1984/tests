@@ -4,14 +4,7 @@ import Input from "./input";
 import {config, enums} from "../../configs/consts";
 
 const DisplayListAsGrid = props => {
-    const {data, searchVal, onselect, onedit, ondelete, numpages, curPageIndex, header, onSelectAll, pageSearchKeyDown} = props
-
-    const foundAMatch = (row, valueToBeMatched) => {
-        let val = valueToBeMatched.toLowerCase()
-        return row.name.toLowerCase().indexOf(val) !== -1
-            || row.email.toLowerCase().indexOf(val) !== -1
-            || row.role.toLowerCase().indexOf(val) !== -1
-    }
+    const {data, onselect, onedit, ondelete, numpages, curPageIndex, header, onSelectAll, pageSearchKeyDown} = props
 
     const displayHeader = () => {
         return header.map((row, index) => {
@@ -30,7 +23,6 @@ const DisplayListAsGrid = props => {
         let {_start, _end} = config.utils.getPageIndex(curPageIndex)
         return data.slice(_start, _end).map((row, index) => {
             let {id, name, email, role, checked} = row
-            if (searchVal !== '' && foundAMatch(row, searchVal) === false) return
             let selClass = checked ? 'gray' : ''
             return <div key={'grid-row' + index} className={'line size12 ' + selClass}>
                 <span style={{minWidth: '30px'}}>

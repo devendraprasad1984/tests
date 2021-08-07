@@ -26,10 +26,20 @@ const AdminDashboard = props => {
         calculateUpdatePageCount([...updates])
     }, [data])
 
+    const foundAMatch = (row, valueToBeMatched) => {
+        let val = valueToBeMatched.toLowerCase()
+        return row.name.toLowerCase().indexOf(val) !== -1
+            || row.email.toLowerCase().indexOf(val) !== -1
+            || row.role.toLowerCase().indexOf(val) !== -1
+    }
     const handleSearchOnChange = (e) => {
         if (updatedDataSet.length === 0) return
         let val = e.target.value
-        setTxtSearchVal(val)
+        // setTxtSearchVal(val)
+        let tmp = [...updatedDataSet]
+        let filter = val === '' ? tmp : tmp.filter(x => foundAMatch(x, val))
+        console.log('filtered', filter)
+        setUpdatedDataSet([...filter])
     }
     const onSelectAll = (id) => {
         let {_start, _end} = config.utils.getPageIndex(gridPageIndex)
@@ -70,7 +80,8 @@ const AdminDashboard = props => {
         if (!isEnterPressed) return
         let keyval = e.target.value
         if (isNaN(keyval) === true) return;
-        if (parseInt(keyval) <= 0 || parseInt(keyval) > pageCount) return;
+        keyval = parseInt(keyval)
+        if (keyval <= 0 || keyval > pageCount) return;
         setGridPageIndex(keyval)
     }
 
@@ -81,7 +92,7 @@ const AdminDashboard = props => {
             onselect={(e, id) => onselect(e, id)}
             onedit={(id) => onedit(id)}
             ondelete={(id) => ondelete(id)}
-            searchVal={txtSearchVal}
+            // searchVal={txtSearchVal}
             curPageIndex={gridPageIndex}
             numpages={pageCount}
             header={headerline}
@@ -97,7 +108,7 @@ const AdminDashboard = props => {
 
     if (loading) return <PlzWait/>
     return <div>
-        <div><Input classname='wid100p' placeholder={enums.placeholders.adminSearch} onchange={handleSearchOnChange}/></div>
+        <div><Input classname='wid100p txtpad' placeholder={enums.placeholders.adminSearch} onchange={handleSearchOnChange}/></div>
         {displayGridSet()}
         <div className='row pad'>
             <Button val='Delete All Selected' classname='red' onclick={handleDeleteAllSelected}/>
