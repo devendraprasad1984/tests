@@ -21,19 +21,35 @@ const AdminDashboard = props => {
         let val = e.target.value
         setTxtSearchVal(val)
     }
-    const updateCallbackDataUpdate = (updateData) => {
-        setUpdatedDataSet([...updateData])
+    const onselect = (e, id) => {
+        //shallow copy magic here, changes reflect in main data and then we update parent and rerender
+        let tmp = [...updatedDataSet]
+        let found = tmp.filter(x => parseInt(x.id) === parseInt(id))[0]
+        found.checked = e.target.checked
+        setUpdatedDataSet([...tmp])
+    }
+    const onedit = (id) => {
+        console.log('edited', id)
+    }
+    const ondelete = (id) => {
+        let tmp = [...updatedDataSet]
+        let nondeleted = tmp.filter(x => parseInt(x.id) !== parseInt(id))
+        // console.log('on single delete',id, nondeleted)
+        setUpdatedDataSet([...nondeleted])
     }
 
     const handleDeleteAllSelected = () => {
-        let selectedRows = updatedDataSet.filter(x => x.checked === true)
-        console.log('selected rows', selectedRows)
+        let tmp = [...updatedDataSet]
+        let nondeleted = tmp.filter(x => x.checked === false)
+        setUpdatedDataSet([...nondeleted])
     }
 
     const displayGridSet = useCallback(() => {
         return <DisplayListAsGrid
             data={updatedDataSet}
-            updateBack={(d) => updateCallbackDataUpdate(d)}
+            onselect={(e, id) => onselect(e, id)}
+            onedit={(id) => onedit(id)}
+            ondelete={(id) => ondelete(id)}
             searchVal={txtSearchVal}
         />
     }, [updatedDataSet, txtSearchVal])

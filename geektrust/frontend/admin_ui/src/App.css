@@ -16,6 +16,15 @@
     position: relative;
 }
 
+.xymargin{
+    margin-right: 10px;
+    margin-left: 10px;
+}
+.hwmargin{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .atcenter {
     position: absolute;
     top: 50%;
@@ -176,9 +185,9 @@ input[type=checkbox]{
     -ms-user-select: none;
     user-select: none;
     padding: 10px 10px 10px 10px;
-    line-height: 1.1;
+    line-height: 1;
     border-radius: .25rem;
-    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    /*transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;*/
 }
 
 .margin10{
@@ -206,7 +215,7 @@ input[type=checkbox]{
     font-weight: bolder;
 }
 .pad, .pad > button  {
-    padding: 5px;
+    padding: 4px;
     margin: 5px;
 }
 .red{
@@ -292,6 +301,10 @@ input[type=checkbox]{
 /* width */
 ::-webkit-scrollbar {
     width: 10px;
+}
+
+.bl{
+    font-weight: bolder;
 }
 
 /* Track */
