@@ -35,16 +35,15 @@ const AdminDashboard = props => {
             || row.role.toLowerCase().indexOf(val) !== -1
     }
     const handleSearchOnChange = (e) => {
-        if (updatedDataSet.length === 0) return
         let val = e.target.value
-        // setTxtSearchVal(val)
-        let filter = dataCopy.filter(x => val === '' || foundAMatch(x, val) === true)
+        // console.log('val',val)
+        let filter = dataCopy.filter((x, i) => val === '' || foundAMatch(x, val) === true)
+        // console.log(filter, updatedDataSet, dataCopy)
         setUpdatedDataSet([...filter])
         calculateUpdatePageCount([...filter])
     }
     const onSelectAll = (id) => {
         let {_start, _end} = config.utils.getPageIndex(gridPageIndex)
-        //shallow copy magic here, changes reflect in main data and then we update parent and rerender
         let tmp = [...updatedDataSet]
         if (id === -1) {
             tmp.slice(_start, _end).forEach(x => x.checked = !x.checked)
