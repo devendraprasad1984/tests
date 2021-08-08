@@ -8,6 +8,7 @@ import Button from "../common/button";
 import Pagination from "./pagination";
 
 const AdminDashboard = props => {
+    //shallow copy magic here, changes reflect in data, copy of data and pages, searches
     const {data, loading} = useInAppAPI({url: config.apis.users})
     const [dataCopy, setDataCopy] = useState([]) //used for global search in data and also to keep track of original records, get updated on specific actions edit/save/delete
 
@@ -50,7 +51,6 @@ const AdminDashboard = props => {
         setDataCopy([...tmp])
     }
     const onselect = (e, id) => {
-        //shallow copy magic here, changes reflect in main data and then we update parent and rerender
         let tmp = [...updatedDataSet]
         let found = tmp.filter(x => parseInt(x.id) === parseInt(id))[0]
         found.checked = e.target.checked
