@@ -36,9 +36,7 @@ const AdminDashboard = props => {
     }
     const handleSearchOnChange = (e) => {
         let val = e.target.value
-        let tmpUpdateCopy = config.utils.deepCopy([...updatedDataSet])
         let filter = dataCopy.filter((x, i) => val === '' || foundAMatch(x, val) === true)
-        // console.log(tmpUpdateCopy, filter)
         setUpdatedDataSet([...filter])
         calculateUpdatePageCount([...filter])
     }
