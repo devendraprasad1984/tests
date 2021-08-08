@@ -9,7 +9,7 @@ import Pagination from "./pagination";
 
 const AdminDashboard = props => {
     const {data, loading} = useInAppAPI({url: config.apis.users})
-    const [dataCopy, setDataCopy] = useState([])
+    const [dataCopy, setDataCopy] = useState([]) //used for global search in data and also to keep track of original records, get updated on specific actions edit/save/delete
 
     const [updatedDataSet, setUpdatedDataSet] = useState([])
     const [txtSearchVal, setTxtSearchVal] = useState('')
@@ -85,6 +85,7 @@ const AdminDashboard = props => {
         let tmp = [...updatedDataSet]
         let nondeleted = tmp.filter(x => x.checked === false)
         setUpdatedDataSet([...nondeleted])
+        setDataCopy([...nondeleted])
         calculateUpdatePageCount([...nondeleted])
     }
     const pageSearchKeyDown = (e) => {
