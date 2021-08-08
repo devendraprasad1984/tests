@@ -8,14 +8,9 @@ const editLabels = {
     email: 'email',
     role: 'role'
 }
-const editMetaInit = {
-    [editLabels.name]: '',
-    [editLabels.email]: '',
-    [editLabels.role]: ''
-}
+
 const DisplayListAsGrid = props => {
-    const {data, onselect, onedit, ondelete, numpages, curPageIndex, header, onSelectAll, pageSearchKeyDown} = props
-    const [editMeta, setEditMeta] = useState({...editMetaInit})
+    const {data, onselect, onedit, ondelete, numpages, curPageIndex, header, onSelectAll, pageSearchKeyDown, onItemChange} = props
 
     const displayHeader = () => {
         return header.map((row, index) => {
@@ -30,16 +25,12 @@ const DisplayListAsGrid = props => {
         })
     }
 
-    const handleEditChange = (e) => {
-        let val = e.target.value
-        let name = e.target.name
-        let tmp = {}
-        tmp[name] = val
-        setEditMeta({...editMeta, ...tmp})
-    }
-    const showItems = (flagEdit, label, val) => {
-        let editItem = <Input name={label} value={editMeta[editLabels[label]]} onchange={handleEditChange}/>
-        return flagEdit === false ? val : editItem
+    const showItems = (flagEdit, label, row) => {
+        let {id} = row
+        let val = row[label]
+        // editMeta[editLabels[label]]
+        let editItem = <Input value={val} onchange={() => onItemChange(id, label, val)}/>
+        return flagEdit === false ? row[label] : editItem
     }
 
     const displayList = () => {
@@ -52,9 +43,9 @@ const DisplayListAsGrid = props => {
                 <span style={{minWidth: '30px'}}>
                     <Input classname='checkbox' type='checkbox' onchange={(e) => onselect(e, id)} checked={checked}/>
                 </span>
-                <span>{showItems(edit, editLabels.name, name)}</span>
-                <span style={{minWidth: '250px'}}>{showItems(edit, editLabels.email, email)}</span>
-                    <span style={{minWidth: '100px'}}>{showItems(edit, editLabels.role, role)}</span>
+                <span>{showItems(edit, editLabels.name, row)}</span>
+                <span style={{minWidth: '250px'}}>{showItems(edit, editLabels.email, row)}</span>
+                <span style={{minWidth: '100px'}}>{showItems(edit, editLabels.role, row)}</span>
                 <span className='pad'>
                         <Button classname={edit === true ? 'green' : ''} val={edit === true ? 'save' : 'edit'} onclick={() => onedit(id)}/>
                         <Button classname='red' val='delete' onclick={() => ondelete(id)}/>

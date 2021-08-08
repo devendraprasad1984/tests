@@ -37,8 +37,8 @@ const AdminDashboard = props => {
     const handleSearchOnChange = (e) => {
         let val = e.target.value
         // console.log('val',val)
+        // console.log(dataCopy)
         let filter = dataCopy.filter((x, i) => val === '' || foundAMatch(x, val) === true)
-        // console.log(filter, updatedDataSet, dataCopy)
         setUpdatedDataSet([...filter])
         calculateUpdatePageCount([...filter])
     }
@@ -85,6 +85,9 @@ const AdminDashboard = props => {
         if (keyval <= 0 || keyval > pageCount) return;
         setGridPageIndex(keyval)
     }
+    const handleItemChange=(id,label,val)=>{
+        console.log('item under change', id,label,val)
+    }
 
     const displayGridSet = useCallback(() => {
         const headerline = [{id: -1, name: 'Name', email: 'Email', role: 'Role', checked: 'Actions'}]
@@ -99,6 +102,7 @@ const AdminDashboard = props => {
             header={headerline}
             onSelectAll={onSelectAll}
             pageSearchKeyDown={pageSearchKeyDown}
+            onItemChange={handleItemChange}
         />
     }, [updatedDataSet, txtSearchVal, gridPageIndex, pageCount])
 

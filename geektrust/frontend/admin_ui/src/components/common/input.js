@@ -21,7 +21,7 @@ const Input = props => {
     }
 
     let inputObj = <input {...baseInputProps} {...ifDateFormat} {...ifPlacehollder} {...ifChecked} />
-    return <div className={inputInOneLine === true ? '' : 'col v-space'}>
+    return <div className={inputInOneLine === true ? '' : 'col'}>
         {isCheckBox || inputInOneLine === true ? null : <span className='label'>{label}</span>}
         <div className={`row ${!isCheckBox ? 'input-border' : ''}`} style={style}>
             {inputObj}
