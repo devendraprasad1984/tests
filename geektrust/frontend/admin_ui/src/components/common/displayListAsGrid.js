@@ -8,10 +8,15 @@ const labels = {
     email: 'email',
     role: 'role'
 }
+const metaInit = {
+    [labels.name]: '',
+    [labels.email]: ''
+}
 
 const DisplayListAsGrid = props => {
     const {data, onselect, onedit, ondelete, numpages, curPageIndex, header, onSelectAll, pageSearchKeyDown, onItemChange} = props
     const [editItem, setEditItem] = useState([])
+    const [editMeta, setEditMeta] = useState({...metaInit})
 
     const displayHeader = () => {
         return header.map((row, index) => {
@@ -27,7 +32,9 @@ const DisplayListAsGrid = props => {
     }
     const handleEdit = (id) => {
         let tmp = config.utils.deepCopy(data).filter(x => x.id === id)
+        let tmpItem = {[labels.name]: tmp[0].name, [labels.email]: tmp[0].email}
         onedit(id, true)
+        setEditMeta({...editMeta, ...tmpItem})
         setEditItem([...tmp])
     }
     const displayList = () => {
@@ -52,6 +59,7 @@ const DisplayListAsGrid = props => {
         })
     }
     const handleItemSave = (id) => {
+        console.log(editMeta)
         setEditItem([])
         onedit(id, false)
     }
@@ -60,8 +68,12 @@ const DisplayListAsGrid = props => {
         onedit(id, false)
     }
 
-    const handleEditChange = (e, id) => {
-        console.log(e, id)
+    const changeEditMeta = (e) => {
+        let tmp = {}
+        let name = e.target.name
+        let value = e.target.value
+        tmp[name] = value
+        setEditMeta({...editMeta, ...tmp})
     }
 
     const showRightEditPanel = () => {
@@ -70,8 +82,8 @@ const DisplayListAsGrid = props => {
         return <div className='col'>
             <h3 className='xred'>Editing {id}, role: {role}</h3>
             <div className='v-space'>
-                <Input name={labels.name} label={labels.name} value={name} onchange={(e) => handleEditChange(e, id)}/>
-                <Input name={labels.email} label={labels.email} value={email} onchange={(e) => handleEditChange(e, id)}/>
+                <Input name={labels.name} label={labels.name} value={editMeta[labels.name]} onchange={changeEditMeta}/>
+                <Input name={labels.email} label={labels.email} value={editMeta[labels.email]} onchange={changeEditMeta}/>
             </div>
 
             <div className='row pad'>
