@@ -1,20 +1,16 @@
 import React, {useEffect, useState} from "react";
 import Button from "./button";
 import Input from "./input";
-import {config} from "../../configs/consts";
+import {config, formLabels} from "../../configs/consts";
 
-const labels = {
-    name: 'name',
-    email: 'email',
-    role: 'role'
-}
+const labels = formLabels.adminLabels
 const metaInit = {
     [labels.name]: '',
     [labels.email]: ''
 }
 
 const DisplayListAsGrid = props => {
-    const {data, onselect, onedit, ondelete, numpages, curPageIndex, header, onSelectAll, pageSearchKeyDown, onItemChange} = props
+    const {data, onselect, onedit, ondelete, numpages, curPageIndex, header, onSelectAll, pageSearchKeyDown, onsave} = props
     const [editItem, setEditItem] = useState([])
     const [editMeta, setEditMeta] = useState({...metaInit})
 
@@ -59,9 +55,12 @@ const DisplayListAsGrid = props => {
         })
     }
     const handleItemSave = (id) => {
-        console.log(editMeta)
-        setEditItem([])
-        onedit(id, false)
+        onsave(id, editMeta, (status) => {
+            if (status === 'success') {
+                onedit(id, false)
+                setEditItem([])
+            }
+        })
     }
     const handleItemCancel = (id) => {
         setEditItem([])

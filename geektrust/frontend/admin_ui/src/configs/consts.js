@@ -1,4 +1,5 @@
 export const config = {
+    env: window.location.href.indexOf('localhost') !== -1 ? 'local' : 'server',
     apis: {
         users: 'https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json'
     },
@@ -14,6 +15,7 @@ export const config = {
 }
 
 export const enums = {
+    env: {local: 'local', server: 'server'},
     numberOfItemsPerPage: 10,
     headings: {
         admin: 'Admin Interface, XYZ Corp.',
@@ -25,4 +27,12 @@ export const enums = {
         adminSearch: 'search here by name,email, role..'
     }
 
+}
+
+export const formLabels = {
+    adminLabels: {
+        name: 'name',
+        email: 'email',
+        role: 'role'
+    }
 }

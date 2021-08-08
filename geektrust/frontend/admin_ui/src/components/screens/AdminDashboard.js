@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect, useState} from 'react'
 import Input from "../common/input";
 import useInAppAPI from "../../customhooks/api_hooks";
-import {config, enums} from "../../configs/consts";
+import {config, enums, formLabels} from "../../configs/consts";
 import PlzWait from "../common/plzwait";
 import DisplayListAsGrid from "../common/displayListAsGrid";
 import Button from "../common/button";
@@ -36,9 +36,9 @@ const AdminDashboard = props => {
     }
     const handleSearchOnChange = (e) => {
         let val = e.target.value
-        // console.log('val',val)
-        // console.log(dataCopy)
+        let tmpUpdateCopy = config.utils.deepCopy([...updatedDataSet])
         let filter = dataCopy.filter((x, i) => val === '' || foundAMatch(x, val) === true)
+        // console.log(tmpUpdateCopy, filter)
         setUpdatedDataSet([...filter])
         calculateUpdatePageCount([...filter])
     }
@@ -49,6 +49,7 @@ const AdminDashboard = props => {
             tmp.slice(_start, _end).forEach(x => x.checked = !x.checked)
         }
         setUpdatedDataSet([...tmp])
+        setDataCopy([...tmp])
     }
     const onselect = (e, id) => {
         //shallow copy magic here, changes reflect in main data and then we update parent and rerender
@@ -62,11 +63,23 @@ const AdminDashboard = props => {
         let found = tmp.filter(x => parseInt(x.id) === parseInt(id))[0]
         found.edit = flag
         setUpdatedDataSet([...tmp])
+        setDataCopy([...tmp])
+    }
+    const onsave = (id, updatedItems, saveCallback) => {
+        const labels = formLabels.adminLabels
+        let tmp = [...updatedDataSet]
+        let found = tmp.filter(x => parseInt(x.id) === parseInt(id))[0]
+        found[labels.name] = updatedItems[labels.name]
+        found[labels.email] = updatedItems[labels.email]
+        saveCallback('success')
+        setUpdatedDataSet([...tmp])
+        setDataCopy([...tmp])
     }
     const ondelete = (id) => {
         let tmp = [...updatedDataSet]
         let nondeleted = tmp.filter(x => parseInt(x.id) !== parseInt(id))
         setUpdatedDataSet([...nondeleted])
+        setDataCopy([...nondeleted])
         calculateUpdatePageCount([...nondeleted])
     }
 
@@ -80,13 +93,10 @@ const AdminDashboard = props => {
         let isEnterPressed = e.keyCode === 13
         if (!isEnterPressed) return
         let keyval = e.target.value
-        if (isNaN(keyval) === true) return;
+        if (isNaN(keyval) === true || keyval === '' || keyval === null || keyval === undefined) return;
         keyval = parseInt(keyval)
         if (keyval <= 0 || keyval > pageCount) return;
         setGridPageIndex(keyval)
-    }
-    const handleItemChange = (id, label, val) => {
-        console.log('item under change', id, label, val)
     }
 
     const displayGridSet = useCallback(() => {
@@ -95,6 +105,7 @@ const AdminDashboard = props => {
             data={updatedDataSet}
             onselect={(e, id) => onselect(e, id)}
             onedit={onedit}
+            onsave={onsave}
             ondelete={ondelete}
             // searchVal={txtSearchVal}
             curPageIndex={gridPageIndex}
@@ -102,7 +113,6 @@ const AdminDashboard = props => {
             header={headerline}
             onSelectAll={onSelectAll}
             pageSearchKeyDown={pageSearchKeyDown}
-            onItemChange={handleItemChange}
         />
     }, [updatedDataSet, txtSearchVal, gridPageIndex, pageCount])
 

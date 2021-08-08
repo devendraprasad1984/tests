@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react'
 import {GET_API_HOOK} from "../configs/api";
-import {config} from "../configs/consts";
 
 export default function useInAppAPI({url}) {
     const [loading, setLoading] = useState(false)
@@ -12,6 +11,6 @@ export default function useInAppAPI({url}) {
         // console.log('data from api', data)
         setData(data)
         setLoading(false)
-    },[])
+    }, [])
     return {data, loading}
 }
