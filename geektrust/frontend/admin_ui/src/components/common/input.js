@@ -22,6 +22,7 @@ const Input = props => {
         checked={isChecked}
     /> : <input
         onChange={onchange}
+        onKeyDown={onkeydown}
         name={name || ''}
         type={type || 'text'}
         {...ifDateFormat}
