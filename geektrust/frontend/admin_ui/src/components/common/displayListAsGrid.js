@@ -69,11 +69,11 @@ const DisplayListAsGrid = props => {
     }
 
     const changeEditMeta = (e) => {
-        let tmp = {}
+        let tmp = {...editMeta}
         let name = e.target.name
         let value = e.target.value
         tmp[name] = value
-        setEditMeta({...editMeta, ...tmp})
+        setEditMeta({...tmp})
     }
 
     const showRightEditPanel = () => {
