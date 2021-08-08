@@ -6,32 +6,21 @@ const Input = props => {
     const isCheckBox = (type === 'checkbox')
     const isChecked = checked === undefined ? false : checked
     let ifPlacehollder = {}
-    if (placeholder !== undefined)
-        ifPlacehollder = {"placeholder": placeholder}
-    if (isCheckBox)
-        ifPlacehollder = {"value": placeholder}
+    let ifChecked = {}
+    if (placeholder !== undefined) ifPlacehollder = {"placeholder": placeholder}
+    if (isCheckBox) ifPlacehollder = {"value": placeholder}
+    if (isCheckBox) ifChecked = {"checked": isChecked}
 
-    const inputObj = isChecked === true ? <input
-        onChange={onchange}
-        name={name || ''}
-        type={type || 'text'}
-        {...ifDateFormat}
-        {...ifPlacehollder}
-        className={classname || ''}
-        value={value}
-        checked={isChecked}
-    /> : <input
-        onChange={onchange}
-        onKeyDown={onkeydown}
-        name={name || ''}
-        type={type || 'text'}
-        {...ifDateFormat}
-        {...ifPlacehollder}
-        className={classname || ''}
-        value={value}
-    />
+    let baseInputProps = {
+        onChange: onchange,
+        onKeyDown: onkeydown,
+        name: name || '',
+        type: type || 'text',
+        className: classname || '',
+        value: value
+    }
 
-
+    let inputObj = <input {...baseInputProps} {...ifDateFormat} {...ifPlacehollder} {...ifChecked} />
     return <div className={inputInOneLine === true ? '' : 'col v-space'}>
         {isCheckBox || inputInOneLine === true ? null : <span className='label'>{label}</span>}
         <div className={`row ${!isCheckBox ? 'input-border' : ''}`} style={style}>

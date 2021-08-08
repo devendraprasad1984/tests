@@ -22,7 +22,7 @@ const AdminDashboard = props => {
         setPageCount(numpages)
     }
     useEffect(() => {
-        let updates = data.map(x => ({...x, checked: false}))
+        let updates = data.map(x => ({...x, checked: false, edit: false}))
         setDataCopy(config.utils.deepCopy([...updates]))
         setUpdatedDataSet([...updates])
         calculateUpdatePageCount([...updates])
@@ -58,12 +58,14 @@ const AdminDashboard = props => {
         setUpdatedDataSet([...tmp])
     }
     const onedit = (id) => {
-        console.log('edited', id)
+        let tmp = [...updatedDataSet]
+        let found = tmp.filter(x => parseInt(x.id) === parseInt(id))[0]
+        found.edit = !found.edit
+        setUpdatedDataSet([...tmp])
     }
     const ondelete = (id) => {
         let tmp = [...updatedDataSet]
         let nondeleted = tmp.filter(x => parseInt(x.id) !== parseInt(id))
-        // console.log('on single delete',id, nondeleted)
         setUpdatedDataSet([...nondeleted])
         calculateUpdatePageCount([...nondeleted])
     }

@@ -22,11 +22,12 @@
     position: relative;
 }
 
-.xymargin{
+.xymargin {
     margin-right: 10px;
     margin-left: 10px;
 }
-.hwmargin{
+
+.hwmargin {
     margin-top: 10px;
     margin-bottom: 10px;
 }
@@ -38,10 +39,11 @@
     transform: translate(-50%, -50%);
 }
 
-.wid100p{
+.wid100p {
     width: 100%;
 }
-.wid80p{
+
+.wid80p {
     width: 80%;
 }
 
@@ -51,6 +53,7 @@
     text-align: left;
     font-weight: bolder;
 }
+
 .flexbox {
     display: flex;
     flex-wrap: wrap;
@@ -60,7 +63,8 @@
     display: flex;
     flex-direction: row;
 }
-.space-around{
+
+.space-around {
     display: flex;
     justify-content: space-between;
 }
@@ -82,7 +86,8 @@ input[type=text], input[type=date], input[type=password] {
     background-color: transparent;
     width: 100%;
 }
-.txtpad{
+
+.txtpad {
     padding: 10px;
 }
 
@@ -147,7 +152,7 @@ input[type=text], input[type=date], input[type=password] {
 }
 
 
-input[type=checkbox]{
+input[type=checkbox] {
     padding: 8px;
 }
 
@@ -162,6 +167,7 @@ input[type=checkbox]{
     outline: none;
     cursor: pointer;
 }
+
 .checkbox:checked {
     background-color: #3B286D;
 }
@@ -182,7 +188,7 @@ input[type=checkbox]{
     background-color: #3B286D;
 }
 
-.btn:hover{
+.btn:hover {
     opacity: 0.6;
 }
 
@@ -206,39 +212,56 @@ input[type=checkbox]{
     /*transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;*/
 }
 
-.margin10{
+.margin10 {
     margin-top: 10px;
 }
-.margin15{
+
+.margin15 {
     margin-top: 15px;
 }
-.margin20{
+
+.margin20 {
     margin-top: 20px;
 }
-.margin25{
+
+.margin25 {
     margin-top: 2rem;
 }
-.margin30{
+
+.margin30 {
     margin-top: 5rem;
 }
 
-.xred{
-    color: #ba5b28;
-    font-weight: bolder;
+.xred {
+    color: #ba5b28 !important;
 }
-.xgreen{
-    color: #68ba31;
-    font-weight: bolder;
+
+.xgreen {
+    color: #68ba31 !important;
 }
-.pad, .pad > button, .pad span  {
+
+.xwhite {
+    color: white !important;
+}
+
+.pad, .pad > button, .pad span {
     padding: 5px;
     margin: 2px;
 }
-.red{
+
+.green {
+    background-color: #0e9546 !important;
+}
+
+.red {
     background-color: #f15c5c !important;
 }
-.gray{
+
+.gray {
     background-color: #e7e5e5 !important;
+}
+.purple {
+    background-color: #f2e7fa !important;
 }
 
 .table {
@@ -252,11 +275,12 @@ input[type=checkbox]{
     width: 100%;
     border-bottom: 1px solid #8a8a8a;
 }
+
 .header {
     font-weight: bolder;
     font-size: 18px;
     color: black;
-    }
+}
 
 .line span {
     /*font-size: 13px;*/
@@ -290,10 +314,11 @@ input[type=checkbox]{
     font-feature-settings: 'liga';
 }
 
-.height450{
+.height450 {
     height: 450px;
 }
-.height400{
+
+.height400 {
     height: 400px;
 }
 
@@ -302,22 +327,27 @@ input[type=checkbox]{
     color: #908d8d;
 }
 
-.right{
+.right {
     text-align: right;
 }
-.atright{
+
+.atright {
     float: right;
 }
-.size10{
+
+.size10 {
     font-size: 10px;
 }
-.size12{
+
+.size12 {
     font-size: 12px;
 }
-.size15{
+
+.size15 {
     font-size: 15px;
 }
-.size25{
+
+.size25 {
     font-size: 25px;
 }
 
@@ -326,9 +356,10 @@ input[type=checkbox]{
     width: 10px;
 }
 
-.bl{
+.bl {
     font-weight: bolder;
 }
+
 .v-space {
     margin-top: 8px;
     margin-bottom: 12px;
