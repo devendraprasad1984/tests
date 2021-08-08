@@ -42,9 +42,18 @@
 .wid100p {
     width: 100%;
 }
+.wid90p {
+    width: 90%;
+}
 
 .wid80p {
     width: 80%;
+}
+.wid10p {
+    width: 10%;
+}
+.wid20p {
+    width: 20%;
 }
 
 

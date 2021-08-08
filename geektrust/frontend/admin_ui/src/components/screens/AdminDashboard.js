@@ -57,10 +57,10 @@ const AdminDashboard = props => {
         found.checked = e.target.checked
         setUpdatedDataSet([...tmp])
     }
-    const onedit = (id) => {
+    const onedit = (id, flag) => {
         let tmp = [...updatedDataSet]
         let found = tmp.filter(x => parseInt(x.id) === parseInt(id))[0]
-        found.edit = !found.edit
+        found.edit = flag
         setUpdatedDataSet([...tmp])
     }
     const ondelete = (id) => {
@@ -85,8 +85,8 @@ const AdminDashboard = props => {
         if (keyval <= 0 || keyval > pageCount) return;
         setGridPageIndex(keyval)
     }
-    const handleItemChange=(id,label,val)=>{
-        console.log('item under change', id,label,val)
+    const handleItemChange = (id, label, val) => {
+        console.log('item under change', id, label, val)
     }
 
     const displayGridSet = useCallback(() => {
@@ -94,8 +94,8 @@ const AdminDashboard = props => {
         return <DisplayListAsGrid
             data={updatedDataSet}
             onselect={(e, id) => onselect(e, id)}
-            onedit={(id) => onedit(id)}
-            ondelete={(id) => ondelete(id)}
+            onedit={onedit}
+            ondelete={ondelete}
             // searchVal={txtSearchVal}
             curPageIndex={gridPageIndex}
             numpages={pageCount}

@@ -1,9 +1,9 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Button from "./button";
 import Input from "./input";
 import {config} from "../../configs/consts";
 
-const editLabels = {
+const labels = {
     name: 'name',
     email: 'email',
     role: 'role'
@@ -11,6 +11,7 @@ const editLabels = {
 
 const DisplayListAsGrid = props => {
     const {data, onselect, onedit, ondelete, numpages, curPageIndex, header, onSelectAll, pageSearchKeyDown, onItemChange} = props
+    const [editItem, setEditItem] = useState([])
 
     const displayHeader = () => {
         return header.map((row, index) => {
@@ -24,15 +25,11 @@ const DisplayListAsGrid = props => {
             </div>
         })
     }
-
-    const showItems = (flagEdit, label, row) => {
-        let {id} = row
-        let val = row[label]
-        // editMeta[editLabels[label]]
-        let editItem = <Input value={val} onchange={() => onItemChange(id, label, val)}/>
-        return flagEdit === false ? row[label] : editItem
+    const handleEdit = (id) => {
+        let tmp = config.utils.deepCopy(data).filter(x => x.id === id)
+        onedit(id, true)
+        setEditItem([...tmp])
     }
-
     const displayList = () => {
         let {_start, _end} = config.utils.getPageIndex(curPageIndex)
         return data.slice(_start, _end).map((row, index) => {
@@ -43,16 +40,45 @@ const DisplayListAsGrid = props => {
                 <span style={{minWidth: '30px'}}>
                     <Input classname='checkbox' type='checkbox' onchange={(e) => onselect(e, id)} checked={checked}/>
                 </span>
-                <span>{showItems(edit, editLabels.name, row)}</span>
-                <span style={{minWidth: '250px'}}>{showItems(edit, editLabels.email, row)}</span>
-                <span style={{minWidth: '100px'}}>{showItems(edit, editLabels.role, row)}</span>
+                <span>{name}</span>
+                <span style={{minWidth: '250px'}}>{email}</span>
+                <span style={{minWidth: '100px'}}>{role}</span>
                 <span className='pad'>
-                        <Button classname={edit === true ? 'green' : ''} val={edit === true ? 'save' : 'edit'} onclick={() => onedit(id)}/>
+                        <Button classname={edit === true ? 'green' : ''} val={'edit'} onclick={() => handleEdit(id)}/>
                         <Button classname='red' val='delete' onclick={() => ondelete(id)}/>
                 </span>
                 <span>{checked}</span>
             </div>
         })
+    }
+    const handleItemSave = (id) => {
+        setEditItem([])
+        onedit(id, false)
+    }
+    const handleItemCancel = (id) => {
+        setEditItem([])
+        onedit(id, false)
+    }
+
+    const handleEditChange = (e, id) => {
+        console.log(e, id)
+    }
+
+    const showRightEditPanel = () => {
+        if (editItem.length === 0) return
+        let {id, name, email, role} = editItem[0]
+        return <div className='col'>
+            <h3 className='xred'>Editing {id}, role: {role}</h3>
+            <div className='v-space'>
+                <Input name={labels.name} label={labels.name} value={name} onchange={(e) => handleEditChange(e, id)}/>
+                <Input name={labels.email} label={labels.email} value={email} onchange={(e) => handleEditChange(e, id)}/>
+            </div>
+
+            <div className='row pad'>
+                <span><Button classname='green' val='Save' onclick={() => handleItemSave(id)}/></span>
+                <span><Button classname='red' val='Cancel' onclick={() => handleItemCancel(id)}/></span>
+            </div>
+        </div>
     }
 
     return <div className=''>
@@ -64,8 +90,9 @@ const DisplayListAsGrid = props => {
             </span>
         </div>
         {displayHeader()}
-        <div className='height400 table'>
-            {displayList()}
+        <div className='row wid100p'>
+            <div className='height400 table col wid80p'>{displayList()}</div>
+            <div className='bl xymargin hwmargin wid20p'>{showRightEditPanel()}</div>
         </div>
     </div>
 }
