@@ -850,9 +850,10 @@ const longestValidParenthesis = () => {
         }
     }
     let res = stack.length - stack2.length
-    console.log('length of longest valid parenthesis', str, stack, stack2, res)
+    console.log('length of longest valid ', str, stack, stack2)
 }
-// longestValidParenthesis()
+longestValidParenthesis()
+
 const maxSumLessGiveSum = () => {
     let K = 60
     let sum = 0
@@ -978,7 +979,7 @@ const swapCaseAndNumbers = () => {
     console.log(swap("Hello -5LOL6du5d4e"));
     // console.log(swap("2S 6 du5d4e"));
 }
-// swapCaseAndNumbers()
+swapCaseAndNumbers()
 
 
 const CountingAnagrams = (str) => {
@@ -1037,7 +1038,7 @@ const quickSortExample = () => {
     console.log('array', arr, 'FASTEST: quick sort example (best/average-OnLogn, worst: 0n^2)', quicksort_swap(arr))
 }
 
-findPairSum([undefined, 10, 6, 15, 3, 7, 9], 22)
+findPairSum([undefined, 10, 6, 15, 3, 7, 9,12,21,1], 22)
 
 
 const powerSchoolTest = () => {
