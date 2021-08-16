@@ -47,14 +47,14 @@ const findPairSum = () => {
     let array = [1, 2, 3, 4, 5, 6, 8]
     let collectionResults = {}
     let sum = 9
+    let duplicatePair = []
     for (let i in array) {
         let curVal = array[i]
-        //for removing duplicates
-        let resKeys = Object.keys(collectionResults).map(x => parseInt(x))
-        let resVals = Object.values(collectionResults)
-        // console.log(resKeys, resVals)
-        if (resKeys.indexOf(curVal) === -1 && resVals.indexOf(curVal) === -1)
-            collectionResults[sum - curVal] = curVal
+        let diff = sum - curVal
+        if (duplicatePair.indexOf(curVal) === -1 && duplicatePair.indexOf(diff) === -1) {
+            collectionResults[diff] = curVal
+            duplicatePair.push(...[curVal], ...[diff])
+        }
     }
     console.log('pair of numbers that equals givan sum', sum, '=', collectionResults)
 }
