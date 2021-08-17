@@ -9,8 +9,7 @@ const ClosureCounterCheck = () => {
             setCounter(ival + 1)
         }
         // setCounter(counter+1)
-        setTimeout(fn(counter), 3000
-    )
+        setTimeout(fn(counter), 3000)
     }
     return <>
         <h1>basic settimeout/closure counter test</h1>
