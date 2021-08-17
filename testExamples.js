@@ -289,7 +289,7 @@ const chainedBuilderClass = () => {
     }
     return chainedObject
 }
-console.log(chainedBuilderClass().first('one').second('2nd').third('third').build())
+// console.log(chainedBuilderClass().first('one').second('2nd').third('third').build())
 
 const testClassVanilaTypes = () => {
     function user(name) {
@@ -852,7 +852,7 @@ const longestValidParenthesis = () => {
     let res = stack.length - stack2.length
     console.log('length of longest valid ', str, stack, stack2)
 }
-longestValidParenthesis()
+// longestValidParenthesis()
 
 const maxSumLessGiveSum = () => {
     let K = 60
@@ -979,8 +979,7 @@ const swapCaseAndNumbers = () => {
     console.log(swap("Hello -5LOL6du5d4e"));
     // console.log(swap("2S 6 du5d4e"));
 }
-swapCaseAndNumbers()
-
+// swapCaseAndNumbers()
 
 const CountingAnagrams = (str) => {
     let anagramObject = {}
@@ -1038,7 +1037,7 @@ const quickSortExample = () => {
     console.log('array', arr, 'FASTEST: quick sort example (best/average-OnLogn, worst: 0n^2)', quicksort_swap(arr))
 }
 
-findPairSum([undefined, 10, 6, 15, 3, 7, 9,12,21,1], 22)
+// findPairSum([undefined, 10, 6, 15, 3, 7, 9,12,21,1], 22)
 
 
 const powerSchoolTest = () => {
@@ -1080,7 +1079,6 @@ const powerSchoolTest = () => {
     }
     jsIValueLoopCheck()
 }
-
 const symmetricalDiffrences = () => {
     /*
     reducer problem
@@ -1157,3 +1155,48 @@ const updateInventoryInArray = () => {
 
     updateInventory(curInv, newInv);
 }
+
+const minWindowSubstring = () => {
+    // Min Window Substring
+    // Have the function MinWindowSubstring(strArr) take the array of strings stored in strArr,
+    // which will contain only two strings, the first parameter being the string N and the second parameter being a string
+    // K of some characters, and your goal is to determine the smallest substring of N that contains all the characters in K.
+    // For example: if strArr is ["aaabaaddae", "aed"] then the smallest substring of N that contains the characters a, e, and d is
+    // "dae" located at the end of the string. So for this example your program should return the string dae.
+    //Another example: if strArr is ["aabdccdbcacd", "aad"] then the smallest substring of N that contains all
+    //of the characters in K is "aabd" which is located at the beginning of the string. Both parameters will be strings
+    //ranging in length from 1 to 50 characters and all of K's characters will exist somewhere in the string N.
+    //Both strings will only contains lowercase alphabetic characters.
+    // Examples
+    // Input: ["ahffaksfajeeubsne", "jefaa"]
+    // Output: aksfaje
+    // Input: ["aaffhkksemckelloe", "fhea"]
+    // Output: affhkkse
+    const checkLowerSubstringExistance = (arr) => {
+        const foundAllOfK = (str) => {
+            const strK = arr[1].split('')
+            const sliceArr = str.split('')
+            //find if all characters in strK exists in myslice
+            let kCount = strK.length
+            let foundCount = 0
+            for (let k = 0; k < kCount; k++) {
+                if (sliceArr.indexOf(strK[k]) !== -1) foundCount += 1
+            }
+            return foundCount >= kCount
+        }
+
+        const strN = arr[0]
+        const strK = arr[1].split('')
+        for (let i = strK.length, len = strN.length; i <= len; i++) {
+            for (let j = 0; j <= len - i; j++) {
+                let myslice = strN.substr(j, i)
+                if (foundAllOfK(myslice) === true) {
+                    return 'found-' + myslice
+                }
+            }
+        }
+        return 'not found'
+    }
+    console.log(checkLowerSubstringExistance(["ahffaksfajeeubsne", "jefaa"]))
+}
+minWindowSubstring()
