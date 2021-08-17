@@ -1,8 +1,8 @@
 // import './App.css';
 import './style.css';
-import Chart2 from "./charts/chart2";
-import { useState } from "react";
-import { getMarks, getQtrs, getYrs } from "./charts/config";
+import ClosureCounterCheck from "./component/closureCounterCheck";
+// import Chart2 from "./charts/chart2";
+// import { getMarks, getQtrs, getYrs } from "./charts/config";
 // import QuickForm from './component/quickForm';
 // import Combine from "./black_hawk/combine";
 // import Chart1 from "./charts/chart1";
@@ -26,53 +26,53 @@ function App() {
     // const handleTagsCallBack=values=>{
     //     console.log('tags', values)
     // }
-    const chartHeight = 200
-    const chartWidth = 1000
-    const deepCopy = d => Object.values(d)
-    const yrs = getQtrs(2010, 2028)
-    const data = yrs.map(x => Math.round(100 + Math.random() * 1000, 2))
-    const data2 = yrs.map(x => Math.round(100 + Math.random() * 1000, 2))
-    // const data3 = yrs.map(x => Math.round(100 + Math.random() * 1000, 2))
-    // const data4 = yrs.map(x => Math.round(100 + Math.random() * 1000, 2))
-    const marks = yrs.map((x, i) => getMarks(x, i))
-    const defaultRange = ['2015Q1', '2020Q3']
-
-    let dataset = [
-        { name: 'line1', candrag: true, copy: deepCopy(data), data: deepCopy(data) },
-        { name: 'line2', candrag: false, copy: deepCopy(data2), data: deepCopy(data2) },
-        // { name: 'line3', candrag: true, copy: deepCopy(data3), data: deepCopy(data3) },
-        // { name: 'line4', candrag: false, copy: deepCopy(data4), data: deepCopy(data4) }
-    ]
-    let dataset2 = JSON.parse(JSON.stringify(dataset))
-    let dataset3 = JSON.parse(JSON.stringify(dataset))
-    let dataset4 = JSON.parse(JSON.stringify(dataset))
-    let dataset5 = JSON.parse(JSON.stringify(dataset))
-    let dataset6 = JSON.parse(JSON.stringify(dataset))
-    let dataset7 = JSON.parse(JSON.stringify(dataset))
-    const charts = ['chart1', 'chart2', 'chart3', 'chart4', 'chart5', 'chart6', 'chart7']
-    const datasets = [dataset, dataset2, dataset3, dataset4, dataset5, dataset6, dataset7]
-    const colrors = [
-        ['tomato', '#f2f2f2'],
-        ['blue', '#f2f2f2'],
-        ['purple', '#f2f2f2'],
-        ['red', '#f2f2f2'],
-        ['gray', '#f2f2f2'],
-        ['black', '#f2f2f2'],
-        ['magenta', '#f2f2f2']
-    ]
-
-    const displayAllCharts = () => {
-        return charts.map((name, i) => {
-            return <Chart2 name={name}
-                linesArray={datasets[i]}
-                tickmarks={marks}
-                color={colrors[i]}
-                height={chartHeight}
-                width={chartWidth}
-                defaultRange={defaultRange}
-            />
-        })
-    }
+    // const chartHeight = 200
+    // const chartWidth = 1000
+    // const deepCopy = d => Object.values(d)
+    // const yrs = getQtrs(2010, 2028)
+    // const data = yrs.map(x => Math.round(100 + Math.random() * 1000, 2))
+    // const data2 = yrs.map(x => Math.round(100 + Math.random() * 1000, 2))
+    // // const data3 = yrs.map(x => Math.round(100 + Math.random() * 1000, 2))
+    // // const data4 = yrs.map(x => Math.round(100 + Math.random() * 1000, 2))
+    // const marks = yrs.map((x, i) => getMarks(x, i))
+    // const defaultRange = ['2015Q1', '2020Q3']
+    //
+    // let dataset = [
+    //     { name: 'line1', candrag: true, copy: deepCopy(data), data: deepCopy(data) },
+    //     { name: 'line2', candrag: false, copy: deepCopy(data2), data: deepCopy(data2) },
+    //     // { name: 'line3', candrag: true, copy: deepCopy(data3), data: deepCopy(data3) },
+    //     // { name: 'line4', candrag: false, copy: deepCopy(data4), data: deepCopy(data4) }
+    // ]
+    // let dataset2 = JSON.parse(JSON.stringify(dataset))
+    // let dataset3 = JSON.parse(JSON.stringify(dataset))
+    // let dataset4 = JSON.parse(JSON.stringify(dataset))
+    // let dataset5 = JSON.parse(JSON.stringify(dataset))
+    // let dataset6 = JSON.parse(JSON.stringify(dataset))
+    // let dataset7 = JSON.parse(JSON.stringify(dataset))
+    // const charts = ['chart1', 'chart2', 'chart3', 'chart4', 'chart5', 'chart6', 'chart7']
+    // const datasets = [dataset, dataset2, dataset3, dataset4, dataset5, dataset6, dataset7]
+    // const colrors = [
+    //     ['tomato', '#f2f2f2'],
+    //     ['blue', '#f2f2f2'],
+    //     ['purple', '#f2f2f2'],
+    //     ['red', '#f2f2f2'],
+    //     ['gray', '#f2f2f2'],
+    //     ['black', '#f2f2f2'],
+    //     ['magenta', '#f2f2f2']
+    // ]
+    //
+    // const displayAllCharts = () => {
+    //     return charts.map((name, i) => {
+    //         return <Chart2 name={name}
+    //             linesArray={datasets[i]}
+    //             tickmarks={marks}
+    //             color={colrors[i]}
+    //             height={chartHeight}
+    //             width={chartWidth}
+    //             defaultRange={defaultRange}
+    //         />
+    //     })
+    // }
 
     return <div className='center'>
         {/*<SelectBox multi={true} data={data} change={handleChange}/>*/}
@@ -83,8 +83,9 @@ function App() {
         {/*<h1>Black Hawk Test</h1>*/}
         {/*<span>put * to see all</span>*/}
         {/*<Combine/>*/}
-        <h1 className='xgray'>Drag points to make changes</h1>
-        {displayAllCharts()}
+        {/*<h1 className='xgray'>Drag points to make changes</h1>*/}
+        {/*{displayAllCharts()}*/}
+        <ClosureCounterCheck/>
     </div>
 }
 
