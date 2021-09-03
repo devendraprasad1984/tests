@@ -1231,8 +1231,8 @@ const arrayNestingMain = () => {
         let obj = {}
         let maxLen = 0
         for (let i of nums) {
-            let res = [i]
             let curIterIndex = i
+            let res = [curIterIndex]
             while (!isDuplicateFound) {
                 let valueAtIndex = nums[curIterIndex]
                 isDuplicateFound = res.indexOf(valueAtIndex) !== -1
