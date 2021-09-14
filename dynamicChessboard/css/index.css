@@ -25,12 +25,19 @@
     align-content: center;
 }
 
-.cell:nth-child(odd) .cell:nth-child(odd) {
-    background: #111111;
+/*.cell:nth-child(odd) .cell:nth-child(odd) {*/
+/*    background: #111111;*/
+/*    color: white;*/
+/*}*/
+
+/*.cell:nth-child(even) .cell:nth-child(even) {*/
+/*    background: white;*/
+/*    color: black;*/
+/*}*/
+.black{
+    background-color: #222;
     color: white;
 }
-
-.cell:nth-child(even) .cell:nth-child(even) {
-    background: white;
-    color: black;
+.white{
+    color: #222;
 }
