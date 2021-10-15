@@ -11,10 +11,10 @@ const ClosureCounterCheck = () => {
         // setCounter(counter+1)
         setTimeout(fn(counter), 3000)
     }
-    return <>
+    return <div>
         <h1>basic settimeout/closure counter test</h1>
         <span>Counter Check {counter}</span><br/>
         <button onClick={handleClick}>click me</button>
-    </>
+    </div>
 }
 export default ClosureCounterCheck

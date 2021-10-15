@@ -1,6 +1,7 @@
-// import './App.css';
+import React from 'react'
 import './style.css';
 import ClosureCounterCheck from "./component/closureCounterCheck";
+import CommentApp from "./comments/CommentApp";
 // import Chart2 from "./charts/chart2";
 // import { getMarks, getQtrs, getYrs } from "./charts/config";
 // import QuickForm from './component/quickForm';
@@ -85,7 +86,9 @@ function App() {
         {/*<Combine/>*/}
         {/*<h1 className='xgray'>Drag points to make changes</h1>*/}
         {/*{displayAllCharts()}*/}
-        <ClosureCounterCheck/>
+        {/*<ClosureCounterCheck/>*/}
+        <h2>hello test advance react+redux+TDD</h2>
+        <CommentApp/>
     </div>
 }
 
