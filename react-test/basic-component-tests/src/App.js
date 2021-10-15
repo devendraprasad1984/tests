@@ -1,7 +1,7 @@
 import React from 'react'
 import './style.css';
 import ClosureCounterCheck from "./component/closureCounterCheck";
-import CommentApp from "./comments/CommentApp";
+import CommentApp from "comments/CommentApp";
 // import Chart2 from "./charts/chart2";
 // import { getMarks, getQtrs, getYrs } from "./charts/config";
 // import QuickForm from './component/quickForm';

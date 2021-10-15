@@ -2,7 +2,15 @@ import React from "react";
 
 const CommentBox=()=>{
     return (
-        <div>CommentBox</div>
+        <div>
+            <form>
+                <h4>Add Comment</h4>
+                <textarea/>
+                <div>
+                    <button>Submit</button>
+                </div>
+            </form>
+        </div>
     )
 }
 

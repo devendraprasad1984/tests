@@ -20,10 +20,10 @@
     "start": "PORT=6200 react-scripts start",
     "build": "react-scripts build",
     "lint": "lint-staged",
+    "testw": "CI=false react-scripts test --env=jsdom --verbose",
     "testy": "CI=false react-scripts test --verbose false -t --env=jsdom --findRelatedTests=**/*test.{js,ts,tsx,jsx} --forceExit -u",
     "testx": "CI=false react-scripts test --verbose --env=jsdom --findRelatedTests=**/*test.{js,ts,tsx,jsx} --forceExit -u",
     "testc": "npm run testx -- --coverage",
-    "eject": "react-scripts eject",
     "testg": "npm run testx",
     "command": "npm lint && npm testg",
     "prepare": "husky install"
