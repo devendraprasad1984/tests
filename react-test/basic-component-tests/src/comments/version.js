@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react'
+import urls from "../urls";
 
 const AppVersion=()=>{
     const [verFromBackend, setVersionFromBackend]=useState('')
@@ -6,9 +7,8 @@ const AppVersion=()=>{
     const [err, setErr]=useState('')
 
     useEffect(()=>{
-        fetch('http://localhost:3000/ui').then(r=>r.json()).then(d=>setVersionFromBackend(d.version)).catch(e=>setErr(e))
-        const manifest=document.getElementById('manifest')
-        fetch(manifest.href).then(r=>r.json()).then(d=>setVersionFromUI(d.version)).catch(e=>setErr(e))
+        fetch(urls.ui).then(r=>r.json()).then(d=>setVersionFromBackend(d.version)).catch(e=>setErr(e))
+        fetch(urls.manifest).then(r=>r.json()).then(d=>setVersionFromUI(d.version)).catch(e=>setErr(e))
     },[])
 
     return <div>
