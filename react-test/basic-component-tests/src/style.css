@@ -50,6 +50,8 @@ input[type='text']{
 
 .row {
     flex-direction: row;
+    flex: 1;
+    justify-content: flex-start;
 }
 
 .gap *{
@@ -102,6 +104,14 @@ input[type='text']{
     border: 2px solid gray;
     margin: 5px;
 }
+
+.red{
+    background-color: #f38d8d !important;
+}
+.green{
+    background-color: #72d375 !important;
+}
+
 
 .xred{
     color: red !important;
@@ -163,6 +173,49 @@ input[type='text']{
     padding: 5px;
 }
 
+.btn:hover{
+    background-color: #7f7f7f !important;
+}
+.btn {
+    display: inline-block;
+    border-radius: 5px;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 22px;
+    min-width: 120px;
+    padding: 5px;
+    transition: all 0.2s;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.btn span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+.btn span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+
+.btn:hover span {
+    padding-right: 25px;
+}
+
+.btn:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
 .axis {
     font: 10px sans-serif;
 }
@@ -188,6 +241,12 @@ input[type='text']{
 
 .size12{
     font-size: 12px;
+}
+.size15{
+    font-size: 15px;
+}
+.size20{
+    font-size: 20px;
 }
 
 .center {

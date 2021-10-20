@@ -1,8 +1,9 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {connect} from "react-redux";
 import * as actions from '../redux/actions'
+import RequireAuth from "../hoc/requireAuth";
 
-//styled commponents
+//styled components
 const textBoxAreaStyles = {
     width: '90vw',
     height: '250px',
@@ -23,10 +24,12 @@ const fetchBtn = {
 
 }
 const CommentBox = (props) => {
+    const { saveComment, fetchComments}=props
     const [comment, setComment] = useState('')
+
     const handleSubmit = e => {
         e.preventDefault()
-        props.saveComment(comment)
+        saveComment(comment)
         setComment('')
     }
     return (
@@ -39,9 +42,9 @@ const CommentBox = (props) => {
                     <button style={submitBtn}>Submit</button>
                 </div>
             </form>
-            <button className='fetch-comments' style={fetchBtn} onClick={props.fetchComments}>Fetch Comments from API</button>
+            <button className='fetch-comments' style={fetchBtn} onClick={fetchComments}>Fetch Comments from API</button>
         </div>
     )
 }
 
-export default React.memo(connect(null, actions)(CommentBox))
+export default React.memo(connect(null, actions)(RequireAuth(CommentBox)))

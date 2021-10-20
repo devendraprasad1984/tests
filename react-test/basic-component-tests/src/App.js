@@ -1,6 +1,6 @@
 import React from 'react'
 import './style.css';
-import ClosureCounterCheck from "./component/closureCounterCheck";
+// import ClosureCounterCheck from "./component/closureCounterCheck";
 import CommentApp from "comments/CommentApp";
 // import Chart2 from "./charts/chart2";
 // import { getMarks, getQtrs, getYrs } from "./charts/config";
