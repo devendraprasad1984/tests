@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {connect} from "react-redux";
 import * as actions from '../redux/actions'
 import RequireAuth from "../hoc/requireAuth";
@@ -24,7 +24,7 @@ const fetchBtn = {
 
 }
 const CommentBox = (props) => {
-    const { saveComment, fetchComments}=props
+    const {saveComment, fetchComments} = props
     const [comment, setComment] = useState('')
 
     const handleSubmit = e => {
