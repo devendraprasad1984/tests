@@ -1,11 +1,11 @@
 //local definition for user model as per DB
 //this will tell mongoose ORM to have it mapped to mongo DB
-const mongoose=require('mongoose')
-const schema=mongoose.Schema
-
+const mongoose = require('mongoose')
+const schema = mongoose.Schema
+const bcrypt = require('bcrypt-nodejs')
 
 //define our model
-const userSchema=new schema({
+const userSchema = new schema({
     email: {
         type: schema.Types.String,
         unique: true,
@@ -14,6 +14,19 @@ const userSchema=new schema({
     password: schema.Types.String
 })
 
+//on save hook, encrypt password
+userSchema.pre('save', (next) => {
+    const user = this
+    bcrypt.genSalt(10, (err, salt) => {
+        if (err) return next(err)
+        bcrypt.hash(user.password, salt, null, (err, hash) => {
+            if (err) return next(err)
+            user.password = hash
+            next()
+        })
+    })
+})
+
 //create the model class and export
-const userModelClass=mongoose.model('user', userSchema)
-module.exports=userModelClass
+const userModelClass = mongoose.model('user', userSchema)
+module.exports = userModelClass

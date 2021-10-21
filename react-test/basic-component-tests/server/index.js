@@ -4,6 +4,12 @@ const http = require('http')
 const bodyParser = require('body-parser') //parse incoming requests specific into json
 const morgan = require('morgan') //logging incoming framework
 const router=require('./router')
+const mongoose=require('mongoose')
+
+//db setup
+mongoose.connect('mongodb://localhost:27017/db_comments')
+
+
 //app setup
 const app=express()
 //below two are app middlewares, any calls to this express server, first is being intercepted by morgan and bodyparser
