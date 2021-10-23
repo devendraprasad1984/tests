@@ -22,7 +22,7 @@ const localLogin = new localStrategy(localOptions, function (email, password, do
         user.comparePassword(password, function (err, isMatch) {
             if (err) return done(err)
             if (!isMatch) return done(null, isMatch)
-            done(null, user)
+            return done(null, user)
         })
     })
 })
@@ -32,12 +32,12 @@ const jwtLogin = new JwtStrategy(jwtOptions, function (payload, done) {
     //see if the userid in payload exists in db
     //if it does call, done with that user
     //else call done without a user object
-    User.findById(payload.sub, (err, user) => {
+    User.findById(payload.sub, function(err, user) {
         if (err) return done(err, false)
         if (user) {
-            done(null, user)
+            return done(null, user)
         } else {
-            done(null, false)
+            return done(null, false)
         }
     })
 })

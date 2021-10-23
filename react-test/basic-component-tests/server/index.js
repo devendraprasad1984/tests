@@ -6,6 +6,8 @@ const morgan = require('morgan') //logging incoming framework
 const router=require('./router')
 const mongoose=require('mongoose')
 
+
+//stephengrider: https://github.com/StephenGrider/AdvancedReduxCode
 //db setup
 mongoose.connect('mongodb://localhost:27017/db_comments')
 
