@@ -7,6 +7,7 @@ const requireSignin = passport.authenticate('local', {session: false})
 
 //in python, its done via decorator pattern and attachment over each api call
 module.exports = function (app) {
+    app.use(passport.initialize()) //init this before routes registration
     app.get('/', requireAuth, function (req, res, next) {
         res.send({msg: 'hello home page', auth: true})
     })

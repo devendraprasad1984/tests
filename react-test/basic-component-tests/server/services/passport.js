@@ -12,7 +12,7 @@ const jwtOptions = {
     secretOrKey: config.secret
 }
 //create local strategy using email and password
-const localOptions = {usernameField: 'email'}
+const localOptions = {usernameField: 'email', passwordField: 'password'}
 const localLogin = new localStrategy(localOptions, function (email, password, done) {
     //verify this username and password, call done, if it is, else call false
     User.findOne({email: email}, (err, user) => {
