@@ -2,6 +2,7 @@ import React from 'react'
 import './style.css';
 // import ClosureCounterCheck from "./component/closureCounterCheck";
 import CommentApp from "comments/CommentApp";
+import ClientApp from "./client-app/clientApp";
 // import Chart2 from "./charts/chart2";
 // import { getMarks, getQtrs, getYrs } from "./charts/config";
 // import QuickForm from './component/quickForm';
@@ -88,7 +89,8 @@ function App() {
         {/*{displayAllCharts()}*/}
         {/*<ClosureCounterCheck/>*/}
         <h2>hello test advance react+redux+TDD</h2>
-        <CommentApp/>
+        {/*<CommentApp/>*/}
+        <ClientApp/>
     </div>
 }
 
