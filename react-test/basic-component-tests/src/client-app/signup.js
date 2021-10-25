@@ -5,11 +5,12 @@ import {connect} from "react-redux";
 import * as actions from './redux/actions'
 
 const SignUp = props => {
-    const {handleSubmit} = props //handleSubmit is via the ReduxForm
+    const {handleSubmit,history, signup, errorMessage} = props //handleSubmit is via the ReduxForm
 
     const onSubmit = (formProps) => {
-        const {email, password} = formProps
-        console.log(email, password)
+        signup(formProps,()=>{
+            history.push('/feature')
+        }) //from redux actions
     }
 
     return <form onSubmit={handleSubmit(onSubmit)}>
@@ -21,12 +22,19 @@ const SignUp = props => {
             <label>Password</label>
             <Field name='password' type='password' component='input' autoComplete={'none'}/>
         </fieldset>
+        <div>{errorMessage}</div>
         <button type='submit'>Signup</button>
     </form>
 }
 
+const mapStateToProps = state => {
+    return {
+        errorMessage: state.authReducer.errorMessage
+    }
+}
+
 // export default connect(null, actions)(reduxForm({form: 'signup'})(SignUp))
 export default compose(
-    connect(null, actions),
+    connect(mapStateToProps, actions),
     reduxForm({form: 'signup'})
 )(SignUp)
