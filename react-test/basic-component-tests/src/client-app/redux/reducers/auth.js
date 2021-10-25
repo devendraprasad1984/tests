@@ -3,7 +3,7 @@ const INIT_STATE = {
     errorMessage: ''
 }
 
-const authReducer= (state = INIT_STATE, action)= {
+const authReducer= (state = INIT_STATE, action)=> {
     return state
 }
 
