@@ -27,7 +27,7 @@ const Header = props => {
 
 const mapx = state => {
     return {
-        auth: state.auth || state.auth.authenticated
+        auth:  state.auth.authenticated
     }
 }
 
