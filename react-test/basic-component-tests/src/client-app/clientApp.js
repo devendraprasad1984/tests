@@ -7,8 +7,13 @@ import {Provider} from "react-redux";
 import {createStore, applyMiddleware} from "redux";
 import reduxThunk from 'redux-thunk'
 import reducers from './redux/reducers'
+import Feature from "./feature";
+import Signout from "./signout";
+import SignIn from "./signin";
 
-const initStore = {}
+const initStore = {
+    authReducer: {authenticated: localStorage.getItem('token')}
+}
 const store = createStore(reducers, initStore, applyMiddleware(reduxThunk))
 
 const ClientApp = props => {
@@ -17,7 +22,10 @@ const ClientApp = props => {
             <BrowserRouter>
                 <Header/>
                 <Route path={'/'} exact component={Welcome}/>
-                <Route path={'/signup'} component={SignUp}/>
+                  <Route path={'/signin'} component={SignIn}/>
+                    <Route path={'/signup'} component={SignUp}/>
+                <Route path={'/feature'} component={Feature}/>
+                <Route path={'/signout'} component={Signout}/>
             </BrowserRouter>
         </Provider>
     </div>

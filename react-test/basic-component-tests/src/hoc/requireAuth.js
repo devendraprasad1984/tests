@@ -1,27 +1,27 @@
 import React, {useEffect} from "react";
 import {connect} from "react-redux";
 
-const RequireAuth=(ChildComponent)=>{
-    const composeHoc=props=>{
-        const {auth, history}=props
-        const checkIfAuthenticated=()=>{
-            if(!auth){
+const RequireAuth = (ChildComponent) => {
+    const composeHoc = props => {
+        const {auth, history} = props
+        const checkIfAuthenticated = () => {
+            if (!auth) {
                 history.push('/')
             }
         }
-        useEffect(()=>{
+        useEffect(() => {
             //mounting+updating
             checkIfAuthenticated()
-            return ()=>{
+            return () => {
                 //unmounting
             }
-        },[auth])
+        }, [auth])
 
         return <ChildComponent {...props}/>
     }
-    const mapStateToProps=state=>{
+    const mapStateToProps = state => {
         return {
-            auth: state.auth
+            auth: state.auth || state.authReducer.authenticated
         }
     }
     return connect(mapStateToProps)(composeHoc)
