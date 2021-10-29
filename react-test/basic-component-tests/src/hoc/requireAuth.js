@@ -21,7 +21,7 @@ const RequireAuth = (ChildComponent) => {
     }
     const mapStateToProps = state => {
         return {
-            auth: state.auth || state.authReducer.authenticated
+            auth: state.auth || state.auth.authenticated
         }
     }
     return connect(mapStateToProps)(composeHoc)

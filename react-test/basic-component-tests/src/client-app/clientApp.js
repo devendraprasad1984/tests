@@ -3,13 +3,14 @@ import {BrowserRouter, Route} from "react-router-dom";
 import Header from "./header";
 import SignUp from "./signup";
 import Welcome from "./welcome";
-import {Provider} from "react-redux";
+import {connect, Provider} from "react-redux";
 import {createStore, applyMiddleware} from "redux";
 import reduxThunk from 'redux-thunk'
 import reducers from './redux/reducers'
 import Feature from "./feature";
 import Signout from "./signout";
 import SignIn from "./signin";
+import './style.css'
 
 const initStore = {
     authReducer: {authenticated: localStorage.getItem('token')}

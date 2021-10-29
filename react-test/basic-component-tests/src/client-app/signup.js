@@ -29,7 +29,7 @@ const SignUp = props => {
 
 const mapStateToProps = state => {
     return {
-        errorMessage: state.authReducer.errorMessage
+        errorMessage: state.auth.errorMessage
     }
 }
 
