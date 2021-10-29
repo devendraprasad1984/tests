@@ -1,4 +1,6 @@
 import React from 'react'
+import {connect} from 'react-redux'
+import * as actions from './redux/actions'
 
 
 const SignIn=props=>{
@@ -7,4 +9,4 @@ const SignIn=props=>{
   </div>
 }
 
-export default SignIn
+export default connect(null, actions)(SignIn)

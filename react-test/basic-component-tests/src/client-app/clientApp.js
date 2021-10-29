@@ -22,8 +22,8 @@ const ClientApp = props => {
             <BrowserRouter>
                 <Header/>
                 <Route path={'/'} exact component={Welcome}/>
-                  <Route path={'/signin'} component={SignIn}/>
-                    <Route path={'/signup'} component={SignUp}/>
+                <Route path={'/signin'} component={SignIn}/>
+                <Route path={'/signup'} component={SignUp}/>
                 <Route path={'/feature'} component={Feature}/>
                 <Route path={'/signout'} component={Signout}/>
             </BrowserRouter>

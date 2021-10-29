@@ -30,7 +30,9 @@
     "testx": "CI=false react-scripts test --verbose --env=jsdom --findRelatedTests=**/*test.{js,ts,tsx,jsx} --forceExit -u",
     "testc": "npm run testx -- --coverage",
     "testg": "npm run testx",
-    "command": "npm lint && npm testg"
+    "command": "npm lint && npm testg",
+    "testrc":"rc-autocomplete --src node_modules/react-toolbox/components/**/*.js",
+    "generate":"rc-autocomplete"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [
@@ -64,6 +66,7 @@
     "lint-staged": "^11.1.2",
     "prettier": "^2.4.0",
     "prop-types": "^15.7.2",
+    "react-autocomplete-cli": "0.0.3",
     "redux-mock-store": "^1.5.4"
   },
   "jest": {
