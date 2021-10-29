@@ -1,6 +1,8 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
+import './headerStyle.css'
+
 
 const Header = props => {
     const {auth} = props
@@ -19,7 +21,7 @@ const Header = props => {
         }
     }
 
-    return <div>
+    return <div className='headerstyle'>
         <Link to={'/'}>Redux Auth</Link>
         {renderLinks()}
     </div>

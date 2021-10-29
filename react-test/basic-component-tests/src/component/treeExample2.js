@@ -1,7 +1,7 @@
 import React from 'react'
 import treeDataset2 from "../data/treeDataset2"
 import Tree from 'react-tree-graph'
-import 'react-tree-graph/dist/style.css'
+import 'react-tree-graph/dist/headerStyle.css'
 
 const TreeExample2 = (props) => {
     const getNodes=node=>{

@@ -10,7 +10,6 @@ import reducers from './redux/reducers'
 import Feature from "./feature";
 import Signout from "./signout";
 import SignIn from "./signin";
-import './style.css'
 
 const initStore = {
     authReducer: {authenticated: localStorage.getItem('token')}
