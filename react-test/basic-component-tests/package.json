@@ -31,8 +31,8 @@
     "testc": "npm run testx -- --coverage",
     "testg": "npm run testx",
     "command": "npm lint && npm testg",
-    "testrc":"rc-autocomplete --src node_modules/react-toolbox/components/**/*.js",
-    "generate":"rc-autocomplete"
+    "testrc": "rc-autocomplete --src node_modules/react-toolbox/components/**/*.js",
+    "generate": "rc-autocomplete"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [
