@@ -1,6 +1,7 @@
 import React from 'react'
 import './style.css';
 import ClientApp from "./client-app/clientApp";
+import DropDown from "./component/dropdown";
 // import ClosureCounterCheck from "./component/closureCounterCheck";
 // import CommentApp from "comments/CommentApp";
 // import ClientApp from "./client-app/clientApp";
@@ -91,6 +92,7 @@ function App() {
         {/*<ClosureCounterCheck/>*/}
         {/*<CommentApp/>*/}
         <ClientApp/>
+        <DropDown/>
     </div>
 }
 
