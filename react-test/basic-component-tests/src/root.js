@@ -2,7 +2,7 @@ import React from 'react';
 import {Provider} from "react-redux";
 import {applyMiddleware, createStore} from "redux";
 import asyncMiddleware from "./middlewares/async";
-import reducers from 'redux/reducers'
+import reducers from './redux/reducers'
 import stateSchemaValidator from "./middlewares/stateSchemaValidator";
 
 const Root = (props) => {

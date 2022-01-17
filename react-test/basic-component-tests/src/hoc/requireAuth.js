@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import {connect} from "react-redux";
 
 const RequireAuth = (ChildComponent) => {
-    const composeHoc = props => {
+    const ComposeHoc = props => {
         const {auth, history} = props
         const checkIfAuthenticated = () => {
             if (!auth) {
@@ -24,6 +24,6 @@ const RequireAuth = (ChildComponent) => {
             auth: state.auth || state.auth.authenticated
         }
     }
-    return connect(mapStateToProps)(composeHoc)
+    return connect(mapStateToProps)(ComposeHoc)
 }
 export default RequireAuth
