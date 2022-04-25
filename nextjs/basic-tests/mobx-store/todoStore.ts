@@ -1,17 +1,26 @@
-import {makeAutoObservable} from "mobx";
+import {configure, makeAutoObservable, observable} from "mobx";
 
-export interface ITodoModel {
+export interface ITodoItem {
     id: number,
     text: string,
     done: boolean
 }
 
+configure({
+    enforceActions: 'never'
+})
+
 class TodoStore {
-    todoList: ITodoModel[] = []
-    todo: ITodoModel = this.initTodo()
+    todoList: ITodoItem[] = []
+    todo: ITodoItem = this.initTodo()
 
     constructor() {
-        makeAutoObservable(this) //observes changes on this class context and rerenders the UI when changes happen from anywhere in app
+        makeAutoObservable(this, {
+            todoList: observable,
+            todo: observable
+        })
+        // 2 args: 1 - this context, all props point to observer
+        //observes changes on this class context and rerenders the UI when changes happen from anywhere in app
     }
 
     initTodo() {
@@ -22,6 +31,7 @@ class TodoStore {
         }
     }
 
+    //action
     addTodo() {
         console.log(`inside add to ${this.todo}`)
         this.todoList.push(this.todo)
