@@ -1,8 +1,10 @@
 import React from 'react'
 import './style.css';
 // import ClosureCounterCheck from "./component/closureCounterCheck";
-import CommentApp from "comments/CommentApp";
-import ClientApp from "./client-app/clientApp";
+// import CommentApp from "comments/CommentApp";
+// import ClientApp from "./client-app/clientApp";
+import ChatApp from "./StreamChat/StreamCheck";
+import ChatAppMain from "./StreamChat/StreamCheck";
 // import Chart2 from "./charts/chart2";
 // import { getMarks, getQtrs, getYrs } from "./charts/config";
 // import QuickForm from './component/quickForm';
@@ -90,7 +92,8 @@ function App() {
         {/*<ClosureCounterCheck/>*/}
         <h2>hello test advance react+redux+TDD</h2>
         {/*<CommentApp/>*/}
-        <ClientApp/>
+        {/*<ClientApp/>*/}
+        <ChatAppMain/>
     </div>
 }
 
