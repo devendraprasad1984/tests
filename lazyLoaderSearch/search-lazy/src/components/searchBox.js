@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef, useCallback} from 'react'
+import React, {useCallback, useEffect, useRef, useState} from 'react'
 import getData from "../common/getFromApi";
 import debounce from '../common/debounce'
 
@@ -9,15 +9,18 @@ export default function SearchBox(props) {
     const [pageLoadingStatus, setPageLoadingStatus] = useState(false)
     const [error, setError] = useState(false)
     const [hasMoreData, setHasMoreData] = useState(true)
-    const txtSearch = useRef()
+    const [txtSearch, setTxtSearch] = useState('')
 
-    useEffect(() => {
-        setData([])
-    }, [query])
+    // useEffect(() => {
+    //     setData([])
+    // }, [query])
 
 
     const fetchData = () => {
-        if (query === '') return
+        if (query === '') {
+            setData([])
+            return
+        }
         setPageLoadingStatus(true)
         let url = `https://openlibrary.org/search.json?q=${query}&page=${page}`
         let handleData = data => {
@@ -51,13 +54,15 @@ export default function SearchBox(props) {
     const delayedCallback = debounce((e) => setQuery(e.target.value), 1000)
 
     const handleChange = (e) => {
+        let value = e.target.value
         delayedCallback(e)
         setPage(1)
+        setTxtSearch(value)
     }
 
     const handleSubmitClick = (e) => {
-        // setQuery(e.target.value)
-        setQuery(txtSearch.current.value)
+        setQuery(e.target.value)
+        // setQuery(txtSearch.current.value)
         setPage(1)
     }
 
@@ -65,16 +70,34 @@ export default function SearchBox(props) {
         if (data.length === 0) return null
         return data.map((title, index) => {
             if (data.length === index + 1)
-                return <div key={'rowBooks' + index} ref={lastElementRef}>{title}</div>
+                return <div key={'rowBooks' + index} ref={lastElementRef}>{index + 1} {title}</div>
             else
-                return <div key={'rowBooks' + index}>{title}</div>
+                return <div key={'rowBooks' + index}>{index + 1} {title}</div>
         })
     }
-    return <div>
-        <input ref={txtSearch} onChange={handleChange}/>
-        <button onClick={handleSubmitClick}>submit</button>
-        <div>{handleDisplayData()}</div>
-        {pageLoadingStatus && <div><h1>please wait...</h1></div>}
-        {error && <div>{error}</div>}
-    </div>
+
+    const handleReset = () => {
+        setData([])
+        setTxtSearch('')
+    }
+
+    return (
+        <>
+            <div className='flex col wid100'>
+                <input onChange={handleChange} value={txtSearch}
+                       placeholder={'eg enter cars|frog|any random word, when list comes, scroll to load more'}
+                       className=''
+                />
+                <div className='right marginTop10 gap10'>
+                    <button onClick={handleSubmitClick}>Submit</button>
+                    <button onClick={handleReset} className='danger'>Reset</button>
+                </div>
+            </div>
+            <div>{handleDisplayData()}</div>
+
+            {pageLoadingStatus && <div><h1>please wait...</h1></div>}
+            {error && <div>{error}</div>}
+
+        </>
+    )
 }
