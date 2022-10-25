@@ -1,5 +1,9 @@
 import React from 'react'
 import './style.css';
+import NavigatorChecks from "./component/navigatorChecks";
+import ReactLazyChecks from "./component/ReactLazyChecks";
+import CounterBatchingCheck from "./component/counterBatchingCheck";
+import RecoilCheck from "./recoil";
 // import ClosureCounterCheck from "./component/closureCounterCheck";
 // import CommentApp from "comments/CommentApp";
 // import ClientApp from "./client-app/clientApp";
@@ -14,8 +18,7 @@ import './style.css';
 // import InputTag from "./component/inputTag";
 // import TreeExample1 from "./component/treeExample1";
 // import TreeExample2 from "./component/treeExample2";
-
-import CoWorking from "./component/coworking";
+// import CommentApp from "./comments/CommentApp";
 
 function App() {
     // const data = [
@@ -92,11 +95,26 @@ function App() {
         {/*<h1 className='xgray'>Drag points to make changes</h1>*/}
         {/*{displayAllCharts()}*/}
         {/*<ClosureCounterCheck/>*/}
-        <h2>hello test advance react+redux+TDD</h2>
+        {/*<h2>hello test advance react+redux+TDD</h2>*/}
         {/*<CommentApp/>*/}
         {/*<ClientApp/>*/}
         {/*<ChatAppMain/>*/}
-        <CoWorking />
+        {/*<CoWorking />*/}
+        {/*<NavigatorChecks/>*/}
+
+        {/*<h3>React Lazy Checks</h3>*/}
+        {/*<ReactLazyChecks type={"form"}/>*/}
+        {/*<ReactLazyChecks type={"type1"}/>*/}
+        {/*<ReactLazyChecks type={"type2"}/>*/}
+        {/*<ReactLazyChecks type={"type3"}/>*/}
+
+
+        {/*<CounterBatchingCheck/>*/}
+        <RecoilCheck/>
+
+
+
+
     </div>
 }
 
