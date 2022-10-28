@@ -6,8 +6,9 @@
 }
 
 .slides .container{
-    min-height: 400px;
-    height: 400px;
+    min-height: 500px;
+    /*max-height: 500px;*/
+    /*height: 500px;*/
     background-color: #C9C9C9;
 }
 
@@ -29,4 +30,20 @@
 .button:hover, button:hover{
     opacity: 0.8;
     background-color: #2b3e40;
+}
+
+.img{
+    height: 200px;
+    width: 200px;
+}
+
+.slideText{
+    height: 200px;
+    overflow: auto;
+    position: relative;
+}
+
+.overflow{
+    position: relative;
+    overflow: auto;
 }

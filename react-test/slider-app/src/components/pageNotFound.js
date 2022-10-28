@@ -2,7 +2,7 @@ import React from 'react'
 
 const PageNotFound = props => {
     return <React.Fragment>
-        <div>Page Not Found</div>
+        <h3>Page Not Found</h3>
     </React.Fragment>
 }
 
