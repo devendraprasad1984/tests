@@ -1,5 +1,5 @@
 import React from 'react'
-import {useRecoilValue} from "recoil";
+import {useRecoilState, useRecoilValue} from "recoil";
 import {getSlideDetails} from "../config/helper";
 import currentSlideNumber from "../recoil/atom/currentSlideNumber";
 
