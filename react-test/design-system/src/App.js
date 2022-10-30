@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import {Input, StyledButton, StyledInput, StyledInput2, StyledInput3, StyledInput4} from "./components/Input";
+import theme from './themes/index'
+import {ThemeProvider} from "@emotion/react";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <ThemeProvider theme={theme}>
+            <div className="App">
+                <h2>Basic Test of Design system...</h2>
+                <div className="column">
+                    <Input placeholder={"enter your name..."}/>
+                    <StyledInput placeholder={"enter your name in styled input..."}/>
+                    <StyledInput2 placeholder={"enter your name in styled input 2 ..."}/>
+                    <StyledInput3 placeholder={"enter your name in styled input 3 ..."}/>
+                    <StyledInput4 placeholder={"enter your name in styled input 4 ..."}/>
+                    <StyledButton bgcolor={'yellow'} onClick={() => alert('clicked')}>Click me</StyledButton>
+                </div>
+            </div>
+        </ThemeProvider>
+    );
 }
 
 export default App;
