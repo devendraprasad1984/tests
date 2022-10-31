@@ -3,6 +3,14 @@ import InputStyle from '../components/Input/style'
 const theme={
     InputStyle,
     colors: {
+        primary: '#38C172',
+        error: '#A20808',
+        info: '#EFF8FF',
+        text: {
+            body: '#222',
+            subtle: '#929FB1',
+            link: '#3793E0'
+        },
         grays: {
             100: '#F8E4E4',
             200: '#F8E4E4',
@@ -14,7 +22,13 @@ const theme={
             800: '#F8E4E4'
         }
     },
-    fontSizes: [12,13,14,16,18,20,25,36]
+    fontSizes: {
+        1: '10px',
+        2: '12px',
+        3: '14px',
+        4: '16px',
+        5: '20px',
+    },
 }
 theme.borders={
     thin: '1px solid',
